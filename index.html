@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduNexus AI — Ultimate 3D Live Edition</title>
+    
+    <!-- 🔥 PERMANENT EDU NEXUS AI LOGO (FAVICON) 🔥 -->
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -295,7 +299,7 @@
         <h2>Welcome to EduNexus AI</h2>
         <p>Enter your name to initialize your personal learning engine.</p>
         <form id="loginForm">
-          <input type="text" id="usernameInput" placeholder="Your Name (e.g., Prince)" required autocomplete="off">
+          <input type="text" id="usernameInput" placeholder="Your Name (e.g., Kartik)" required autocomplete="off">
           <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
         </form>
       </div>
@@ -389,7 +393,7 @@
                 </select>
               </label>
               <label>Subjects
-                <input id="subjects" value="Physics, Chemistry, Mathematics" placeholder="e.g. Physics, Maths">
+                <input id="subjects" value="Science-(PCM), Computer Science, English" placeholder="e.g. Physics, Maths">
               </label>
               <label>Daily study time
                 <input id="hours" type="range" min="1" max="8" value="4" oninput="document.getElementById('hoursValue').textContent=this.value+' hours'">
@@ -496,7 +500,12 @@
       const $ = id => document.getElementById(id);
 
       function openExplanation() { $('explanation-modal').classList.add('show'); }
-      function closeExplanation() { $('explanation-modal').classList.remove('show'); }
+      
+      // 🔥 FIX: Modal close hone ke baad hi typing start hogi 🔥
+      function closeExplanation() { 
+        $('explanation-modal').classList.remove('show'); 
+        setTimeout(startTyping, 300); // Thoda sa delay smooth effect ke liye
+      }
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -549,14 +558,21 @@
         });
       }
 
+      // 🔥 FIX: The Cinematic Login Transition 🔥
       function activateUser(name, isFirstTime) {
         overlay.style.opacity = '0';
         setTimeout(() => {
           overlay.style.visibility = 'hidden';
           mainContent.classList.remove('blurred');
-          startTyping();
-          if (isFirstTime) { setTimeout(openExplanation, 1500); }
-        }, 500);
+          
+          if (isFirstTime) { 
+            // 1500ms delay hataya, Modal instantly open hoga
+            openExplanation(); 
+          } else {
+            // Agar purana user hai, toh seedha dashboard text type hoga
+            startTyping();
+          }
+        }, 500); // 500ms login screen ko fade hone ka time
         
         $('profileName').textContent = name;
         $('profileAvatar').textContent = name.charAt(0).toUpperCase();
@@ -687,23 +703,20 @@
         wrap.scrollTop = wrap.scrollHeight;
         
         const loadingId = "load-" + Date.now();
-        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Searching the live AI Engine...</div></div>`;
+        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
         wrap.scrollTop = wrap.scrollHeight;
 
         try {
-          // 🔥 YAHAN TERA LIVE RENDER CLOUD URL UPDATE HO GAYA HAI 🔥
           const res = await fetch("https://edunexusai.onrender.com/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: q })
+            body: JSON.stringify({ message: q + "\n\n(Reply briefly in 3-5 short sentences or bullet points. Only go into full detail if I clearly ask for a deep/detailed explanation.)" })
           });
           
           const data = await res.json();
           let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
           
           document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
-          
-          speakAnswer(answer); 
 
         } catch (error) {
           document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>Oops!Server Connection Broked, Please Check Your Internet Connection!!</div>`;
@@ -748,17 +761,6 @@
         isListening = false;
         $('mic-btn').classList.remove('listening');
         $('question').placeholder = "E.g., What is gravity?";
-      }
-
-      function speakAnswer(text) {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel(); 
-          const cleanText = text.replace(/<[^>]*>?/gm, ''); 
-          const utterance = new SpeechSynthesisUtterance(cleanText);
-          utterance.rate = 1.05; 
-          utterance.pitch = 1.1; 
-          window.speechSynthesis.speak(utterance);
-        }
       }
     </script>
   </body>
