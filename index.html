@@ -725,7 +725,7 @@
       }
 
       // ==========================================
-      // 🔥 KX NEURAL CORE: VOICE ENGINE 🔥
+      // 🔥 KX NEURAL CORE: VOICE ENGINE (ONLY INPUT) 🔥
       // ==========================================
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       let recognition;
@@ -762,6 +762,9 @@
         $('mic-btn').classList.remove('listening');
         $('question').placeholder = "E.g., What is gravity?";
       }
+
+      // 🔥 NOTE: speakAnswer function has been completely removed to mute AI output forever! 🔥
+
     </script>
   </body>
   </html>
