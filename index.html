@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNexus AI — Ultimate 3D Live Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --bg: #070a12; --panel: #0e1421; --text: #f4f7ff; --muted: #9ba6bb;
+        --line: rgba(255,255,255,.09); --accent: #8b7cff; --accent2: #5ee7c5;
+        --shadow: 0 24px 80px rgba(0,0,0,.5);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0; background: var(--bg); color: var(--text);
+        font-family: Inter, system-ui, sans-serif; line-height: 1.5;
+        overflow-x: hidden; 
+      }
+      
+      /* Cyber Grid Background */
+      body::before {
+        content: ""; position: fixed; inset: -50%; top: 0;
+        background-image: linear-gradient(rgba(94, 231, 197, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 124, 255, 0.15) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(600px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+        animation: gridMove 10s linear infinite; z-index: -2; pointer-events: none;
+        mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
+      }
+      @keyframes gridMove {
+        0% { transform: perspective(600px) rotateX(60deg) translateY(0) translateZ(-200px); }
+        100% { transform: perspective(600px) rotateX(60deg) translateY(50px) translateZ(-200px); }
+      }
+
+      /* 🔥 PERMANENT 3D SCROLL REVEAL 🔥 */
+      .reveal { opacity: 0; transform: translateY(60px) scale(0.85); transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
+      .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+
+      .modal-overlay {
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); z-index: 3000;
+        display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s ease-out;
+      }
+      .modal-overlay.show { opacity: 1; visibility: visible; }
+      .modal-content {
+        background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent2); border-radius: 24px; padding: 40px;
+        max-width: 500px; width: 90%; text-align: left; box-shadow: 0 30px 60px rgba(94, 231, 197, 0.15);
+        transform: scale(0.9) translateY(20px); transition: 0.4s ease-out;
+      }
+      .modal-overlay.show .modal-content { transform: scale(1) translateY(0); }
+      .modal-content h2 { font-family: "Space Grotesk"; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
+      .modal-content ul { list-style: none; padding: 0; margin-bottom: 30px; }
+      .modal-content li { padding: 12px; background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+      .modal-content li b { color: #fff; font-size: 14px; }
+
+      #login-overlay {
+        position: fixed; inset: 0; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(25px); z-index: 2000; 
+        display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s;
+        perspective: 1000px;
+      }
+      .login-box {
+        background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent); padding: 50px; border-radius: 24px; 
+        text-align: center; box-shadow: 0 0 50px rgba(139, 124, 255, 0.2); transform-style: preserve-3d; animation: floatIn 1s ease-out;
+      }
+      @keyframes floatIn { from { opacity: 0; transform: translateY(50px) scale(0.9) rotateX(-20deg); } to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); } }
+      
+      .cube-container { width: 60px; height: 60px; perspective: 600px; margin: 0 auto 30px; }
+      .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spinCube 4s infinite linear; }
+      .face { position: absolute; width: 60px; height: 60px; border: 2px solid var(--accent2); background: rgba(139, 124, 255, 0.2); box-shadow: inset 0 0 20px rgba(94, 231, 197, 0.5); }
+      .front { transform: translateZ(30px); } .back { transform: rotateY(180deg) translateZ(30px); }
+      .right { transform: rotateY(90deg) translateZ(30px); } .left { transform: rotateY(-90deg) translateZ(30px); }
+      .top { transform: rotateX(90deg) translateZ(30px); } .bottom { transform: rotateX(-90deg) translateZ(30px); }
+      @keyframes spinCube { 0% { transform: rotateX(0deg) rotateY(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg); } }
+
+      .login-box h2 { font-size: 28px; margin-bottom: 10px; }
+      .login-box p { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+      .login-box input { width: 100%; padding: 15px; border-radius: 12px; background: #070a12; border: 1px solid var(--line); color: white; font-size: 16px; margin-bottom: 20px; outline: none; }
+      .login-box input:focus { border-color: var(--accent2); box-shadow: 0 0 15px rgba(94, 231, 197, 0.3); }
+
+      .blurred { filter: blur(10px) brightness(0.5); pointer-events: none; }
+      .ambient { position: fixed; width: 500px; height: 500px; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; }
+      .ambient-1 { background: #7665ff; top: -180px; right: -100px; }
+      .ambient-2 { background: #2bd9b1; left: -200px; top: 45%; }
+
+      .topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; max-width: 1240px; margin: auto; padding: 0 28px; border-bottom: 1px solid var(--line); position: relative; z-index: 10; backdrop-filter: blur(10px); }
+      .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-family: "Space Grotesk"; font-weight: 700; font-size: 20px; text-decoration: none; }
+      .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, var(--accent), #5d5cff); box-shadow: 0 8px 28px #655bff44; }
+      .brand-ai { color: var(--accent2); }
+      nav { display: flex; gap: 26px; }
+      nav a { color: var(--muted); text-decoration: none; font-size: 13px; transition: 0.3s; cursor: pointer; }
+      nav a:hover { color: white; transform: translateY(-2px); display: inline-block; }
+      .profile-btn { border: 1px solid var(--line); background: #ffffff06; color: white; border-radius: 999px; padding: 7px 12px 7px 7px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s; }
+      .profile-btn:hover { background: #ffffff15; box-shadow: 0 0 15px rgba(94,231,197,0.3); }
+      .avatar { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #262d42; font-size: 12px; color: var(--accent2); font-weight: bold; }
+      
+      main { max-width: 1240px; margin: auto; transition: filter 0.5s; }
+      .hero { min-height: 650px; padding: 90px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: center; }
+      .eyebrow { font-size: 11px; letter-spacing: 1.5px; color: #aaa3ff; font-weight: 800; }
+      .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 14px var(--accent2); margin-right: 8px; animation: pulse 2s infinite; }
+      @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(94, 231, 197, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(94, 231, 197, 0); } 100% { box-shadow: 0 0 0 0 rgba(94, 231, 197, 0); } }
+      
+      h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.05; margin: 0; }
+      .hero h1 { font-size: clamp(54px, 6vw, 82px); letter-spacing: -4px; margin: 18px 0 22px; min-height: 180px; }
+      .hero h1 span { background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
+      .hero-copy > p { max-width: 600px; color: var(--muted); font-size: 17px; }
+      
+      .btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 14px; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; transform-style: preserve-3d; }
+      .btn:hover { transform: translateY(-3px) scale(1.02); }
+      .primary { background: linear-gradient(135deg, #8c7cff, #665cff); color: white; box-shadow: 0 12px 35px #685cff55; }
+      .primary:hover { box-shadow: 0 15px 45px #685cff88; }
+      .ghost { background: #ffffff08; border: 1px solid var(--line); color: white; }
+      .trust-row { display: flex; gap: 20px; color: #727d91; font-size: 11px; margin-top: 25px; }
+      
+      .glass { background: linear-gradient(145deg, #121a29cc, #0b101bdd); border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow); backdrop-filter: blur(18px); transition: transform 0.1s ease-out; transform-style: preserve-3d; }
+      .hero-card { border-radius: 22px; padding: 26px; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); }
+      .hero-card > * { transform: translateZ(30px); } 
+
+      .card-top { display: flex; justify-content: space-between; align-items: start; }
+      .mini-label { font-size: 10px; letter-spacing: 1.3px; color: #727e96; font-weight: 800; }
+      .card-top h3 { font-size: 19px; margin-top: 7px; }
+      .score-badge { font-size: 11px; padding: 7px 9px; border-radius: 8px; background: #5ee7c51a; color: #5ee7c5; box-shadow: 0 0 15px rgba(94,231,197,0.2); }
+      
+      .focus-progress { height: 6px; background: #ffffff09; border-radius: 10px; margin: 22px 0; }
+      .focus-progress span { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #8d7cff, #5ee7c5); box-shadow: 0 0 10px #5ee7c5; }
+      
+      .task-list { display: grid; gap: 10px; }
+      .task { display: flex; align-items: center; gap: 12px; padding: 13px; background: #ffffff04; border: 1px solid #ffffff08; border-radius: 13px; transition: 0.3s; cursor: pointer; }
+      .task:hover { transform: translateZ(40px) scale(1.02); background: #ffffff0a; border-color: rgba(255,255,255,0.2); }
+      .task > span { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: #ffffff08; color: #a9b1c1; font-size: 11px; }
+      .task.done > span { background: #5ee7c51a; color: #5ee7c5; }
+      .task div { flex: 1; }
+      .task b { display: block; font-size: 12px; }
+      .task small { color: #747f93; font-size: 10px; }
+      .task button { border: 0; background: #fff; color: #111; border-radius: 7px; padding: 6px 9px; font-size: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+      .task button:hover { background: var(--accent2); }
+      
+      .ai-note { display: flex; gap: 10px; margin-top: 18px; padding: 12px; border-radius: 12px; background: #8c7cff0d; border: 1px solid #8c7cff22; }
+      .ai-note > span { color: #a89fff; text-shadow: 0 0 10px #a89fff; }
+      .ai-note p { margin: 0; font-size: 10px; color: #929caf; }
+      .ai-note b { color: #d6d2ff; }
+
+      .section { padding: 80px 28px; }
+      .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 30px; }
+      .section-heading h2 { font-size: 40px; letter-spacing: -1.8px; margin-top: 10px; }
+      .section-heading > p { max-width: 420px; color: var(--muted); font-size: 13px; }
+
+      .planner-grid { display: grid; grid-template-columns: 390px 1fr; gap: 18px; }
+      .panel { border-radius: 20px; padding: 24px; }
+      .panel > * { transform: translateZ(20px); }
+      
+      .panel-title { display: flex; gap: 12px; margin-bottom: 24px; }
+      .panel-title .icon, .tutor-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: #8b7cff18; color: #a59dff; box-shadow: inset 0 0 10px #8b7cff44; }
+      .panel-title h3 { font-size: 18px; }
+      .panel-title p { margin: 4px 0 0; color: #707b91; font-size: 11px; }
+      
+      label { display: block; color: #aeb7c8; font-size: 11px; font-weight: 700; margin: 18px 0; }
+      select, input { font: inherit; display: block; width: 100%; margin-top: 8px; background: #090e18; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 11px; outline: none; transition: 0.3s; }
+      select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(139,124,255,0.3); }
+      input[type=range] { width: 100%; accent-color: var(--accent); margin-top: 13px; }
+      .range-value { float: right; color: #8f86ff; font-size: 10px; margin-top: -22px; }
+      .full { width: 100%; margin-top: 8px; }
+      
+      .result-panel { min-height: 460px; background: radial-gradient(circle at 70% 20%, #7e70ff12, transparent 45%), linear-gradient(145deg, #111928, #0b101a); }
+      .result-empty { height: 100%; min-height: 410px; display: grid; place-items: center; align-content: center; text-align: center; padding: 30px; }
+      .empty-orb { width: 70px; height: 70px; border-radius: 22px; display: grid; place-items: center; font-size: 26px; color: #aaa2ff; background: #8b7cff12; border: 1px solid #8b7cff25; margin-bottom: 18px; animation: float 3s ease-in-out infinite; box-shadow: 0 0 20px rgba(139,124,255,0.2); }
+      @keyframes float { 0%, 100% { transform: translateY(0) translateZ(30px); } 50% { transform: translateY(-10px) translateZ(30px); } }
+      .result-empty h3 { font-size: 19px; }
+      .result-empty p { max-width: 400px; color: #727d91; font-size: 12px; }
+      
+      .generated-plan h3 { font-size: 21px; margin-top: 10px; margin-bottom: 5px; }
+      .plan-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
+      .chip { font-size: 10px; padding: 6px 8px; border-radius: 999px; background: #ffffff08; color: #aeb7c8; border: 1px solid rgba(255,255,255,0.1); }
+      .plan-day { padding: 14px; border: 1px solid #ffffff09; background: #ffffff03; border-radius: 13px; margin: 9px 0; transition: 0.3s; }
+      .plan-day:hover { transform: translateZ(10px) translateX(5px); border-color: rgba(94,231,197,0.3); background: rgba(94,231,197,0.05); }
+      .plan-day b { font-size: 11px; }
+      .plan-day span { float: right; color: #5ee7c5; font-size: 10px; }
+      .plan-day p { margin: 5px 0 0; color: #7f8a9e; font-size: 10px; }
+
+      /* 🔥 THE FIX: Chat Box Strict Height & Scroll 🔥 */
+      .tutor { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; height: 550px; } /* Height Lock */
+      .tutor-side { padding: 28px; border-right: 1px solid var(--line); overflow-y: auto; }
+      .tutor-side h3 { font-size: 22px; margin: 16px 0 8px; }
+      .tutor-side p { font-size: 12px; color: #7f8a9e; }
+      .suggestions { display: grid; gap: 8px; margin-top: 22px; }
+      .suggestions button { background: #ffffff05; border: 1px solid var(--line); color: #aeb7c8; text-align: left; border-radius: 9px; padding: 10px; font-size: 10px; cursor: pointer; transition: 0.3s; }
+      .suggestions button:hover { background: rgba(139,124,255,0.2); border-color: rgba(139,124,255,0.5); color: white; transform: translateX(5px); }
+      
+      .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; } /* Inner Height Lock */
+      .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
+      .tiny { float: right; color: #616c80; font-weight: 500; }
+      .messages { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
+      .message { display: flex; gap: 9px; max-width: 80%; font-size: 11px; color: #b7c0d0; animation: popIn 0.3s forwards; }
+      @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      .message > div { padding: 11px 13px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; }
+      .message.user { align-self: flex-end; flex-direction: row-reverse; }
+      .message.user > div { background: #8b7cff17; border-color: #8b7cff28; }
+      .msg-avatar { min-width: 25px; height: 25px; border-radius: 8px; display: grid; place-items: center; background: #8b7cff18; color: #aaa2ff; }
+      
+      .chat-input { display: flex; gap: 8px; padding: 15px; border-top: 1px solid var(--line); }
+      .chat-input button[type="submit"] { background: white; border: 0; border-radius: 10px; padding: 0 15px; font-weight: 800; cursor: pointer; color: black; transition: 0.3s; }
+      .chat-input button[type="submit"]:hover { background: var(--accent2); transform: scale(1.05); }
+
+      /* 🔥 NEW MIC BUTTON CSS 🔥 */
+      #mic-btn { background: #ffffff08; color: var(--accent2); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; transition: 0.3s; font-size: 16px; cursor: pointer; display: grid; place-items: center; }
+      #mic-btn:hover { background: #5ee7c522; transform: scale(1.05); }
+      #mic-btn.listening { background: #ff4757; color: white; border-color: #ff4757; animation: pulseMic 1.5s infinite; }
+      @keyframes pulseMic { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
+      
+      .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+      .stat { border-radius: 16px; padding: 20px; transition: 0.3s; }
+      .stat:hover { transform: translateY(-5px) translateZ(20px); border-color: rgba(94,231,197,0.4); box-shadow: 0 10px 30px rgba(94,231,197,0.15); }
+      .stat span { font-size: 10px; color: #737e92; }
+      .stat strong { display: block; font-family: "Space Grotesk"; font-size: 31px; margin: 8px 0 2px; }
+      .stat small { font-size: 10px; color: #5ee7c5; }
+      
+      .progress-panel { margin-top: 12px; border-radius: 20px; padding: 25px; }
+      .chart-head { display: flex; justify-content: space-between; align-items: end; }
+      .chart-head h3 { font-size: 18px; margin-top: 7px; }
+      .legend { font-size: 10px; color: #707b90; }
+      .legend i { display: inline-block; width: 6px; height: 6px; background: #8b7cff; border-radius: 50%; margin-right: 5px; box-shadow: 0 0 8px #8b7cff; }
+      
+      .bars { margin: 30px 0; }
+      .bar-row { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 14px; margin: 18px 0; font-size: 11px; }
+      .bar-row > b { text-align: right; color: #b8c1d0; }
+      .bar { height: 10px; background: #ffffff07; border-radius: 20px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+      .bar i { display: block; height: 100%; background: linear-gradient(90deg, #8b7cff, #5ee7c5); border-radius: 20px; position: relative; overflow: hidden; }
+      .bar i::after { content:""; position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shimmer 2s infinite; }
+      @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+      .recommendation { display: flex; gap: 12px; align-items: center; padding: 13px; border: 1px solid #5ee7c51b; background: #5ee7c507; border-radius: 12px; }
+      .recommendation > span { color: #5ee7c5; text-shadow: 0 0 10px #5ee7c5; }
+      .recommendation div { flex: 1; }
+      .recommendation b { font-size: 11px; }
+      .recommendation p { margin: 4px 0 0; font-size: 10px; color: #7c879b; }
+      .recommendation button { background: #ffffff08; border: 1px solid var(--line); color: #dce2ee; border-radius: 8px; padding: 8px; font-size: 9px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+      .recommendation button:hover { background: #5ee7c5; color: #000; }
+      
+      .pitch-card { padding: 65px 50px; border: 1px solid var(--line); border-radius: 25px; text-align: center; background: radial-gradient(circle at 50% 0, #7668ff1c, transparent 45%), #0d1320; }
+      .pitch-card h2 { font-size: clamp(30px, 4vw, 50px); letter-spacing: -2px; margin: 15px 0; }
+      .pitch-card h2 span { color: #8f86ff; text-shadow: 0 0 20px rgba(143,134,255,0.4); }
+      .pitch-card > p { color: #818ca0; max-width: 650px; margin: 0 auto; }
+      .pitch-points { display: flex; justify-content: center; gap: 10px; margin-top: 35px; }
+      .pitch-points div { padding: 12px 18px; background: #ffffff05; border: 1px solid var(--line); border-radius: 12px; transition: 0.3s; }
+      .pitch-points div:hover { transform: translateY(-5px) scale(1.05); border-color: var(--accent); background: rgba(143,134,255,0.1); }
+      .pitch-points b { color: #8f86ff; margin-right: 8px; font-size: 10px; }
+      .pitch-points span { font-size: 10px; color: #b8c1d0; }
+      
+      /* 🔥 FOOTER FIX 🔥 */
+      footer { max-width: 1184px; margin: auto; padding: 30px 28px 50px; border-top: 1px solid var(--line); display: flex; justify-content: center; color: #566175; font-size: 11px; letter-spacing: 0.5px; }
+      footer span { opacity: 0.7; transition: 0.3s ease; }
+      footer span:hover { opacity: 1; color: var(--accent2); }
+      
+      .toast { position: fixed; bottom: 25px; right: 25px; background: #f4f7ff; color: #0a0d14; padding: 11px 15px; border-radius: 10px; font-size: 11px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 5000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+      .toast.show { transform: none; opacity: 1; }
+      
+      /* 🔥 MOBILE FIX FOR CHAT 🔥 */
+      @media(max-width: 850px) {
+        nav { display: none; }
+        .hero { grid-template-columns: 1fr; padding-top: 55px; }
+        .hero-card { transform: none; }
+        .planner-grid { grid-template-columns: 1fr; }
+        .tutor { grid-template-columns: 1fr; height: 750px; display: flex; flex-direction: column; }
+        .tutor-side { border-right: 0; border-bottom: 1px solid var(--line); flex: none; }
+        .chat { flex: 1; height: auto; }
+        .stats-grid { grid-template-columns: 1fr 1fr; }
+        .section-heading { display: block; }
+        .section-heading > p { margin-top: 15px; }
+        .pitch-points { flex-direction: column; }
+        .bar-row { grid-template-columns: 80px 1fr 35px; }
+      }
+      @media(max-width: 520px) {
+        .hero h1 { font-size: 50px; }
+        .stats-grid { grid-template-columns: 1fr; }
+        .hero-actions { flex-direction: column; }
+        .topbar { padding: 0 16px; }
+        .profile-btn > span:last-child { display: none; }
+        .section, .hero { padding-left: 18px; padding-right: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="login-overlay">
+      <div class="login-box">
+        <div class="cube-container">
+          <div class="cube">
+            <div class="face front"></div><div class="face back"></div>
+            <div class="face right"></div><div class="face left"></div>
+            <div class="face top"></div><div class="face bottom"></div>
+          </div>
+        </div>
+        <h2>Welcome to EduNexus AI</h2>
+        <p>Enter your name to initialize your personal learning engine.</p>
+        <form id="loginForm">
+          <input type="text" id="usernameInput" placeholder="Your Name (e.g., Prince)" required autocomplete="off">
+          <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="explanation-modal" class="modal-overlay">
+      <div class="modal-content glass tilt-panel">
+        <h2><span style="color:var(--accent2)">✦</span> Welcome to EduNexus AI</h2>
+        <p style="color:var(--muted); font-size: 14px; margin-bottom: 25px;">Here is your quick guide to mastering this application:</p>
+        <ul>
+          <li><b>1. The Dashboard:</b> Track your daily focus tasks and AI insights immediately upon logging in.</li>
+          <li><b>2. AI Planner:</b> Scroll down to input your exams and subjects. The AI engine will instantly generate a custom study roadmap for you.</li>
+          <li><b>3. Doubt Solver (Live AI):</b> Use the chat tutor to ask ANY concept. It uses a live API to fetch real-world definitions instantly!</li>
+          <li><b>4. Progress Tracker:</b> Monitor your accuracy and let the system recommend your next study session automatically.</li>
+        </ul>
+        <button class="btn primary full" onclick="closeExplanation()">Got it, let's start! 🚀</button>
+      </div>
+    </div>
+
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+
+    <div id="main-content" class="blurred">
+      <header class="topbar glass" style="border-radius: 0 0 20px 20px; transform: none !important;">
+        <a class="brand" href="#">
+          <span class="brand-mark">✦</span>
+          <span>EduNexus<span class="brand-ai"> AI</span></span>
+        </a>
+        <nav>
+          <a onclick="openExplanation()" style="color: var(--accent2); cursor:pointer;">How it Works</a>
+          <a href="#planner">AI Planner</a>
+          <a href="#doubt">Doubt Solver</a>
+          <a href="#progress">Progress</a>
+        </nav>
+        <button class="profile-btn" onclick="logout()" title="Click to Logout">
+          <span class="avatar" id="profileAvatar">P</span>
+          <span id="profileName">Prince</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero reveal" id="dashboard">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="pulse"></span> AI-powered learning companion</div>
+            <h1 id="typing-text"></h1>
+            <p>EduNexus AI turns your subjects, exam dates and weak areas into a personalized learning plan that adapts as you improve.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#planner">Build my AI plan <span>→</span></a>
+              <a class="btn ghost" href="#doubt">Try AI Tutor</a>
+            </div>
+            <div class="trust-row">
+              <span>✓ Personalized</span>
+              <span>✓ Adaptive</span>
+              <span>✓ Student-first</span>
+            </div>
+          </div>
+
+          <div class="hero-card glass tilt-panel reveal">
+            <div class="card-top">
+              <div><span class="mini-label">TODAY'S FOCUS</span><h3>Physics • Electrostatics</h3></div>
+              <span class="score-badge">82% ready</span>
+            </div>
+            <div class="focus-progress"><span style="width:82%"></span></div>
+            <div class="task-list">
+              <div class="task done"><span>✓</span><div><b>Electric field basics</b><small>25 min • Completed</small></div></div>
+              <div class="task"><span>2</span><div><b>Gauss's law</b><small>30 min • Recommended now</small></div><button onclick="completeTask(this)">Start</button></div>
+              <div class="task"><span>3</span><div><b>10-question quiz</b><small>15 min • After study</small></div><button onclick="startRealQuiz(this)">Start</button></div>
+            </div>
+            <div class="ai-note"><span>✦</span><p><b>AI insight:</b> You're improving fast. One more practice set today could raise your score by ~8–12%.</p></div>
+          </div>
+        </section>
+
+        <section class="section reveal" id="planner">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">01 • PERSONALIZED PLANNING</span>
+              <h2>Your plan, built by AI.</h2>
+            </div>
+            <p>Input your Class 12 goals. The KX Core will instantly architect your personalized study roadmap.</p>
+          </div>
+
+          <div class="planner-grid">
+            <form class="panel glass tilt-panel" id="plannerForm">
+              <div class="panel-title"><span class="icon">✦</span><div><h3>Build your study plan</h3><p>3 quick inputs</p></div></div>
+              <label>Goal
+                <select id="goal">
+                  <option>Board Exams</option>
+                  <option>JEE Preparation</option>
+                  <option>School Test</option>
+                  <option>Concept Mastery</option>
+                </select>
+              </label>
+              <label>Subjects
+                <input id="subjects" value="Physics, Chemistry, Mathematics" placeholder="e.g. Physics, Maths">
+              </label>
+              <label>Daily study time
+                <input id="hours" type="range" min="1" max="8" value="4" oninput="document.getElementById('hoursValue').textContent=this.value+' hours'">
+                <span class="range-value" id="hoursValue">4 hours</span>
+              </label>
+              <label>Exam / target date
+                <input id="date" type="date">
+              </label>
+              <button class="btn primary full" type="submit">Generate AI Study Plan <span>✦</span></button>
+            </form>
+
+            <div class="panel result-panel glass tilt-panel" id="planResult">
+              <div class="result-empty">
+                <div class="empty-orb">✦</div>
+                <h3 id="planEmptyTitle">Your personalized plan will appear here</h3>
+                <p>EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal" id="doubt">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">02 • LIVE AI TUTOR</span>
+              <h2>Ask. Understand. Master.</h2>
+            </div>
+            <p>A real-time intelligence engine designed to decode Class 12 Science, CS, and English concepts instantly.</p>
+          </div>
+          
+          <div class="tutor panel glass">
+            <div class="tutor-side">
+              <div class="tutor-icon">✦</div>
+              <h3>EduNexus Tutor</h3>
+              <p>From Physics derivations to Python logic—decode complex concepts instantly, then test your mastery.</p>
+              <div class="suggestions">
+                <button onclick="askDemo('Explain Quantum Mechanics')">What is Quantum Mechanics?</button>
+                <button onclick="askDemo('Explain Thermodynamics')">Define Thermodynamics</button>
+                <button onclick="askDemo('Explain Gauss law')">Explain Gauss's law</button>
+              </div>
+            </div>
+            <div class="chat">
+              <div class="chat-head">
+                <span class="online-dot"></span> AI Tutor <span class="tiny">Online</span>
+              </div>
+              <div class="messages" id="messages"></div>
+              <form class="chat-input" onsubmit="sendQuestion(event)">
+                <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">🎤</button>
+                <input id="question" placeholder="E.g., What is gravity?" autocomplete="off">
+                <button type="submit">Send ↑</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal" id="progress">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">03 • ADAPTIVE PROGRESS</span>
+              <h2>See what's actually improving.</h2>
+            </div>
+            <p>The system uses performance signals to decide what you should study next.</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat glass tilt-panel"><span>Weekly focus</span><strong>18.4h</strong><small>↑ 24% vs last week</small></div>
+            <div class="stat glass tilt-panel"><span>Topics mastered</span><strong>27</strong><small>↑ 6 this week</small></div>
+            <div class="stat glass tilt-panel"><span>Quiz accuracy</span><strong>86%</strong><small>↑ 9% this month</small></div>
+            <div class="stat glass tilt-panel"><span>Study streak</span><strong>12 days</strong><small>Personal best 🔥</small></div>
+          </div>
+
+          <div class="progress-panel glass tilt-panel">
+            <div class="chart-head"><div><span class="mini-label">SUBJECT HEALTH</span><h3>Where your next hour should go</h3></div><span class="legend"><i></i> Mastery</span></div>
+            <div class="bars">
+              <div class="bar-row"><span>Physics</span><div class="bar"><i style="width:82%"></i></div><b>82%</b></div>
+              <div class="bar-row"><span>Chemistry</span><div class="bar"><i style="width:68%"></i></div><b>68%</b></div>
+              <div class="bar-row"><span>Mathematics</span><div class="bar"><i style="width:91%"></i></div><b>91%</b></div>
+            </div>
+            <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Spend your next 45 minutes on <strong>Chemistry</strong>. Your accuracy is good, but retention is falling after 3 days.</p></div><button onclick="showToast('Recommended session added to your plan.')">Add session</button></div>
+          </div>
+        </section>
+
+        <section class="pitch section reveal">
+          <div class="pitch-card tilt-panel glass">
+            <span class="eyebrow">THE PRODUCT IDEA</span>
+            <h2>From “I don't know what to study”<br>to <span>“I know exactly what to do next.”</span></h2>
+            <p>EduNexus combines student context, performance signals and AI tutoring into one adaptive learning journey.</p>
+            <div class="pitch-points">
+              <div><b>01</b><span>Understand the student</span></div>
+              <div><b>02</b><span>Personalize the path</span></div>
+              <div><b>03</b><span>Adapt from results</span></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <footer>
+        <span>EduNexus AI — Powered by KX Neural Core | Developed by Kartik</span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const $ = id => document.getElementById(id);
+
+      function openExplanation() { $('explanation-modal').classList.add('show'); }
+      function closeExplanation() { $('explanation-modal').classList.remove('show'); }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active'); 
+          }
+        });
+      }, { threshold: 0.10 }); 
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+      });
+
+      const textToType = "Study smarter. ";
+      const typeTarget = $("typing-text");
+      let typeIndex = 0;
+      
+      function startTyping() { 
+        typeTarget.innerHTML = ""; 
+        typeIndex = 0; 
+        typeEffect(); 
+      }
+      
+      function typeEffect() {
+        if (typeIndex < textToType.length) {
+          typeTarget.innerHTML += textToType.charAt(typeIndex); 
+          typeIndex++; 
+          setTimeout(typeEffect, 80);
+        } else {
+          typeTarget.innerHTML += `<br><span style="background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; -webkit-background-clip: text; animation: popIn 0.5s ease-out;">Not harder.</span>`;
+        }
+      }
+
+      const overlay = $('login-overlay'); 
+      const mainContent = $('main-content');
+      const savedUser = localStorage.getItem('studymate_username');
+      
+      if (savedUser) { 
+        activateUser(savedUser, false); 
+      } else {
+        $('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const newName = $('usernameInput').value.trim();
+          if (newName) {
+            localStorage.setItem('studymate_username', newName);
+            activateUser(newName, true);
+          }
+        });
+      }
+
+      function activateUser(name, isFirstTime) {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.visibility = 'hidden';
+          mainContent.classList.remove('blurred');
+          startTyping();
+          if (isFirstTime) { setTimeout(openExplanation, 1500); }
+        }, 500);
+        
+        $('profileName').textContent = name;
+        $('profileAvatar').textContent = name.charAt(0).toUpperCase();
+        $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
+        
+        $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Which Class 12 concept are we decoding today?</div></div>`;
+        
+        if(isFirstTime) {
+          const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
+          
+          fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+              content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` 
+            })
+          }).catch(err => console.log("Tracker silent fail"));
+        }
+      }
+
+      function logout() {
+        if (confirm("Do you want to log out?")) {
+          localStorage.removeItem('studymate_username');
+          location.reload();
+        }
+      }
+
+      document.querySelectorAll('.tilt-panel').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const rotateX = (((e.clientY - rect.top) - (rect.height / 2)) / (rect.height / 2)) * -10;
+          const rotateY = (((e.clientX - rect.left) - (rect.width / 2)) / (rect.width / 2)) * 10;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          card.style.transition = "transform 0.1s ease-out";
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+          card.style.transition = "transform 0.5s ease-out";
+        });
+      });
+
+      function showToast(text) {
+        const t = $("toast"); 
+        t.textContent = text; 
+        t.classList.add("show");
+        clearTimeout(window.toastTimer); 
+        window.toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+      }
+      
+      function completeTask(btn) { 
+        btn.textContent = "Done ✓"; 
+        btn.disabled = true; 
+        btn.style.opacity = ".5"; 
+        showToast("Task completed!"); 
+      }
+
+      function startRealQuiz(btn) {
+        btn.textContent = "Done ✓"; 
+        btn.disabled = true; 
+        btn.style.opacity = ".5"; 
+        showToast("Quiz initiated! Redirecting to AI Tutor...");
+        
+        setTimeout(() => {
+          const doubtSection = document.getElementById('doubt');
+          if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+
+        setTimeout(() => {
+          askDemo('Make a quick revision quiz on Electrostatics');
+        }, 1200);
+      }
+      
+      function escapeHtml(s) { 
+        return s.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m])); 
+      }
+
+      if ($("date")) {
+        $("date").value = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+      }
+
+      $("plannerForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const currentUser = localStorage.getItem('studymate_username') || "Student";
+        const subjectsInput = $("subjects").value;
+        const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Physics", "Chemistry", "Mathematics"];
+        const hours = $("hours").value;
+        const goal = $("goal").value;
+        const days = ["Today", "Tomorrow", "Day 3", "Day 4", "Day 5"];
+        const focus = subjects.length ? subjects : ["Physics", "Chemistry", "Mathematics"];
+        
+        $("planResult").innerHTML = `
+          <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
+            <span class="eyebrow" style="color: var(--accent2);">✦ AI PLAN GENERATED FOR ${currentUser.toUpperCase()}</span>
+            <h3 style="margin-top:10px;">Your ${goal.toLowerCase()} roadmap</h3>
+            <div class="plan-meta">
+              <span class="chip">${hours} hrs/day</span>
+              <span class="chip">${focus.length} subjects</span>
+              <span class="chip">Adaptive revision</span>
+            </div>
+            ${days.map((d, i) => `
+              <div class="plan-day">
+                <b>${d}</b><span>${i === 0 ? "Start now" : "Planned"}</span>
+                <p>${focus[i % focus.length]} • ${i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review"} • ${Math.max(30, Math.round((hours * 60) / 3))} min</p>
+              </div>
+            `).join("")}
+            <div class="ai-note" style="margin-top:14px; background: rgba(139,124,255,0.1);">
+              <span style="color: var(--accent);">✦</span>
+              <p><b>Why this plan?</b> EduNexus balances your available time across subjects and adds revision after practice so weak areas can improve.</p>
+            </div>
+          </div>`;
+        showToast("AI study plan generated!");
+      });
+
+      function askDemo(text) { 
+        $("question").value = text; 
+        sendQuestion(new Event("submit")); 
+      }
+      
+      async function sendQuestion(e) {
+        e.preventDefault();
+        const input = $("question");
+        const q = input.value.trim(); 
+        if (!q) return;
+        
+        const wrap = $("messages");
+        wrap.innerHTML += `<div class="message user"><div>${escapeHtml(q)}</div></div>`;
+        input.value = ""; 
+        wrap.scrollTop = wrap.scrollHeight;
+        
+        const loadingId = "load-" + Date.now();
+        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Searching the live AI Engine...</div></div>`;
+        wrap.scrollTop = wrap.scrollHeight;
+
+        try {
+          // 🔥 YAHAN TERA LIVE RENDER CLOUD URL UPDATE HO GAYA HAI 🔥
+          const res = await fetch("https://edunexusai.onrender.com/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: q })
+          });
+          
+          const data = await res.json();
+          let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+          
+          document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
+          
+          speakAnswer(answer); 
+
+        } catch (error) {
+          document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>Oops! Server se connection toot gaya. Internet on hai na?</div>`;
+        }
+        wrap.scrollTop = wrap.scrollHeight;
+      }
+
+      // ==========================================
+      // 🔥 KX NEURAL CORE: VOICE ENGINE 🔥
+      // ==========================================
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition;
+      let isListening = false;
+
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-IN'; 
+
+        recognition.onstart = () => {
+          isListening = true;
+          $('mic-btn').classList.add('listening');
+          $('question').placeholder = "KX Core is listening...";
+        };
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          $('question').value = transcript; 
+          stopMic(); 
+        };
+
+        recognition.onend = () => stopMic();
+        recognition.onerror = () => stopMic();
+      }
+
+      function toggleMic() {
+        if (!SpeechRecognition) return showToast("Use Chrome browser for Voice AI!");
+        isListening ? recognition.stop() : recognition.start();
+      }
+
+      function stopMic() {
+        isListening = false;
+        $('mic-btn').classList.remove('listening');
+        $('question').placeholder = "E.g., What is gravity?";
+      }
+
+      function speakAnswer(text) {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel(); 
+          const cleanText = text.replace(/<[^>]*>?/gm, ''); 
+          const utterance = new SpeechSynthesisUtterance(cleanText);
+          utterance.rate = 1.05; 
+          utterance.pitch = 1.1; 
+          window.speechSynthesis.speak(utterance);
+        }
+      }
+    </script>
+  </body>
+  </html>
