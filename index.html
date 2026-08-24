@@ -21,7 +21,7 @@
       * { box-sizing: border-box; }
       html, body {
         scroll-behavior: smooth;
-        overflow-x: hidden; /* 🔥 MOBILE FIX: Pura lock kar diya taaki screen idhar udhar na hile */
+        overflow-x: hidden; /* 🔥 Horizontal scroll band */
         width: 100%;
       }
       body {
@@ -264,13 +264,13 @@
       .toast { position: fixed; bottom: 25px; right: 25px; background: #f4f7ff; color: #0a0d14; padding: 11px 15px; border-radius: 10px; font-size: 11px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 5000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
       .toast.show { transform: none; opacity: 1; }
       
-      /* 🔥 1000% CORRECT MOBILE FIXES 🔥 */
+      /* 🔥 MOBILE LAYOUT FIXES (SCROLL REVEAL ACTIVE) 🔥 */
       @media(max-width: 850px) {
         nav { display: none; }
         .hero { grid-template-columns: 1fr; padding-top: 55px; }
         .hero-card { transform: none; margin-top: 20px; }
         .planner-grid { grid-template-columns: 1fr; }
-        .tutor { grid-template-columns: 1fr; height: 700px; display: flex; flex-direction: column; } /* Fixed height for chat on mobile */
+        .tutor { grid-template-columns: 1fr; height: 700px; display: flex; flex-direction: column; } 
         .tutor-side { border-right: 0; border-bottom: 1px solid var(--line); flex: none; padding-bottom: 15px; }
         .chat { flex: 1; height: auto; }
         .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -279,14 +279,8 @@
         .pitch-points { flex-direction: column; }
         .bar-row { grid-template-columns: 80px 1fr 35px; }
         
-        /* Disable hover/tilt glitches on mobile */
-        .tilt-panel, .task, .btn, .plan-day, .stat, .pitch-points div {
-          transform: none !important;
-          transition: none !important; /* Touch screen par hover animations block kar diye */
-        }
-        
-        /* Smooth fast reveals for phone */
-        .reveal { transform: translateY(30px) scale(1); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        /* 🔥 ONLY Disable 3D tilt hover on mobile, KEEP the scroll animations! 🔥 */
+        .tilt-panel { transform: none !important; }
       }
       
       @media(max-width: 520px) {
@@ -298,7 +292,7 @@
         .section, .hero { padding-left: 18px; padding-right: 18px; padding-top: 50px; }
         .login-box { padding: 30px 20px; }
         .chat-input { flex-wrap: wrap; }
-        .chat-input input { flex: 1 1 100%; order: -1; margin-bottom: 8px; } /* Chat input full width on tiny screens */
+        .chat-input input { flex: 1 1 100%; order: -1; margin-bottom: 8px; }
       }
     </style>
   </head>
@@ -316,6 +310,7 @@
         <h2>Welcome to EduNexus AI</h2>
         <p>Enter your name to initialize your personal learning engine.</p>
         <form id="loginForm">
+          <!-- Placeholder name updated to Kartik -->
           <input type="text" id="usernameInput" placeholder="Your Name (e.g., Kartik)" required autocomplete="off">
           <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
         </form>
@@ -352,8 +347,9 @@
           <a href="#progress">Progress</a>
         </nav>
         <button class="profile-btn" onclick="logout()" title="Click to Logout">
-          <span class="avatar" id="profileAvatar">P</span>
-          <span id="profileName">Prince</span>
+          <!-- 🔥 Avatar aur Naam set to KARTIK 🔥 -->
+          <span class="avatar" id="profileAvatar">K</span>
+          <span id="profileName">Kartik</span>
         </button>
       </header>
 
@@ -507,7 +503,8 @@
       </main>
       
       <footer>
-        <span>EduNexus AI — Powered by KX Neural Core | Developed by Prince</span>
+        <!-- 🔥 DEVELOPER NAME SET TO KARTIK 🔥 -->
+        <span>EduNexus AI — Powered by KX Neural Core | Developed by Kartik</span>
       </footer>
     </div>
 
@@ -523,8 +520,7 @@
         setTimeout(startTyping, 300);
       }
 
-      // 🔥 MOBILE REVEAL FIX 🔥
-      // Threshold kam kar diya taaki phone par jaldi dikhe screen
+      // 🔥 ANIMATION REVEAL THRESHOLD LOW SET SO IT WORKS ON MOBILE EASILY 🔥
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -615,9 +611,7 @@
         }
       }
 
-      // 🔥 MOBILE TILT FIX 🔥
-      // 3D animations phone ki battery aur performance kharab karte hain
-      // Sirf badi screen (laptops/PC) par hi mouse event chalega ab.
+      // 🔥 MOBILE TILT FIX (LEAVES SCROLL ANIMATION ACTIVE) 🔥
       if (window.innerWidth > 850) {
         document.querySelectorAll('.tilt-panel').forEach(card => {
           card.addEventListener('mousemove', e => {
