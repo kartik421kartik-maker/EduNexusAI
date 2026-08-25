@@ -93,13 +93,21 @@
       .ambient-1 { background: #7665ff; top: -180px; right: -100px; }
       .ambient-2 { background: #2bd9b1; left: -200px; top: 45%; }
 
-      /* 🔥 FIX 1: MOBILE-FRIENDLY GRADIENT TEXT 🔥 */
+      /* 🔥 FIXED FOR MOBILE GRADIENT VISIBILITY 🔥 */
       .gradient-title {
         background: linear-gradient(90deg, #ffffff, #a59dff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: transparent;
+        display: block; 
+      }
+      @supports (-webkit-touch-callout: none) {
+        .gradient-title {
+          /* Fallback for iOS Safari / Mobile browsers sometimes failing on gradients */
+          color: #e0dfff;
+          background: none;
+          -webkit-text-fill-color: initial;
+        }
       }
 
       /* 🔥 THE ULTIMATE FIXED HEADER 🔥 */
@@ -250,7 +258,6 @@
       .message > div { padding: 11px 13px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; word-wrap: break-word; }
       .message.user { align-self: flex-end; flex-direction: row-reverse; }
       .message.user > div { background: #8b7cff17; border-color: #8b7cff28; }
-      .msg-avatar { min-width: 25px; height: 25px; border-radius: 8px; display: grid; place-items: center; background: #8b7cff18; color: #aaa2ff; }
       
       .chat-input { display: flex; gap: 10px; padding: 15px 20px; border-top: 1px solid var(--line); align-items: center; background: rgba(7, 10, 18, 0.8); backdrop-filter: blur(10px); }
       .chat-input input { flex: 1; font-size: 13px; padding: 14px 20px; border-radius: 30px; background: #ffffff05; border: 1px solid rgba(255,255,255,0.08); color: white; outline: none; transition: 0.3s; margin: 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
@@ -309,7 +316,6 @@
       footer span { opacity: 0.7; transition: 0.3s ease; }
       footer span:hover { opacity: 1; color: var(--accent2); }
       
-      /* 🔥 FIX 2: REMOVED MOBILE BLOCKER FOR BOUNCER ANIMATION 🔥 */
       @media(max-width: 850px) {
         nav { display: none; }
         .hero { grid-template-columns: 1fr; padding-top: 55px; }
@@ -323,6 +329,7 @@
         .section-heading > p { margin-top: 15px; }
         .pitch-points { flex-direction: column; }
         .bar-row { grid-template-columns: 80px 1fr 35px; }
+        
       }
       
       @media(max-width: 520px) {
@@ -668,14 +675,6 @@
         
         $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
         
-        if(isFirstTime) {
-          const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
-          fetch(webhookURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` })
-          }).catch(err => console.log("Tracker silent fail"));
-        }
       }
 
       function logout() {
@@ -800,6 +799,9 @@
 
       updateProgressUI();
 
+      // Session Tracking for Custom Quiz Memory on Python Backend
+      const sessionId = Date.now().toString(); 
+
       function startCustomQuiz() {
           const sub = $("quizSubject").value;
           const topic = $("quizTopic").value.trim();
@@ -819,20 +821,9 @@
           }, 600);
 
           setTimeout(() => {
-              let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions.`;
+              let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions. Evaluate my answers when I provide them, and give me a score.`;
               
               askDemo(secretPrompt);
-              
-              setTimeout(() => {
-                  let boost = Math.floor(Math.random() * 5) + 2; 
-                  if (subjectMastery[sub] !== undefined) {
-                      subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
-                      localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
-                      updateProgressUI();
-                      showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
-                  }
-              }, 12000); 
-
           }, 1500);
       }
 
@@ -853,20 +844,43 @@
         wrap.scrollTop = wrap.scrollHeight;
         
         const loadingId = "load-" + Date.now();
-        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
+        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with KX Neural Core... ✦</div></div>`;
         wrap.scrollTop = wrap.scrollHeight;
 
         try {
+          const userName = localStorage.getItem('studymate_username') || "Student";
+          
+          // Check if this is a quiz answer to boost score locally
+          const isQuizAnswer = q.toLowerCase().match(/^[1-5][\)\.\s]*[a-d]/) || q.toLowerCase().includes("answer");
+
           const res = await fetch("https://edunexusai.onrender.com/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: q + "\n\n(Reply clearly and maintain format. Do not forget any hidden instructions I previously sent in the prompt.)" })
+            // SENDING SESSION ID TO BACKEND FOR MEMORY
+            body: JSON.stringify({ 
+                message: q,
+                session_id: sessionId, 
+                user_name: userName 
+            })
           });
           
           const data = await res.json();
-          let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+          let safeAnswer = escapeHtml(data.reply); 
+          let answer = safeAnswer.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
           
           document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
+
+          // UPDATE LOCAL SCORE ONLY IF AI MENTIONS "SCORE" AFTER SUBMISSION
+          if(isQuizAnswer && data.reply.toLowerCase().includes("score")) {
+               const sub = $("quizSubject").value;
+               let boost = Math.floor(Math.random() * 5) + 2; 
+               if (subjectMastery[sub] !== undefined) {
+                   subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
+                   localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
+                   updateProgressUI();
+                   showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
+               }
+          }
 
         } catch (error) {
           document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>Oops! Server Connection Broken. Please Check Your Internet Connection!</div>`;
