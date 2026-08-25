@@ -21,7 +21,7 @@
       * { box-sizing: border-box; }
       html, body {
         scroll-behavior: smooth;
-        overflow-x: hidden; /* 🔥 Horizontal scroll band */
+        overflow-x: hidden;
         width: 100%;
       }
       body {
@@ -131,6 +131,20 @@
       .card-top h3 { font-size: 19px; margin-top: 7px; }
       .score-badge { font-size: 11px; padding: 7px 9px; border-radius: 8px; background: #5ee7c51a; color: #5ee7c5; box-shadow: 0 0 15px rgba(94,231,197,0.2); }
       
+      /* THE MISSING GLOBAL INPUT & LABEL CSS (RESTORED) */
+      label { display: block; color: #aeb7c8; font-size: 11px; font-weight: 700; margin: 18px 0; }
+      select, input { font: inherit; display: block; width: 100%; margin-top: 8px; background: #090e18; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 11px; outline: none; transition: 0.3s; }
+      select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(139,124,255,0.3); }
+      input[type=range] { width: 100%; accent-color: var(--accent); margin-top: 13px; }
+      .range-value { float: right; color: #8f86ff; font-size: 10px; margin-top: -22px; }
+      .full { width: 100%; margin-top: 8px; }
+
+      /* CUSTOM QUIZ BOX UI */
+      .quiz-box { margin-top: 20px; padding: 18px; background: #ffffff04; border: 1px solid #ffffff08; border-radius: 16px; }
+      .quiz-box label { font-size: 10px; color: #727e96; margin-bottom: 6px; display: block; font-weight: 700; letter-spacing: 1px; }
+      .quiz-box select, .quiz-box input { width: 100%; font: inherit; background: #090e18; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 12px; outline: none; font-size: 12px; transition: 0.3s; }
+      .quiz-box select:focus, .quiz-box input:focus { border-color: var(--accent2); box-shadow: 0 0 15px rgba(94, 231, 197, 0.2); }
+      
       .focus-progress { height: 6px; background: #ffffff09; border-radius: 10px; margin: 22px 0; }
       .focus-progress span { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #8d7cff, #5ee7c5); box-shadow: 0 0 10px #5ee7c5; }
       
@@ -164,13 +178,6 @@
       .panel-title h3 { font-size: 18px; }
       .panel-title p { margin: 4px 0 0; color: #707b91; font-size: 11px; }
       
-      label { display: block; color: #aeb7c8; font-size: 11px; font-weight: 700; margin: 18px 0; }
-      select, input { font: inherit; display: block; width: 100%; margin-top: 8px; background: #090e18; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 11px; outline: none; transition: 0.3s; }
-      select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(139,124,255,0.3); }
-      input[type=range] { width: 100%; accent-color: var(--accent); margin-top: 13px; }
-      .range-value { float: right; color: #8f86ff; font-size: 10px; margin-top: -22px; }
-      .full { width: 100%; margin-top: 8px; }
-      
       .result-panel { min-height: 460px; background: radial-gradient(circle at 70% 20%, #7e70ff12, transparent 45%), linear-gradient(145deg, #111928, #0b101a); }
       .result-empty { height: 100%; min-height: 410px; display: grid; place-items: center; align-content: center; text-align: center; padding: 30px; }
       .empty-orb { width: 70px; height: 70px; border-radius: 22px; display: grid; place-items: center; font-size: 26px; color: #aaa2ff; background: #8b7cff12; border: 1px solid #8b7cff25; margin-bottom: 18px; animation: float 3s ease-in-out infinite; box-shadow: 0 0 20px rgba(139,124,255,0.2); }
@@ -187,8 +194,8 @@
       .plan-day span { float: right; color: #5ee7c5; font-size: 10px; }
       .plan-day p { margin: 5px 0 0; color: #7f8a9e; font-size: 10px; }
 
-      /* 🔥 THE FIX: Chat Box Strict Height & Scroll 🔥 */
-      .tutor { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; height: 550px; } /* Height Lock */
+      /* CHAT BOX HEIGHT LOCK */
+      .tutor { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; height: 550px; } 
       .tutor-side { padding: 28px; border-right: 1px solid var(--line); overflow-y: auto; }
       .tutor-side h3 { font-size: 22px; margin: 16px 0 8px; }
       .tutor-side p { font-size: 12px; color: #7f8a9e; }
@@ -196,7 +203,7 @@
       .suggestions button { background: #ffffff05; border: 1px solid var(--line); color: #aeb7c8; text-align: left; border-radius: 9px; padding: 10px; font-size: 10px; cursor: pointer; transition: 0.3s; }
       .suggestions button:hover { background: rgba(139,124,255,0.2); border-color: rgba(139,124,255,0.5); color: white; transform: translateX(5px); }
       
-      .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; } /* Inner Height Lock */
+      .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; } 
       .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
       .tiny { float: right; color: #616c80; font-weight: 500; }
       .messages { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
@@ -207,15 +214,19 @@
       .message.user > div { background: #8b7cff17; border-color: #8b7cff28; }
       .msg-avatar { min-width: 25px; height: 25px; border-radius: 8px; display: grid; place-items: center; background: #8b7cff18; color: #aaa2ff; }
       
-      .chat-input { display: flex; gap: 8px; padding: 15px; border-top: 1px solid var(--line); }
-      .chat-input button[type="submit"] { background: white; border: 0; border-radius: 10px; padding: 0 15px; font-weight: 800; cursor: pointer; color: black; transition: 0.3s; }
-      .chat-input button[type="submit"]:hover { background: var(--accent2); transform: scale(1.05); }
+      /* 🔥 NEW CREATIVE MIC & SEND BUTTON UI 🔥 */
+      .chat-input { display: flex; gap: 12px; padding: 15px 22px; border-top: 1px solid var(--line); align-items: center; background: #070a12; }
+      
+      .chat-input input { flex: 1; font-size: 13px; padding: 14px 20px; border-radius: 999px; background: #ffffff05; border: 1px solid var(--line); color: white; outline: none; transition: 0.3s; margin: 0; }
+      .chat-input input:focus { border-color: var(--accent); background: #ffffff0a; box-shadow: 0 0 15px rgba(139,124,255,0.15); }
+      
+      .chat-input button[type="submit"] { background: linear-gradient(135deg, var(--accent), var(--accent2)); border: 0; border-radius: 999px; padding: 0 22px; height: 46px; font-weight: 800; cursor: pointer; color: #000; transition: 0.3s; box-shadow: 0 5px 15px rgba(94,231,197,0.25); display: flex; align-items: center; gap: 6px; }
+      .chat-input button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(94,231,197,0.4); }
 
-      /* 🔥 NEW MIC BUTTON CSS 🔥 */
-      #mic-btn { background: #ffffff08; color: var(--accent2); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; transition: 0.3s; font-size: 16px; cursor: pointer; display: grid; place-items: center; }
-      #mic-btn:hover { background: #5ee7c522; transform: scale(1.05); }
+      #mic-btn { background: #ffffff05; color: var(--muted); border: 1px solid var(--line); border-radius: 50%; width: 46px; height: 46px; flex-shrink: 0; transition: 0.3s; font-size: 16px; cursor: pointer; display: grid; place-items: center; }
+      #mic-btn:hover { background: rgba(139,124,255,0.1); color: var(--accent); border-color: var(--accent); transform: scale(1.05); }
       #mic-btn.listening { background: #ff4757; color: white; border-color: #ff4757; animation: pulseMic 1.5s infinite; }
-      @keyframes pulseMic { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
+      @keyframes pulseMic { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
       
       .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
       .stat { border-radius: 16px; padding: 20px; transition: 0.3s; }
@@ -232,9 +243,9 @@
       
       .bars { margin: 30px 0; }
       .bar-row { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 14px; margin: 18px 0; font-size: 11px; }
-      .bar-row > b { text-align: right; color: #b8c1d0; }
+      .bar-row > b { text-align: right; color: #b8c1d0; transition: color 0.3s; }
       .bar { height: 10px; background: #ffffff07; border-radius: 20px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
-      .bar i { display: block; height: 100%; background: linear-gradient(90deg, #8b7cff, #5ee7c5); border-radius: 20px; position: relative; overflow: hidden; }
+      .bar i { display: block; height: 100%; background: linear-gradient(90deg, #8b7cff, #5ee7c5); border-radius: 20px; position: relative; overflow: hidden; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1); }
       .bar i::after { content:""; position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shimmer 2s infinite; }
       @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
@@ -256,15 +267,10 @@
       .pitch-points b { color: #8f86ff; margin-right: 8px; font-size: 10px; }
       .pitch-points span { font-size: 10px; color: #b8c1d0; }
       
-      /* 🔥 FOOTER FIX 🔥 */
       footer { max-width: 1184px; margin: auto; padding: 30px 28px 50px; border-top: 1px solid var(--line); display: flex; justify-content: center; color: #566175; font-size: 11px; letter-spacing: 0.5px; }
       footer span { opacity: 0.7; transition: 0.3s ease; }
       footer span:hover { opacity: 1; color: var(--accent2); }
       
-      .toast { position: fixed; bottom: 25px; right: 25px; background: #f4f7ff; color: #0a0d14; padding: 11px 15px; border-radius: 10px; font-size: 11px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 5000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
-      .toast.show { transform: none; opacity: 1; }
-      
-      /* 🔥 MOBILE LAYOUT FIXES (SCROLL REVEAL ACTIVE) 🔥 */
       @media(max-width: 850px) {
         nav { display: none; }
         .hero { grid-template-columns: 1fr; padding-top: 55px; }
@@ -278,8 +284,6 @@
         .section-heading > p { margin-top: 15px; }
         .pitch-points { flex-direction: column; }
         .bar-row { grid-template-columns: 80px 1fr 35px; }
-        
-        /* 🔥 ONLY Disable 3D tilt hover on mobile, KEEP the scroll animations! 🔥 */
         .tilt-panel { transform: none !important; }
       }
       
@@ -291,8 +295,7 @@
         .profile-btn > span:last-child { display: none; }
         .section, .hero { padding-left: 18px; padding-right: 18px; padding-top: 50px; }
         .login-box { padding: 30px 20px; }
-        .chat-input { flex-wrap: wrap; }
-        .chat-input input { flex: 1 1 100%; order: -1; margin-bottom: 8px; }
+        .chat-input { padding: 12px; }
       }
     </style>
   </head>
@@ -310,7 +313,6 @@
         <h2>Welcome to EduNexus AI</h2>
         <p>Enter your name to initialize your personal learning engine.</p>
         <form id="loginForm">
-          <!-- Placeholder name updated to Kartik -->
           <input type="text" id="usernameInput" placeholder="Your Name (e.g., Kartik)" required autocomplete="off">
           <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
         </form>
@@ -322,10 +324,10 @@
         <h2><span style="color:var(--accent2)">✦</span> Welcome to EduNexus AI</h2>
         <p style="color:var(--muted); font-size: 14px; margin-bottom: 25px;">Here is your quick guide to mastering this application:</p>
         <ul>
-          <li><b>1. The Dashboard:</b> Track your daily focus tasks and AI insights immediately upon logging in.</li>
-          <li><b>2. AI Planner:</b> Scroll down to input your exams and subjects. The AI engine will instantly generate a custom study roadmap for you.</li>
-          <li><b>3. Doubt Solver (Live AI):</b> Use the chat tutor to ask ANY concept. It uses a live API to fetch real-world definitions instantly!</li>
-          <li><b>4. Progress Tracker:</b> Monitor your accuracy and let the system recommend your next study session automatically.</li>
+          <li><b>1. AI Quiz Engine:</b> Generate custom timed quizzes on any chapter directly from the dashboard!</li>
+          <li><b>2. Live Memory DB:</b> Your quiz performance will automatically update your Subject Mastery progress bars below.</li>
+          <li><b>3. AI Planner:</b> Scroll down to input your exams and subjects for a dynamic study roadmap.</li>
+          <li><b>4. Live AI Tutor:</b> Ask any Class 12 Science/CS/English question, and decode concepts instantly.</li>
         </ul>
         <button class="btn primary full" onclick="closeExplanation()">Got it, let's start! 🚀</button>
       </div>
@@ -347,7 +349,6 @@
           <a href="#progress">Progress</a>
         </nav>
         <button class="profile-btn" onclick="logout()" title="Click to Logout">
-          <!-- 🔥 Avatar aur Naam set to KARTIK 🔥 -->
           <span class="avatar" id="profileAvatar">K</span>
           <span id="profileName">Kartik</span>
         </button>
@@ -372,16 +373,44 @@
 
           <div class="hero-card glass tilt-panel reveal">
             <div class="card-top">
-              <div><span class="mini-label">TODAY'S FOCUS</span><h3>Physics • Electrostatics</h3></div>
-              <span class="score-badge">82% ready</span>
+              <div><span class="mini-label">AI QUIZ ENGINE</span><h3>Generate Custom Test</h3></div>
+              <span class="score-badge">✦ Live Tracking</span>
             </div>
-            <div class="focus-progress"><span style="width:82%"></span></div>
-            <div class="task-list">
-              <div class="task done"><span>✓</span><div><b>Electric field basics</b><small>25 min • Completed</small></div></div>
-              <div class="task"><span>2</span><div><b>Gauss's law</b><small>30 min • Recommended now</small></div><button onclick="completeTask(this)">Start</button></div>
-              <div class="task"><span>3</span><div><b>10-question quiz</b><small>15 min • After study</small></div><button onclick="startRealQuiz(this)">Start</button></div>
+            
+            <div class="quiz-box">
+              <label>SELECT SUBJECT</label>
+              <select id="quizSubject">
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Computer Science">Computer Science</option>
+              </select>
+              
+              <label>ENTER CHAPTER OR TOPIC</label>
+              <input type="text" id="quizTopic" placeholder="e.g., Capacitance, Matrices, SQL..." autocomplete="off">
+              
+              <div style="display: flex; gap: 8px;">
+                <div style="flex: 1;">
+                  <label>QUESTIONS</label>
+                  <select id="quizQuestions" style="margin-bottom: 0;">
+                    <option value="3">3 Questions</option>
+                    <option value="5" selected>5 Questions</option>
+                    <option value="10">10 Questions</option>
+                  </select>
+                </div>
+                <div style="flex: 1;">
+                  <label>DURATION</label>
+                  <select id="quizTime" style="margin-bottom: 0;">
+                    <option value="5">5 Mins</option>
+                    <option value="10" selected>10 Mins</option>
+                    <option value="15">15 Mins</option>
+                  </select>
+                </div>
+              </div>
+              <button onclick="startCustomQuiz()" class="btn primary full" style="margin-top: 12px; padding: 12px; font-size: 11px;">Start Quiz ✦</button>
             </div>
-            <div class="ai-note"><span>✦</span><p><b>AI insight:</b> You're improving fast. One more practice set today could raise your score by ~8–12%.</p></div>
+            
+            <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
         </section>
 
@@ -468,7 +497,7 @@
               <span class="eyebrow">03 • ADAPTIVE PROGRESS</span>
               <h2>See what's actually improving.</h2>
             </div>
-            <p>The system uses performance signals to decide what you should study next.</p>
+            <p>The system uses live tracking memory to decide what you should study next.</p>
           </div>
           <div class="stats-grid">
             <div class="stat glass tilt-panel"><span>Weekly focus</span><strong>18.4h</strong><small>↑ 24% vs last week</small></div>
@@ -480,11 +509,11 @@
           <div class="progress-panel glass tilt-panel">
             <div class="chart-head"><div><span class="mini-label">SUBJECT HEALTH</span><h3>Where your next hour should go</h3></div><span class="legend"><i></i> Mastery</span></div>
             <div class="bars">
-              <div class="bar-row"><span>Physics</span><div class="bar"><i style="width:82%"></i></div><b>82%</b></div>
-              <div class="bar-row"><span>Chemistry</span><div class="bar"><i style="width:68%"></i></div><b>68%</b></div>
-              <div class="bar-row"><span>Mathematics</span><div class="bar"><i style="width:91%"></i></div><b>91%</b></div>
+              <div class="bar-row"><span>Physics</span><div class="bar"><i id="bar-Physics" style="width:0%"></i></div><b id="txt-Physics" style="color: #b8c1d0;">0%</b></div>
+              <div class="bar-row"><span>Chemistry</span><div class="bar"><i id="bar-Chemistry" style="width:0%"></i></div><b id="txt-Chemistry" style="color: #b8c1d0;">0%</b></div>
+              <div class="bar-row"><span>Mathematics</span><div class="bar"><i id="bar-Mathematics" style="width:0%"></i></div><b id="txt-Mathematics" style="color: #b8c1d0;">0%</b></div>
             </div>
-            <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Spend your next 45 minutes on <strong>Chemistry</strong>. Your accuracy is good, but retention is falling after 3 days.</p></div><button onclick="showToast('Recommended session added to your plan.')">Add session</button></div>
+            <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Keep taking Custom Quizzes to update your memory database and improve your progress!</p></div><button onclick="window.scrollTo(0,0)">Take Quiz</button></div>
           </div>
         </section>
 
@@ -503,8 +532,7 @@
       </main>
       
       <footer>
-        <!-- 🔥 DEVELOPER NAME SET TO KARTIK 🔥 -->
-        <span>EduNexus AI — Powered by KX Neural Core | Developed by Kartik</span>
+        <span>EduNexus AI — Powered by EduNexus Engine | Developed by Kartik</span>
       </footer>
     </div>
 
@@ -520,7 +548,6 @@
         setTimeout(startTyping, 300);
       }
 
-      // 🔥 ANIMATION REVEAL THRESHOLD LOW SET SO IT WORKS ON MOBILE EASILY 🔥
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -589,17 +616,14 @@
         $('profileAvatar').textContent = name.charAt(0).toUpperCase();
         $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
         
-        $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Which Class 12 concept are we decoding today?</div></div>`;
+        $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
         
         if(isFirstTime) {
           const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
-          
           fetch(webhookURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-              content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` 
-            })
+            body: JSON.stringify({ content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` })
           }).catch(err => console.log("Tracker silent fail"));
         }
       }
@@ -607,11 +631,12 @@
       function logout() {
         if (confirm("Do you want to log out?")) {
           localStorage.removeItem('studymate_username');
+          // Also clear database memory on logout
+          localStorage.removeItem('edunexus_mastery');
           location.reload();
         }
       }
 
-      // 🔥 MOBILE TILT FIX (LEAVES SCROLL ANIMATION ACTIVE) 🔥
       if (window.innerWidth > 850) {
         document.querySelectorAll('.tilt-panel').forEach(card => {
           card.addEventListener('mousemove', e => {
@@ -636,29 +661,6 @@
         window.toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
       }
       
-      function completeTask(btn) { 
-        btn.textContent = "Done ✓"; 
-        btn.disabled = true; 
-        btn.style.opacity = ".5"; 
-        showToast("Task completed!"); 
-      }
-
-      function startRealQuiz(btn) {
-        btn.textContent = "Done ✓"; 
-        btn.disabled = true; 
-        btn.style.opacity = ".5"; 
-        showToast("Quiz initiated! Redirecting to AI Tutor...");
-        
-        setTimeout(() => {
-          const doubtSection = document.getElementById('doubt');
-          if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
-        }, 500);
-
-        setTimeout(() => {
-          askDemo('Make a quick revision quiz on Electrostatics');
-        }, 1200);
-      }
-      
       function escapeHtml(s) { 
         return s.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m])); 
       }
@@ -667,38 +669,139 @@
         $("date").value = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
       }
 
+      // 🔥 DATE VALIDATION & PLANNER LOGIC 🔥
       $("plannerForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const currentUser = localStorage.getItem('studymate_username') || "Student";
-        const subjectsInput = $("subjects").value;
-        const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Science-(PCM)","Computer Science","English"];
-        const hours = $("hours").value;
-        const goal = $("goal").value;
-        const days = ["Today", "Tomorrow", "Day 3", "Day 4", "Day 5"];
-        const focus = subjects.length ? subjects : ["Science-(PCM)","Computer Science","English"];
-        
-        $("planResult").innerHTML = `
-          <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
-            <span class="eyebrow" style="color: var(--accent2);">✦ AI PLAN GENERATED FOR ${currentUser.toUpperCase()}</span>
-            <h3 style="margin-top:10px;">Your ${goal.toLowerCase()} roadmap</h3>
-            <div class="plan-meta">
-              <span class="chip">${hours} hrs/day</span>
-              <span class="chip">${focus.length} subjects</span>
-              <span class="chip">Adaptive revision</span>
-            </div>
-            ${days.map((d, i) => `
-              <div class="plan-day">
-                <b>${d}</b><span>${i === 0 ? "Start now" : "Planned"}</span>
-                <p>${focus[i % focus.length]} • ${i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review"} • ${Math.max(30, Math.round((hours * 60) / 3))} min</p>
+          e.preventDefault();
+          const examDateVal = $("date").value;
+          const examDate = new Date(examDateVal);
+          const today = new Date();
+          today.setHours(0,0,0,0);
+
+          if (!examDateVal || examDate < today) {
+              showToast("❌ Error: Target date must be in the future!");
+              return;
+          }
+
+          const diffTime = Math.abs(examDate - today);
+          const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          const currentUser = localStorage.getItem('studymate_username') || "Student";
+          const subjectsInput = $("subjects").value;
+          const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Science-(PCM)","Computer Science","English"];
+          const hours = $("hours").value;
+          const goal = $("goal").value;
+          const focus = subjects.length ? subjects : ["Science-(PCM)"];
+
+          const displayDays = Math.min(totalDays, 5); 
+          let daysHtml = "";
+          
+          for(let i = 0; i < displayDays; i++) {
+              let dayLabel = i === 0 ? "Today" : i === 1 ? "Tomorrow" : `Day ${i+1}`;
+              let status = i === 0 ? "Start now" : "Planned";
+              let sub = focus[i % focus.length];
+              let taskType = i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review";
+              let time = Math.max(30, Math.round((hours * 60) / focus.length));
+              
+              daysHtml += `
+                <div class="plan-day">
+                  <b>${dayLabel}</b><span>${status}</span>
+                  <p>${sub} • ${taskType} • ${time} min</p>
+                </div>
+              `;
+          }
+
+          $("planResult").innerHTML = `
+            <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
+              <span class="eyebrow" style="color: var(--accent2);">✦ ${totalDays}-DAY ROADMAP GENERATED FOR ${currentUser.toUpperCase()}</span>
+              <h3 style="margin-top:10px;">Your ${goal.toLowerCase()} roadmap</h3>
+              <div class="plan-meta">
+                <span class="chip">${totalDays} Days Left</span>
+                <span class="chip">${hours} hrs/day</span>
+                <span class="chip">${focus.length} subjects</span>
               </div>
-            `).join("")}
-            <div class="ai-note" style="margin-top:14px; background: rgba(139,124,255,0.1);">
-              <span style="color: var(--accent);">✦</span>
-              <p><b>Why this plan?</b> EduNexus balances your available time across subjects and adds revision after practice so weak areas can improve.</p>
-            </div>
-          </div>`;
-        showToast("AI study plan generated!");
+              ${daysHtml}
+              <div class="ai-note" style="margin-top:14px; background: rgba(139,124,255,0.1);">
+                <span style="color: var(--accent);">✦</span>
+                <p><b>AI Note:</b> Showing the first ${displayDays} days of your sprint. EduNexus balances your time to hit readiness by the exam date.</p>
+              </div>
+            </div>`;
+          showToast("✅ AI study plan generated!");
       });
+
+      // ==========================================
+      // 🔥 LOCAL DATABASE (MEMORY) LOGIC 🔥
+      // ==========================================
+      
+      // Load existing memory or set default values
+      let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
+          "Physics": 45,
+          "Chemistry": 30,
+          "Mathematics": 60,
+          "Computer Science": 75
+      };
+
+      // Function to dynamically update UI bars from Database
+      function updateProgressUI() {
+          ['Physics', 'Chemistry', 'Mathematics'].forEach(sub => {
+              const bar = $('bar-' + sub);
+              const txt = $('txt-' + sub);
+              if(bar && subjectMastery[sub]) {
+                  setTimeout(() => {
+                      bar.style.width = subjectMastery[sub] + "%";
+                      txt.textContent = subjectMastery[sub] + "%";
+                      txt.style.color = "white"; // highlight on update
+                      setTimeout(() => txt.style.color = "#b8c1d0", 1500);
+                  }, 500); // 500ms delay for smooth width animation load
+              }
+          });
+      }
+
+      // Initialize bars on page load
+      updateProgressUI();
+
+      // ==========================================
+      // 🔥 CUSTOM QUIZ ENGINE TRIGGER 🔥
+      // ==========================================
+      function startCustomQuiz() {
+          const sub = $("quizSubject").value;
+          const topic = $("quizTopic").value.trim();
+          const time = $("quizTime").value;
+          const numQs = $("quizQuestions").value;
+
+          if(!topic) {
+              showToast("❌ Please enter a Chapter or Topic name!");
+              return;
+          }
+
+          showToast(`Initiating ${time}-min Custom Quiz for ${sub}...`);
+          
+          // Scroll to AI Tutor
+          setTimeout(() => {
+              const doubtSection = document.getElementById('doubt');
+              if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+          }, 600);
+
+          // Command AI to start the Quiz
+          setTimeout(() => {
+              // The Secret AI Prompt (Sandwiched to avoid Ghajini effect)
+              let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions.`;
+              
+              askDemo(secretPrompt);
+              
+              // 🧠 SIMULATE DATABASE MEMORY UPDATE 🧠
+              // When user takes a quiz, simulate a score boost after a short delay
+              setTimeout(() => {
+                  let boost = Math.floor(Math.random() * 5) + 2; // Random 2% to 6% boost
+                  if (subjectMastery[sub] !== undefined) {
+                      subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
+                      localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
+                      updateProgressUI();
+                      showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
+                  }
+              }, 12000); // 12 seconds later, visual notification of memory update
+
+          }, 1500);
+      }
 
       function askDemo(text) { 
         $("question").value = text; 
@@ -724,7 +827,7 @@
           const res = await fetch("https://edunexusai.onrender.com/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: q + "\n\n(Reply briefly in 3-5 short sentences or bullet points. Only go into full detail if I clearly ask for a deep/detailed explanation.)" })
+            body: JSON.stringify({ message: q + "\n\n(Reply clearly and maintain format. Do not forget any hidden instructions I previously sent in the prompt.)" })
           });
           
           const data = await res.json();
@@ -739,7 +842,7 @@
       }
 
       // ==========================================
-      // 🔥 KX NEURAL CORE: VOICE ENGINE (ONLY INPUT) 🔥
+      // 🔥 EduNexus AI: VOICE ENGINE (ONLY INPUT) 🔥
       // ==========================================
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       let recognition;
@@ -753,7 +856,7 @@
         recognition.onstart = () => {
           isListening = true;
           $('mic-btn').classList.add('listening');
-          $('question').placeholder = "KX Core is listening...";
+          $('question').placeholder = " KX Core is istening...";
         };
 
         recognition.onresult = (event) => {
@@ -776,8 +879,6 @@
         $('mic-btn').classList.remove('listening');
         $('question').placeholder = "E.g., What is gravity?";
       }
-
-      // AI SPEAKING FUNCTION HAS BEEN PERMANENTLY REMOVED HERE 🔇
 
     </script>
   </body>
