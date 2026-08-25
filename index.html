@@ -47,8 +47,9 @@
       .reveal { opacity: 0; transform: translateY(60px) scale(0.85); transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
       .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
+      /* 🔥 Z-INDEX FIX: 3000 se 6000 kar diya taaki Topbar ke upar aaye 🔥 */
       .modal-overlay {
-        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); z-index: 3000;
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); z-index: 6000;
         display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s ease-out;
       }
       .modal-overlay.show { opacity: 1; visibility: visible; }
@@ -63,8 +64,9 @@
       .modal-content li { padding: 12px; background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
       .modal-content li b { color: #fff; font-size: 14px; }
 
+      /* 🔥 Z-INDEX FIX: 2000 se 7000 kar diya 🔥 */
       #login-overlay {
-        position: fixed; inset: 0; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(25px); z-index: 2000; 
+        position: fixed; inset: 0; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(25px); z-index: 7000; 
         display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s;
         perspective: 1000px;
       }
@@ -93,7 +95,7 @@
       .ambient-1 { background: #7665ff; top: -180px; right: -100px; }
       .ambient-2 { background: #2bd9b1; left: -200px; top: 45%; }
 
-      /* 🔥 FIXED FOR MOBILE GRADIENT VISIBILITY 🔥 */
+      /* THE PREMIUM GRADIENT TITLE */
       .gradient-title {
         background: linear-gradient(90deg, #ffffff, #a59dff);
         -webkit-background-clip: text;
@@ -103,21 +105,21 @@
       }
       @supports (-webkit-touch-callout: none) {
         .gradient-title {
-          /* Fallback for iOS Safari / Mobile browsers sometimes failing on gradients */
+          /* Fallback for iOS Safari sometimes failing on gradients */
           color: #e0dfff;
           background: none;
           -webkit-text-fill-color: initial;
         }
       }
 
-      /* 🔥 THE ULTIMATE FIXED HEADER 🔥 */
+      /* 🔥 THE ULTIMATE FIXED HEADER (Z-Index: 5000) 🔥 */
       .topbar-wrapper {
-        position: fixed; /* This makes it stick permanently */
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 5000; /* Stays above everything */
-        background: rgba(7, 10, 18, 0.85); /* Solid frosted background */
+        z-index: 5000; 
+        background: rgba(7, 10, 18, 0.85); 
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255,255,255,0.05);
       }
@@ -342,6 +344,10 @@
         .login-box { padding: 30px 20px; }
         .chat-input { padding: 12px; }
       }
+      
+      /* 🔥 Z-INDEX FIX: Toast Notification Layer 🔥 */
+      .toast { position: fixed; bottom: 25px; right: 25px; background: #f4f7ff; color: #0a0d14; padding: 11px 15px; border-radius: 10px; font-size: 11px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 8000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+      .toast.show { transform: none; opacity: 1; }
     </style>
   </head>
   <body>
