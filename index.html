@@ -93,12 +93,13 @@
       .ambient-1 { background: #7665ff; top: -180px; right: -100px; }
       .ambient-2 { background: #2bd9b1; left: -200px; top: 45%; }
 
-      /* THE PREMIUM GRADIENT TITLE */
+      /* 🔥 FIX 1: MOBILE-FRIENDLY GRADIENT TEXT 🔥 */
       .gradient-title {
         background: linear-gradient(90deg, #ffffff, #a59dff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        display: inline-block;
+        background-clip: text;
+        color: transparent;
       }
 
       /* 🔥 THE ULTIMATE FIXED HEADER 🔥 */
@@ -308,6 +309,7 @@
       footer span { opacity: 0.7; transition: 0.3s ease; }
       footer span:hover { opacity: 1; color: var(--accent2); }
       
+      /* 🔥 FIX 2: REMOVED MOBILE BLOCKER FOR BOUNCER ANIMATION 🔥 */
       @media(max-width: 850px) {
         nav { display: none; }
         .hero { grid-template-columns: 1fr; padding-top: 55px; }
@@ -321,7 +323,6 @@
         .section-heading > p { margin-top: 15px; }
         .pitch-points { flex-direction: column; }
         .bar-row { grid-template-columns: 80px 1fr 35px; }
-        .tilt-panel { transform: none !important; }
       }
       
       @media(max-width: 520px) {
@@ -374,7 +375,6 @@
     <div class="ambient ambient-2"></div>
 
     <div id="main-content" class="blurred">
-      <!-- 🔥 FIX 1: THE FULL-WIDTH FIXED TOPBAR WRAPPER 🔥 -->
       <div class="topbar-wrapper">
         <header class="topbar">
           <a class="brand" href="#">
@@ -413,7 +413,6 @@
 
           <div class="hero-card glass tilt-panel reveal">
             <div class="card-top">
-              <!-- 🔥 FIX 2: REMOVED THE LIVE TRACKING BADGE 🔥 -->
               <div><span class="mini-label">AI QUIZ ENGINE</span><h3 class="gradient-title" style="margin: 0; line-height: 1;">Generate Custom Test</h3></div>
             </div>
             
@@ -492,7 +491,6 @@
 
             <div class="panel result-panel glass tilt-panel" id="planResult">
               <div class="result-empty">
-                <!-- 🔥 FIX 4: RESTORED ELEGANT LOGO TO EMPTY ORB 🔥 -->
                 <img src="https://i.ibb.co/Kz0LvSg9/logo.png" style="width: 50px; height: 50px; border-radius: 12px; object-fit: contain; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(139,124,255,0.3); animation: float 3s ease-in-out infinite;">
                 <h3 id="planEmptyTitle" class="gradient-title">Your personalized plan will appear here</h3>
                 <p style="margin-top: 10px;">EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
@@ -532,7 +530,6 @@
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
                 </button>
                 
-                <!-- 🔥 FIX 1: SERVER NAME (KX NEURAL CORE) IN PLACEHOLDER 🔥 -->
                 <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
                 
                 <button type="submit" title="Send message">
@@ -550,7 +547,6 @@
               <span class="eyebrow">03 • ADAPTIVE PROGRESS</span>
               <h2 class="gradient-title">See what's actually improving.</h2>
             </div>
-            <!-- 🔥 FIX 3: SOPHISTICATED TEXT UPGRADE 🔥 -->
             <p>The KX Neural Core analyzes your performance metrics in real-time to dynamically optimize your learning trajectory.</p>
           </div>
           <div class="stats-grid">
@@ -890,7 +886,6 @@
         recognition.onstart = () => {
           isListening = true;
           $('mic-btn').classList.add('listening');
-          // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
           $('question').placeholder = "KX Neural Core is listening...";
         };
 
@@ -912,7 +907,6 @@
       function stopMic() {
         isListening = false;
         $('mic-btn').classList.remove('listening');
-        // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
         $('question').placeholder = "Ask KX Neural Core...";
       }
 
