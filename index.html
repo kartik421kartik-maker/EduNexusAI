@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>EduNexus AI — Ultimate 3D Live Edition</title>
   
+  <!-- 🔥 PERMANENT EDU NEXUS AI LOGO (FAVICON) 🔥 -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -27,6 +29,7 @@
       font-family: Inter, system-ui, sans-serif; line-height: 1.5;
     }
     
+    /* Cyber Grid Background */
     body::before {
       content: ""; position: fixed; inset: -50%; top: 0;
       background-image: linear-gradient(rgba(94, 231, 197, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 124, 255, 0.15) 1px, transparent 1px);
@@ -40,7 +43,8 @@
       100% { transform: perspective(600px) rotateX(60deg) translateY(50px) translateZ(-200px); }
     }
 
-    .reveal { opacity: 0; transform: translateY(60px) scale(0.85); transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
+    /* 🔥 PERMANENT EXTREME 3D SCROLL BOUNCER 🔥 */
+    .reveal { opacity: 0; transform: translateY(80px) scale(0.9); transition: all 0.8s cubic-bezier(0.34, 2, 0.64, 1); }
     .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
     .modal-overlay {
@@ -112,9 +116,14 @@
     .profile-btn:hover { background: #ffffff15; box-shadow: 0 0 15px rgba(94,231,197,0.3); }
     .avatar { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #262d42; font-size: 12px; color: var(--accent2); font-weight: bold; }
     
-    main { max-width: 1240px; margin: 0 auto; transition: filter 0.5s; padding-bottom: 40px; padding-top: 90px; }
+    main { 
+      max-width: 1240px; 
+      margin: 0 auto; 
+      transition: filter 0.5s; 
+      padding-bottom: 40px; 
+      padding-top: 90px; 
+    }
     
-    /* 🔥 PERFECT START ALIGNMENT 🔥 */
     .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: stretch; }
     
     .eyebrow { font-size: 11px; letter-spacing: 1.5px; color: #aaa3ff; font-weight: 800; }
@@ -125,8 +134,7 @@
     .hero h1 { font-size: clamp(48px, 6vw, 82px); letter-spacing: -3px; margin: 18px 0 22px; min-height: 160px; }
     .hero h1 span { background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
     
-    /* 🔥 REMOVED PADDING-BOTTOM TO FIX GAP AND ALIGN EXACTLY 🔥 */
-    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 0px; } 
+    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 26px; } 
     .hero-copy p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 25px; }
     
     .btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 14px; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; transform-style: preserve-3d; }
@@ -136,9 +144,15 @@
     .ghost { background: #ffffff08; border: 1px solid var(--line); color: white; }
     .trust-row { display: flex; gap: 20px; color: #727d91; font-size: 11px; margin-top: 25px; flex-wrap: wrap; }
 
-    /* 🔥 BARE TEXT ALIGNED WITH PYQ VAULT (GAP INCREASED) 🔥 */
+    .mobile-only { display: none !important; }
+    @media(max-width: 850px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block !important; }
+      .hero-feature-text.mobile-only::before { display: none; }
+    }
+
+    /* 🔥 BARE TEXT ALIGNED WITH PYQ VAULT 🔥 */
     .hero-feature-text {
-      margin-top: 200px; 
       padding-top: 30px;
       padding-right: 20px;
       border-top: 1px solid rgba(255,255,255,0.05);
@@ -154,12 +168,11 @@
       left: 0;
       width: 60px;
       height: 1px;
-      background: #5ee7c5;
-      box-shadow: 0 0 15px #5ee7c5;
+      background: var(--accent2);
+      box-shadow: 0 0 15px var(--accent2);
     }
 
-    /* 🔥 FIXED SPACING FOR RIGHT PANELS 🔥 */
-    .hero-right-panels { display: flex; flex-direction: column; gap: 35px; justify-content: space-between; margin-top: 0; }
+    .hero-right-panels { display: flex; flex-direction: column; gap: 25px; justify-content: space-between; margin-top: 0; }
 
     .glass { background: linear-gradient(145deg, #121a29cc, #0b101bdd); border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow); backdrop-filter: blur(18px); transition: transform 0.1s ease-out; transform-style: preserve-3d; }
     .hero-card { border-radius: 22px; padding: 26px; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); }
@@ -224,10 +237,11 @@
     .generated-plan h3 { font-size: 21px; margin-top: 10px; margin-bottom: 5px; }
     .plan-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
     .chip { font-size: 10px; padding: 6px 8px; border-radius: 999px; background: #ffffff08; color: #aeb7c8; border: 1px solid rgba(255,255,255,0.1); }
-    .plan-day { padding: 16px; border: 1px solid #ffffff09; background: #ffffff03; border-radius: 13px; margin: 12px 0; transition: 0.3s; }
+    .plan-day { padding: 14px; border: 1px solid #ffffff09; background: #ffffff03; border-radius: 13px; margin: 9px 0; transition: 0.3s; }
     .plan-day:hover { transform: translateZ(10px) translateX(5px); border-color: rgba(94,231,197,0.3); background: rgba(94,231,197,0.05); }
-    .plan-day b { font-size: 13px; color: #fff; }
-    .plan-day p { margin: 6px 0 0; color: #a9b1c1; font-size: 11px; }
+    .plan-day b { font-size: 11px; }
+    .plan-day span { float: right; color: #5ee7c5; font-size: 10px; }
+    .plan-day p { margin: 5px 0 0; color: #7f8a9e; font-size: 10px; }
 
     .tutor { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; height: 680px; } 
     .tutor-side { padding: 28px; border-right: 1px solid var(--line); overflow-y: auto; }
@@ -241,7 +255,7 @@
     .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
     .tiny { float: right; color: #616c80; font-weight: 500; }
     .messages { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
-    .message { display: flex; gap: 9px; max-width: 85%; font-size: 12px; color: #b7c0d0; animation: popIn 0.3s forwards; line-height: 1.6;}
+    .message { display: flex; gap: 9px; max-width: 85%; font-size: 11px; color: #b7c0d0; animation: popIn 0.3s forwards; line-height: 1.6;}
     @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .message > div { padding: 12px 16px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; word-wrap: break-word; }
     .message.user { align-self: flex-end; flex-direction: row-reverse; }
@@ -308,7 +322,8 @@
       .hero { grid-template-columns: 1fr; padding-top: 55px; }
       .hero-copy { display: block; padding-bottom: 0; }
       .hero-top-text { margin-bottom: 40px; }
-      .hero-feature-text { margin-top: 40px; }
+      .hero-feature-text { margin-top: 0; }
+
       .planner-grid { grid-template-columns: 1fr; }
       .tutor { grid-template-columns: 1fr; height: 85vh; min-height: 700px; display: flex; flex-direction: column; } 
       .tutor-side { padding: 15px 20px; border-right: 0; border-bottom: 1px solid var(--line); flex: none; display: flex; overflow-x: auto; gap: 10px; white-space: nowrap; }
@@ -361,7 +376,7 @@
       <p style="color:var(--muted); font-size: 14px; margin-bottom: 25px;">Here is your quick guide to mastering this application:</p>
       <ul>
         <li><b>1. AI Quiz Engine:</b> Generate custom timed quizzes on any chapter directly from the dashboard!</li>
-        <li><b>2. PYQ Vault:</b> Get 5-year official PM SHRI Board Papers or test yourself with AI.</li>
+        <li><b>2. PYQ Vault (New!):</b> Get 5-year official PM SHRI Board Papers or test yourself with AI.</li>
         <li><b>3. Live Tracking DB:</b> Your quiz performance will automatically update your Subject Mastery progress bars below.</li>
         <li><b>4. AI Planner:</b> Scroll down to input your exams and subjects for a dynamic study roadmap.</li>
         <li><b>5. Live AI Tutor:</b> Ask any Class 12 Science/CS/English question, and decode concepts instantly.</li>
@@ -382,7 +397,7 @@
         </a>
         <nav>
           <a onclick="openExplanation()" style="color: var(--accent2); cursor:pointer;">How it Works</a>
-          <a href="#quiz-engine">Quiz Engine</a>
+          <a href="#dashboard">AI Quiz Engine</a>
           <a href="#pyq-vault-section">PYQ Vault</a>
           <a href="#planner">AI Planner</a>
           <a href="#doubt">Doubt Solver</a>
@@ -399,6 +414,7 @@
       
       <!-- HERO DASHBOARD -->
       <section class="hero reveal" id="dashboard">
+        
         <div class="hero-copy">
           <div class="hero-top-text">
             <div class="eyebrow" style="margin-bottom: 15px;"><span class="pulse"></span> AI-powered learning companion</div>
@@ -415,9 +431,18 @@
             </div>
           </div>
           
-          <!-- 🔥 BARE TEXT ALIGNED WITH PYQ VAULT 🔥 -->
-          <div class="hero-feature-text">
-            <span class="eyebrow" style="color: #5ee7c5; margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
+          <!-- 🔥 MOBILE ONLY: FEATURE TEXT BEFORE PYQ VAULT 🔥 -->
+          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
+            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
+            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
+            <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
+              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
+            </p>
+          </div>
+
+          <!-- 🔥 BARE TEXT ALIGNED EXACTLY WITH PYQ VAULT 🔥 -->
+          <div class="hero-feature-text desktop-only">
+            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice with the PYQ Vault?</h2>
             <p style="font-size: 17px; color: var(--muted); margin: 0; line-height: 1.6;">
               Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>, and the KX Neural Core will test you strictly on actual past questions, grading you like a real examiner.
@@ -430,7 +455,7 @@
         </div>
 
         <div class="hero-right-panels">
-          <div class="hero-card glass tilt-panel reveal" id="quiz-engine">
+          <div class="hero-card glass tilt-panel reveal" id="quiz-engine-section">
             <div class="card-top">
               <div><span class="mini-label" style="font-size: 11px;">01 • AI QUIZ ENGINE</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">Generate Custom Test</h3></div>
             </div>
@@ -469,8 +494,10 @@
               </div>
               <button onclick="startCustomQuiz()" class="btn primary full" style="margin-top: 12px; padding: 12px; font-size: 11px;">Start Quiz ✦</button>
             </div>
+            <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
 
+          <!-- 🔥 PYQ VAULT BOX 🔥 -->
           <div class="hero-card glass tilt-panel reveal" id="pyq-vault-section">
             <div class="card-top">
               <div><span class="mini-label" style="font-size: 11px;">02 • DO.E OFFICIAL BOARD BANK</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">PYQ Vault</h3></div>
@@ -522,6 +549,7 @@
               </select>
               <button onclick="fetchPYQ()" class="btn primary full" style="margin-top: 12px; padding: 12px; font-size: 11px;">Access Vault ✦</button>
             </div>
+            <div class="ai-note"><span>✦</span><p><b>AI insight:</b> AI Practice mode will test you exactly on the official DO.E paper pattern!</p></div>
           </div>
         </div>
       </section>
@@ -564,6 +592,7 @@
 
           <div class="panel result-panel glass tilt-panel" id="planResult">
             <div class="result-empty">
+              <!-- 🔥 FIX 4: RESTORED ELEGANT LOGO TO EMPTY ORB 🔥 -->
               <img src="https://i.ibb.co/Kz0LvSg9/logo.png" style="width: 50px; height: 50px; border-radius: 12px; object-fit: contain; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(139,124,255,0.3); animation: float 3s ease-in-out infinite;">
               <h3 id="planEmptyTitle" class="gradient-title">Your personalized plan will appear here</h3>
               <p style="margin-top: 10px;">EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
@@ -602,11 +631,15 @@
               <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
               </button>
+              
+              <!-- 🔥 FIX 1: SERVER NAME (KX NEURAL CORE) IN PLACEHOLDER 🔥 -->
               <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
+              
               <button type="submit" title="Send message">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
               </button>
             </form>
+
           </div>
         </div>
       </section>
@@ -617,6 +650,7 @@
             <span class="eyebrow">05 • ADAPTIVE PROGRESS</span>
             <h2 class="gradient-title">See what's actually improving.</h2>
           </div>
+          <!-- 🔥 FIX 3: SOPHISTICATED TEXT UPGRADE 🔥 -->
           <p>The KX Neural Core analyzes your performance metrics in real-time to dynamically optimize your learning trajectory.</p>
         </div>
         <div class="stats-grid">
@@ -857,6 +891,7 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                    
                     <div class="days-list">
                        ${daysHtml}
                     </div>
@@ -874,6 +909,7 @@
                             <p style="margin: 0; font-size: 11px; color: #d6d2ff; line-height: 1.5;">"Your schedule is scientifically optimized. Click <b style="color:#fff;">Start Session</b> on Today's task to launch the AI Tutor instantly."</p>
                         </div>
                     </div>
+
                 </div>
             </div>
           </div>`;
@@ -904,6 +940,7 @@
 
     updateProgressUI();
 
+    // 🔥 NEW: Fetch PYQ / Practice Function 🔥
     function fetchPYQ() {
         const cls = $("pyqClass").value;
         const exam = $("pyqExam").value;
@@ -913,8 +950,10 @@
 
         if (mode === "pdf") {
             showToast(`📚 Accessing DoE ${exam} Papers for ${sub} (${year})...`);
+            // Note: You will replace the link below with your actual Google Drive Folder link later
             setTimeout(() => {
                 alert(`Yahan ${cls} ${sub} ke pichle ${year} ke ${exam} ki PDF Google Drive me khulegi! Abhi link add karni baaki hai.`);
+                // window.open("YOUR_GOOGLE_DRIVE_LINK_HERE", "_blank");
             }, 1000);
         } else {
             showToast(`🤖 Initializing AI Practice for ${cls} ${sub} ${exam}...`);
@@ -1019,6 +1058,7 @@
       recognition.onstart = () => {
         isListening = true;
         $('mic-btn').classList.add('listening');
+        // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
         $('question').placeholder = "KX Core is listening...";
       };
 
@@ -1040,6 +1080,7 @@
     function stopMic() {
       isListening = false;
       $('mic-btn').classList.remove('listening');
+      // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
       $('question').placeholder = "Ask KX Neural Core...";
     }
 
