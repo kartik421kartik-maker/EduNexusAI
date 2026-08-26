@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>EduNexus AI — Ultimate 3D Live Edition</title>
   
-  <!-- 🔥 PERMANENT EDU NEXUS AI LOGO (FAVICON) 🔥 -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -59,6 +57,7 @@
       margin-top: 50px;
     }
     .modal-overlay.show .modal-content { transform: scale(1) translateY(0); }
+    .modal-content h2 { font-family: "Space Grotesk"; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
     .modal-content ul { list-style: none; padding: 0; margin-bottom: 30px; }
     .modal-content li { padding: 12px; background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
     .modal-content li b { color: #fff; font-size: 14px; }
@@ -115,10 +114,17 @@
     .profile-btn:hover { background: #ffffff15; box-shadow: 0 0 15px rgba(94,231,197,0.3); }
     .avatar { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #262d42; font-size: 12px; color: var(--accent2); font-weight: bold; }
     
-    main { max-width: 1240px; margin: 0 auto; transition: filter 0.5s; padding-bottom: 40px; padding-top: 90px; }
+    main { 
+      max-width: 1240px; 
+      margin: 0 auto; 
+      transition: filter 0.5s; 
+      padding-bottom: 40px; 
+      padding-top: 90px; 
+    }
     
-    /* 🔥 PERFECT START ALIGNMENT 🔥 */
-    .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: stretch; }
+    /* 🔥 ORIGINAL CENTERED ALIGNMENT RESTORED 🔥 */
+    .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: center; position: relative; top: -10px }
+    .hero-copy { transform: translateY(-30px); }
     
     .eyebrow { font-size: 11px; letter-spacing: 1.5px; color: #aaa3ff; font-weight: 800; }
     .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 14px var(--accent2); margin-right: 8px; animation: pulse 2s infinite; }
@@ -128,9 +134,8 @@
     .hero h1 { font-size: clamp(48px, 6vw, 82px); letter-spacing: -3px; margin: 18px 0 22px; min-height: 160px; }
     .hero h1 span { background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
     
-    /* 🔥 REMOVED PADDING-BOTTOM TO FIX GAP AND ALIGN EXACTLY 🔥 */
-    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 26px; } 
-    .hero-copy p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 25px; }
+    /* Removed the forced spacing to keep it naturally aligned */
+    .hero-copy > div > p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 25px; }
     
     .btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 14px; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; transform-style: preserve-3d; }
     .btn:hover { transform: translateY(-3px) scale(1.02); }
@@ -149,6 +154,7 @@
 
     /* 🔥 BARE TEXT ALIGNED WITH PYQ VAULT 🔥 */
     .hero-feature-text {
+      margin-top: 150px; 
       padding-top: 30px;
       padding-right: 20px;
       border-top: 1px solid rgba(255,255,255,0.05);
@@ -164,12 +170,12 @@
       left: 0;
       width: 60px;
       height: 1px;
-      background: var(--accent2);
-      box-shadow: 0 0 15px var(--accent2);
+      background: #5ee7c5;
+      box-shadow: 0 0 15px #5ee7c5;
     }
 
-    /* 🔥 FIXED SPACING FOR RIGHT PANELS 🔥 */
-    .hero-right-panels { display: flex; flex-direction: column; gap: 25px; justify-content: space-between; margin-top: 0; }
+    /* 🔥 FIXED SPACING FOR RIGHT PANELS (Original) 🔥 */
+    .hero-right-panels { display: flex; flex-direction: column; gap: 30px; margin-top: 0; }
 
     .glass { background: linear-gradient(145deg, #121a29cc, #0b101bdd); border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow); backdrop-filter: blur(18px); transition: transform 0.1s ease-out; transform-style: preserve-3d; }
     .hero-card { border-radius: 22px; padding: 26px; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); }
@@ -252,7 +258,7 @@
     .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
     .tiny { float: right; color: #616c80; font-weight: 500; }
     .messages { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
-    .message { display: flex; gap: 9px; max-width: 85%; font-size: 11px; color: #b7c0d0; animation: popIn 0.3s forwards; line-height: 1.6;}
+    .message { display: flex; gap: 9px; max-width: 85%; font-size: 12px; color: #b7c0d0; animation: popIn 0.3s forwards; line-height: 1.6;}
     @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .message > div { padding: 12px 16px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; word-wrap: break-word; }
     .message.user { align-self: flex-end; flex-direction: row-reverse; }
@@ -321,7 +327,6 @@
     @media(max-width: 850px) {
       nav { display: none; }
       .hero { grid-template-columns: 1fr; padding-top: 55px; }
-      .hero-copy { display: block; padding-bottom: 0; }
       .hero-top-text { margin-bottom: 40px; }
       .hero-feature-text { margin-top: 0; }
       .planner-grid { grid-template-columns: 1fr; }
@@ -364,7 +369,7 @@
       <h2 class="gradient-title">Welcome to EduNexus AI</h2>
       <p>Enter your name to initialize your personal learning engine.</p>
       <form id="loginForm">
-        <input type="text" id="usernameInput" placeholder="Your Name (e.g., Prince)" required autocomplete="off">
+        <input type="text" id="usernameInput" placeholder="Your Name (e.g., Kartik)" required autocomplete="off">
         <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
       </form>
     </div>
@@ -430,16 +435,7 @@
               <span>✓ Student-first</span>
             </div>
           </div>
-
-          <!-- 🔥 MOBILE ONLY: FEATURE TEXT BEFORE PYQ VAULT 🔥 -->
-          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
-            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
-            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
-            <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
-              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
-            </p>
-          </div>
-
+          
           <!-- 🔥 BARE TEXT ALIGNED EXACTLY WITH PYQ VAULT 🔥 -->
           <div class="hero-feature-text desktop-only">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
@@ -455,6 +451,7 @@
         </div>
 
         <div class="hero-right-panels">
+          
           <div class="hero-card glass tilt-panel reveal" id="quiz-engine">
             <div class="card-top">
               <div><span class="mini-label" style="font-size: 11px;">01 • AI QUIZ ENGINE</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">Generate Custom Test</h3></div>
@@ -497,6 +494,15 @@
             <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
 
+          <!-- 🔥 MOBILE ONLY: FEATURE TEXT BEFORE PYQ VAULT 🔥 -->
+          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
+            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
+            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
+            <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
+              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
+            </p>
+          </div>
+          
           <!-- 🔥 PYQ VAULT BOX 🔥 -->
           <div class="hero-card glass tilt-panel reveal" id="pyq-vault-section">
             <div class="card-top">
@@ -553,8 +559,6 @@
           </div>
         </div>
       </section>
-
-
 
       <section class="section reveal" id="planner">
         <div class="section-heading">
@@ -632,7 +636,9 @@
               <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
               </button>
+              
               <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
+              
               <button type="submit" title="Send message">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
               </button>
@@ -996,8 +1002,6 @@
         }, 1500);
     }
 
-    const sessionId = Date.now().toString();
-
     function askDemo(text) { 
       $("question").value = text; 
       sendQuestion(new Event("submit")); 
@@ -1051,7 +1055,6 @@
       recognition.onstart = () => {
         isListening = true;
         $('mic-btn').classList.add('listening');
-        // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
         $('question').placeholder = "KX Core is listening...";
       };
 
@@ -1073,7 +1076,6 @@
     function stopMic() {
       isListening = false;
       $('mic-btn').classList.remove('listening');
-      // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
       $('question').placeholder = "Ask KX Neural Core...";
     }
 
