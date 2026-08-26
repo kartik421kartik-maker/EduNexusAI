@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>EduNexus AI — Ultimate 3D Live Edition</title>
   
-  <!-- 🔥 PERMANENT EDU NEXUS AI LOGO (FAVICON) 🔥 -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -29,7 +27,6 @@
       font-family: Inter, system-ui, sans-serif; line-height: 1.5;
     }
     
-    /* Cyber Grid Background */
     body::before {
       content: ""; position: fixed; inset: -50%; top: 0;
       background-image: linear-gradient(rgba(94, 231, 197, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 124, 255, 0.15) 1px, transparent 1px);
@@ -43,20 +40,19 @@
       100% { transform: perspective(600px) rotateX(60deg) translateY(50px) translateZ(-200px); }
     }
 
-    /* 🔥 PERMANENT EXTREME 3D SCROLL BOUNCER 🔥 */
+    /* 🔥 EXTREME BOUNCER EFFECT - FAST & POPPING 🔥 */
     .reveal { opacity: 0; transform: translateY(80px) scale(0.9); transition: all 0.8s cubic-bezier(0.34, 2, 0.64, 1); }
     .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); z-index: 6000;
-      display: flex; justify-content: center; align-items: start; opacity: 0; visibility: hidden; transition: 0.4s ease-out;
+      display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s ease-out;
     }
     .modal-overlay.show { opacity: 1; visibility: visible; }
     .modal-content {
       background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent2); border-radius: 24px; padding: 40px;
       max-width: 500px; width: 90%; text-align: left; box-shadow: 0 30px 60px rgba(94, 231, 197, 0.15);
       transform: scale(0.9) translateY(20px); transition: 0.4s ease-out;
-      margin-top: 50px;
     }
     .modal-overlay.show .modal-content { transform: scale(1) translateY(0); }
     .modal-content h2 { font-family: "Space Grotesk"; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
@@ -135,7 +131,7 @@
     .hero h1 span { background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
     
     .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 26px; } 
-    .hero-copy p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 25px; }
+    .hero-copy > div > p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 30px; }
     
     .btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 14px; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; transform-style: preserve-3d; }
     .btn:hover { transform: translateY(-3px) scale(1.02); }
@@ -144,6 +140,7 @@
     .ghost { background: #ffffff08; border: 1px solid var(--line); color: white; }
     .trust-row { display: flex; gap: 20px; color: #727d91; font-size: 11px; margin-top: 25px; flex-wrap: wrap; }
 
+    /* 🔥 HIDE OR SHOW BASED ON DEVICE 🔥 */
     .mobile-only { display: none !important; }
     @media(max-width: 850px) {
       .desktop-only { display: none !important; }
@@ -255,25 +252,26 @@
     .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
     .tiny { float: right; color: #616c80; font-weight: 500; }
     .messages { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
-    .message { display: flex; gap: 9px; max-width: 85%; font-size: 11px; color: #b7c0d0; animation: popIn 0.3s forwards; line-height: 1.6;}
+    .message { display: flex; gap: 9px; max-width: 85%; font-size: 11px; color: #b7c0d0; animation: popIn 0.3s forwards; }
     @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .message > div { padding: 12px 16px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; word-wrap: break-word; }
+    .message > div { padding: 11px 13px; border-radius: 12px; background: #ffffff07; border: 1px solid #ffffff08; word-wrap: break-word; }
     .message.user { align-self: flex-end; flex-direction: row-reverse; }
-    .message.user > div { background: #8b7cff17; border-color: #8b7cff28; color: #fff; }
+    .message.user > div { background: #8b7cff17; border-color: #8b7cff28; }
     .msg-avatar { min-width: 25px; height: 25px; border-radius: 8px; display: grid; place-items: center; background: #8b7cff18; color: #aaa2ff; }
     
     .chat-input { display: flex; gap: 10px; padding: 15px 20px; border-top: 1px solid var(--line); align-items: center; background: rgba(7, 10, 18, 0.8); backdrop-filter: blur(10px); }
-    .chat-input input { flex: 1; font-size: 14px; padding: 16px 20px; border-radius: 30px; background: #ffffff05; border: 1px solid rgba(255,255,255,0.08); color: white; outline: none; transition: 0.3s; margin: 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
+    .chat-input input { flex: 1; font-size: 13px; padding: 14px 20px; border-radius: 30px; background: #ffffff05; border: 1px solid rgba(255,255,255,0.08); color: white; outline: none; transition: 0.3s; margin: 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
     .chat-input input:focus { border-color: var(--accent); background: #ffffff0a; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 0 15px rgba(139,124,255,0.15); }
     
-    .chat-input button[type="submit"] { background: white; border: 0; border-radius: 50%; width: 48px; height: 48px; cursor: pointer; color: black; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); display: grid; place-items: center; box-shadow: 0 4px 15px rgba(255,255,255,0.1); flex-shrink: 0; }
+    .chat-input button[type="submit"] { background: white; border: 0; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; color: black; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); display: grid; place-items: center; box-shadow: 0 4px 15px rgba(255,255,255,0.1); flex-shrink: 0; }
     .chat-input button[type="submit"]:hover { transform: translateY(-3px) scale(1.05); background: var(--accent2); box-shadow: 0 6px 20px rgba(94,231,197,0.4); }
-    .chat-input button[type="submit"] svg { width: 22px; height: 22px; stroke-width: 2.5px; }
+    .chat-input button[type="submit"] svg { width: 20px; height: 20px; stroke-width: 2.5px; }
 
-    #mic-btn { background: #ffffff05; color: #a9b1c1; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 48px; height: 48px; flex-shrink: 0; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-    #mic-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    #mic-btn { background: #ffffff05; color: #a9b1c1; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 44px; height: 44px; flex-shrink: 0; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    #mic-btn svg { width: 18px; height: 18px; fill: currentColor; }
     #mic-btn:hover { background: rgba(139,124,255,0.1); color: var(--accent); border-color: var(--accent); transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 15px rgba(139,124,255,0.2); }
     #mic-btn.listening { background: #ff4757; color: white; border-color: #ff4757; animation: pulseMic 1.5s infinite; }
+    @keyframes pulseMic { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
     
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .stat { border-radius: 16px; padding: 20px; transition: 0.3s; }
@@ -376,7 +374,7 @@
       <p style="color:var(--muted); font-size: 14px; margin-bottom: 25px;">Here is your quick guide to mastering this application:</p>
       <ul>
         <li><b>1. AI Quiz Engine:</b> Generate custom timed quizzes on any chapter directly from the dashboard!</li>
-        <li><b>2. PYQ Vault (New!):</b> Get 5-year official PM SHRI Board Papers or test yourself with AI.</li>
+        <li><b>2. PYQ Vault:</b> Get 5-year official PM SHRI Board Papers or test yourself with AI.</li>
         <li><b>3. Live Tracking DB:</b> Your quiz performance will automatically update your Subject Mastery progress bars below.</li>
         <li><b>4. AI Planner:</b> Scroll down to input your exams and subjects for a dynamic study roadmap.</li>
         <li><b>5. Live AI Tutor:</b> Ask any Class 12 Science/CS/English question, and decode concepts instantly.</li>
@@ -397,7 +395,7 @@
         </a>
         <nav>
           <a onclick="openExplanation()" style="color: var(--accent2); cursor:pointer;">How it Works</a>
-          <a href="#dashboard">AI Quiz Engine</a>
+          <a href="#quiz-engine">Quiz Engine</a>
           <a href="#pyq-vault-section">PYQ Vault</a>
           <a href="#planner">AI Planner</a>
           <a href="#doubt">Doubt Solver</a>
@@ -431,15 +429,6 @@
             </div>
           </div>
           
-          <!-- 🔥 MOBILE ONLY: FEATURE TEXT BEFORE PYQ VAULT 🔥 -->
-          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
-            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
-            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
-            <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
-              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
-            </p>
-          </div>
-
           <!-- 🔥 BARE TEXT ALIGNED EXACTLY WITH PYQ VAULT 🔥 -->
           <div class="hero-feature-text desktop-only">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
@@ -455,7 +444,8 @@
         </div>
 
         <div class="hero-right-panels">
-          <div class="hero-card glass tilt-panel reveal" id="quiz-engine-section">
+          
+          <div class="hero-card glass tilt-panel reveal" id="quiz-engine">
             <div class="card-top">
               <div><span class="mini-label" style="font-size: 11px;">01 • AI QUIZ ENGINE</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">Generate Custom Test</h3></div>
             </div>
@@ -497,6 +487,15 @@
             <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
 
+          <!-- 🔥 MOBILE ONLY: FEATURE TEXT PLACED BEFORE PYQ VAULT 🔥 -->
+          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
+            <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
+            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
+            <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
+              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
+            </p>
+          </div>
+          
           <!-- 🔥 PYQ VAULT BOX 🔥 -->
           <div class="hero-card glass tilt-panel reveal" id="pyq-vault-section">
             <div class="card-top">
@@ -554,536 +553,538 @@
         </div>
       </section>
 
-      <section class="section reveal" id="planner">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">03 • PERSONALIZED PLANNING</span>
-            <h2 class="gradient-title">Your plan, built by AI.</h2>
-          </div>
-          <p>Input your Class 12 goals. The KX Core will instantly architect your personalized study roadmap.</p>
-        </div>
 
-        <div class="planner-grid">
-          <form class="panel glass tilt-panel" id="plannerForm">
-            <div class="panel-title">
-              <span class="icon">✦</span>
-              <div><h3 class="gradient-title">Build your study plan</h3><p>3 quick inputs</p></div>
-            </div>
-            <label>Goal
-              <select id="goal">
-                <option>Board Exams</option>
-                <option>JEE Preparation</option>
-                <option>School Test</option>
-                <option>Concept Mastery</option>
-              </select>
-            </label>
-            <label>Subjects
-              <input id="subjects" value="Science-(PCM), Computer Science, English" placeholder="e.g. Physics, Maths">
-            </label>
-            <label>Daily study time
-              <input id="hours" type="range" min="1" max="8" value="4" oninput="document.getElementById('hoursValue').textContent=this.value+' hours'">
-              <span class="range-value" id="hoursValue">4 hours</span>
-            </label>
-            <label>Exam / target date
-              <input id="date" type="date">
-            </label>
-            <button class="btn primary full" type="submit">Generate AI Study Plan <span>✦</span></button>
-          </form>
 
-          <div class="panel result-panel glass tilt-panel" id="planResult">
-            <div class="result-empty">
-              <!-- 🔥 FIX 4: RESTORED ELEGANT LOGO TO EMPTY ORB 🔥 -->
-              <img src="https://i.ibb.co/Kz0LvSg9/logo.png" style="width: 50px; height: 50px; border-radius: 12px; object-fit: contain; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(139,124,255,0.3); animation: float 3s ease-in-out infinite;">
-              <h3 id="planEmptyTitle" class="gradient-title">Your personalized plan will appear here</h3>
-              <p style="margin-top: 10px;">EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
+        <section class="section reveal" id="planner">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">03 • PERSONALIZED PLANNING</span>
+              <h2 class="gradient-title">Your plan, built by AI.</h2>
             </div>
+            <p>Input your Class 12 goals. The KX Core will instantly architect your personalized study roadmap.</p>
           </div>
-        </div>
-      </section>
 
-      <section class="section reveal" id="doubt">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">04 • LIVE AI TUTOR</span>
-            <h2 class="gradient-title">Ask. Understand. Master.</h2>
-          </div>
-          <p>A real-time intelligence engine designed to decode Class 12 Science, CS, and English concepts instantly.</p>
-        </div>
-        
-        <div class="tutor panel glass">
-          <div class="tutor-side">
-            <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="tutor-logo" alt="EduNexus">
-            <h3 class="gradient-title">EduNexus Tutor</h3>
-            <p>From Physics derivations to Python logic—decode complex concepts instantly, then test your mastery.</p>
-            <div class="suggestions">
-              <button onclick="askDemo('Explain Quantum Mechanics')">What is Quantum Mechanics?</button>
-              <button onclick="askDemo('Explain Thermodynamics')">Define Thermodynamics</button>
-              <button onclick="askDemo('Explain Gauss law')">Explain Gauss's law</button>
-            </div>
-          </div>
-          <div class="chat">
-            <div class="chat-head">
-              <span class="online-dot"></span> AI Tutor <span class="tiny">Online</span>
-            </div>
-            <div class="messages" id="messages"></div>
-            
-            <form class="chat-input" onsubmit="sendQuestion(event)">
-              <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-              </button>
-              
-              <!-- 🔥 FIX 1: SERVER NAME (KX NEURAL CORE) IN PLACEHOLDER 🔥 -->
-              <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
-              
-              <button type="submit" title="Send message">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-              </button>
+          <div class="planner-grid">
+            <form class="panel glass tilt-panel" id="plannerForm">
+              <div class="panel-title">
+                <span class="icon">✦</span>
+                <div><h3 class="gradient-title">Build your study plan</h3><p>3 quick inputs</p></div>
+              </div>
+              <label>Goal
+                <select id="goal">
+                  <option>Board Exams</option>
+                  <option>JEE Preparation</option>
+                  <option>School Test</option>
+                  <option>Concept Mastery</option>
+                </select>
+              </label>
+              <label>Subjects
+                <input id="subjects" value="Science-(PCM), Computer Science, English" placeholder="e.g. Physics, Maths">
+              </label>
+              <label>Daily study time
+                <input id="hours" type="range" min="1" max="8" value="4" oninput="document.getElementById('hoursValue').textContent=this.value+' hours'">
+                <span class="range-value" id="hoursValue">4 hours</span>
+              </label>
+              <label>Exam / target date
+                <input id="date" type="date">
+              </label>
+              <button class="btn primary full" type="submit">Generate AI Study Plan <span>✦</span></button>
             </form>
 
-          </div>
-        </div>
-      </section>
-
-      <section class="section reveal" id="progress">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">05 • ADAPTIVE PROGRESS</span>
-            <h2 class="gradient-title">See what's actually improving.</h2>
-          </div>
-          <!-- 🔥 FIX 3: SOPHISTICATED TEXT UPGRADE 🔥 -->
-          <p>The KX Neural Core analyzes your performance metrics in real-time to dynamically optimize your learning trajectory.</p>
-        </div>
-        <div class="stats-grid">
-          <div class="stat glass tilt-panel"><span>Weekly focus</span><strong>18.4h</strong><small>↑ 24% vs last week</small></div>
-          <div class="stat glass tilt-panel"><span>Topics mastered</span><strong>27</strong><small>↑ 6 this week</small></div>
-          <div class="stat glass tilt-panel"><span>Quiz accuracy</span><strong>86%</strong><small>↑ 9% this month</small></div>
-          <div class="stat glass tilt-panel"><span>Study streak</span><strong>12 days</strong><small>Personal best 🔥</small></div>
-        </div>
-
-        <div class="progress-panel glass tilt-panel">
-          <div class="chart-head"><div><span class="mini-label">SUBJECT HEALTH</span><h3 class="gradient-title">Where your next hour should go</h3></div><span class="legend"><i></i> Mastery</span></div>
-          <div class="bars">
-            <div class="bar-row"><span>Physics</span><div class="bar"><i id="bar-Physics" style="width:0%"></i></div><b id="txt-Physics" style="color: #b8c1d0;">0%</b></div>
-            <div class="bar-row"><span>Chemistry</span><div class="bar"><i id="bar-Chemistry" style="width:0%"></i></div><b id="txt-Chemistry" style="color: #b8c1d0;">0%</b></div>
-            <div class="bar-row"><span>Mathematics</span><div class="bar"><i id="bar-Mathematics" style="width:0%"></i></div><b id="txt-Mathematics" style="color: #b8c1d0;">0%</b></div>
-          </div>
-          <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Keep taking Custom Quizzes to update your memory database and improve your progress!</p></div><button onclick="window.scrollTo(0,0)">Take Quiz</button></div>
-        </div>
-      </section>
-
-      <section class="pitch section reveal">
-        <div class="pitch-card tilt-panel glass">
-          <span class="eyebrow">THE PRODUCT IDEA</span>
-          <h2>From “I don't know what to study”<br>to <span>“I know exactly what to do next.”</span></h2>
-          <p>EduNexus combines student context, performance signals and AI tutoring into one adaptive learning journey.</p>
-          <div class="pitch-points">
-            <div><b>01</b><span>Understand the student</span></div>
-            <div><b>02</b><span>Personalize the path</span></div>
-            <div><b>03</b><span>Adapt from results</span></div>
-          </div>
-        </div>
-      </section>
-    </main>
-    
-    <footer>
-      <span>EduNexus AI — Powered by EduNexus Engine | Developed by Kartik</span>
-    </footer>
-  </div>
-
-  <div class="toast" id="toast"></div>
-
-  <script>
-    const $ = id => document.getElementById(id);
-
-    function openExplanation() { $('explanation-modal').classList.add('show'); }
-    
-    function closeExplanation() { 
-      $('explanation-modal').classList.remove('show'); 
-      setTimeout(startTyping, 300);
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        } else {
-          entry.target.classList.remove('active'); 
-        }
-      });
-    }, { threshold: 0.05 }); 
-
-    document.querySelectorAll('.reveal').forEach(el => {
-      observer.observe(el);
-    });
-
-    const textToType = "Study smarter. ";
-    const typeTarget = $("typing-text");
-    let typeIndex = 0;
-    
-    function startTyping() { 
-      typeTarget.innerHTML = ""; 
-      typeIndex = 0; 
-      typeEffect(); 
-    }
-    
-    function typeEffect() {
-      if (typeIndex < textToType.length) {
-        typeTarget.innerHTML += textToType.charAt(typeIndex); 
-        typeIndex++; 
-        setTimeout(typeEffect, 80);
-      } else {
-        typeTarget.innerHTML += `<br><span style="background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; -webkit-background-clip: text; animation: popIn 0.5s ease-out;">Not harder.</span>`;
-      }
-    }
-
-    const overlay = $('login-overlay'); 
-    const mainContent = $('main-content');
-    const savedUser = localStorage.getItem('studymate_username');
-    
-    if (savedUser) { 
-      activateUser(savedUser, false); 
-    } else {
-      $('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const newName = $('usernameInput').value.trim();
-        if (newName) {
-          localStorage.setItem('studymate_username', newName);
-          activateUser(newName, true);
-        }
-      });
-    }
-
-    function activateUser(name, isFirstTime) {
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.visibility = 'hidden';
-        mainContent.classList.remove('blurred');
-        
-        if (isFirstTime) { 
-          openExplanation(); 
-        } else {
-          startTyping();
-        }
-      }, 500);
-      
-      $('profileName').textContent = name;
-      $('profileAvatar').textContent = name.charAt(0).toUpperCase();
-      $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
-      
-      $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
-      
-      if(isFirstTime) {
-        const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
-        fetch(webhookURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` })
-        }).catch(err => console.log("Tracker silent fail"));
-      }
-    }
-
-    function logout() {
-      if (confirm("Do you want to log out?")) {
-        localStorage.removeItem('studymate_username');
-        localStorage.removeItem('edunexus_mastery');
-        location.reload();
-      }
-    }
-
-    if (window.innerWidth > 850) {
-      document.querySelectorAll('.tilt-panel').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const rotateX = (((e.clientY - rect.top) - (rect.height / 2)) / (rect.height / 2)) * -10;
-          const rotateY = (((e.clientX - rect.left) - (rect.width / 2)) / (rect.width / 2)) * 10;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-          card.style.transition = "transform 0.1s ease-out";
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-          card.style.transition = "transform 0.5s ease-out";
-        });
-      });
-    }
-
-    function showToast(text) {
-      const t = $("toast"); 
-      t.textContent = text; 
-      t.classList.add("show");
-      clearTimeout(window.toastTimer); 
-      window.toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
-    }
-    
-    function escapeHtml(s) { 
-      return s.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m])); 
-    }
-
-    if ($("date")) {
-      $("date").value = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
-    }
-
-    // 🔥 START NOW: SCROLL AND TRIGGER AI FUNCTION 🔥
-    function startSession(sub, taskType) {
-        showToast(`🚀 Initiating Study Session for ${sub}...`);
-        setTimeout(() => {
-            const doubtSection = document.getElementById('doubt');
-            if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
-        }, 400);
-
-        setTimeout(() => {
-            let prompt = `Act as my personal strict AI Tutor. I am starting my study session right now for ${sub}. My goal for today is: ${taskType}. Welcome me, motivate me in ONE short sentence, and then ask me the very first diagnostic question to kickstart my session!`;
-            askDemo(prompt);
-        }, 1200);
-    }
-
-    $("plannerForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const examDateVal = $("date").value;
-        const examDate = new Date(examDateVal);
-        const today = new Date();
-        today.setHours(0,0,0,0);
-
-        if (!examDateVal || examDate < today) {
-            showToast("❌ Error: Target date must be in the future!");
-            return;
-        }
-
-        const diffTime = Math.abs(examDate - today);
-        const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        
-        const currentUser = localStorage.getItem('studymate_username') || "Student";
-        const subjectsInput = $("subjects").value;
-        const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Science-(PCM)","Computer Science","English"];
-        const hours = $("hours").value;
-        const goal = $("goal").value;
-        const focus = subjects.length ? subjects : ["Science-(PCM)"];
-
-        const displayDays = Math.min(totalDays, 5); 
-        let daysHtml = "";
-        
-        for(let i = 0; i < displayDays; i++) {
-            let dayLabel = i === 0 ? "Today" : i === 1 ? "Tomorrow" : `Day ${i+1}`;
-            let status = i === 0 ? "Start now" : "Planned";
-            let sub = focus[i % focus.length];
-            let taskType = i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review";
-            let time = Math.max(30, Math.round((hours * 60) / focus.length));
-            
-            let onclickAttr = i === 0 ? `onclick="startSession('${sub}', '${taskType}')" style="cursor: pointer; border-color: rgba(94, 231, 197, 0.4); background: rgba(94, 231, 197, 0.08); box-shadow: 0 0 15px rgba(94, 231, 197, 0.1);"` : '';
-            let btnSpan = i === 0 ? `<span class="start-btn" style="float: right; background: var(--accent2); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(94,231,197,0.3);">Start Session ✦</span>` : `<span style="float: right; color: #5ee7c5; font-size: 10px;">${status}</span>`;
-            
-            daysHtml += `
-              <div class="plan-day" ${onclickAttr}>
-                <b>${dayLabel}</b>${btnSpan}
-                <p>${sub} • ${taskType} • ${time} min</p>
+            <div class="panel result-panel glass tilt-panel" id="planResult">
+              <div class="result-empty">
+                <!-- 🔥 FIX 4: RESTORED ELEGANT LOGO TO EMPTY ORB 🔥 -->
+                <img src="https://i.ibb.co/Kz0LvSg9/logo.png" style="width: 50px; height: 50px; border-radius: 12px; object-fit: contain; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(139,124,255,0.3); animation: float 3s ease-in-out infinite;">
+                <h3 id="planEmptyTitle" class="gradient-title">Your personalized plan will appear here</h3>
+                <p style="margin-top: 10px;">EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
               </div>
-            `;
-        }
-
-        $("planResult").innerHTML = `
-          <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
-            <div>
-                <span class="eyebrow" style="color: var(--accent2);">✦ ${totalDays}-DAY ROADMAP GENERATED FOR ${currentUser.toUpperCase()}</span>
-                <h3 style="margin-top:10px; font-size: 26px; color: #fff;">Your ${goal} Roadmap</h3>
-                <div class="plan-meta">
-                  <span class="chip">${totalDays} Days Left</span>
-                  <span class="chip">${hours} hrs/day</span>
-                  <span class="chip">${focus.length} subjects</span>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
-                    
-                    <div class="days-list">
-                       ${daysHtml}
-                    </div>
-
-                    <div class="ai-analytics-box" style="padding: 24px; background: #ffffff03; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <h4 style="color: #fff; font-size: 15px; margin-top: 0; margin-bottom: 18px; font-family: 'Space Grotesk';">✦ KX Core Execution Strategy</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 12px; color: #a9b1c1; line-height: 1.8;">
-                                <li style="margin-bottom: 12px;"><b style="color:#8b7cff;">Phase 1:</b> Active Recall testing on ${focus[0]}. Deep focus on weak points.</li>
-                                <li style="margin-bottom: 12px;"><b style="color:#5ee7c5;">Phase 2:</b> Concept decoding via Live AI Tutor.</li>
-                                <li style="margin-bottom: 12px;"><b style="color:#ffb86c;">Phase 3:</b> Solve PYQ Vault papers to build exam muscle memory.</li>
-                            </ul>
-                        </div>
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(139, 124, 255, 0.1); border-left: 3px solid #8b7cff; border-radius: 0 8px 8px 0;">
-                            <p style="margin: 0; font-size: 11px; color: #d6d2ff; line-height: 1.5;">"Your schedule is scientifically optimized. Click <b style="color:#fff;">Start Session</b> on Today's task to launch the AI Tutor instantly."</p>
-                        </div>
-                    </div>
-
-                </div>
             </div>
-          </div>`;
-        showToast("✅ AI study plan generated!");
-    });
+          </div>
+        </section>
 
-    let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
-        "Physics": 45,
-        "Chemistry": 30,
-        "Mathematics": 60,
-        "Computer Science": 75
-    };
+        <section class="section reveal" id="doubt">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">04 • LIVE AI TUTOR</span>
+              <h2 class="gradient-title">Ask. Understand. Master.</h2>
+            </div>
+            <p>A real-time intelligence engine designed to decode Class 12 Science, CS, and English concepts instantly.</p>
+          </div>
+          
+          <div class="tutor panel glass">
+            <div class="tutor-side">
+              <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="tutor-logo" alt="EduNexus">
+              <h3 class="gradient-title">EduNexus Tutor</h3>
+              <p>From Physics derivations to Python logic—decode complex concepts instantly, then test your mastery.</p>
+              <div class="suggestions">
+                <button onclick="askDemo('Explain Quantum Mechanics')">What is Quantum Mechanics?</button>
+                <button onclick="askDemo('Explain Thermodynamics')">Define Thermodynamics</button>
+                <button onclick="askDemo('Explain Gauss law')">Explain Gauss's law</button>
+              </div>
+            </div>
+            <div class="chat">
+              <div class="chat-head">
+                <span class="online-dot"></span> AI Tutor <span class="tiny">Online</span>
+              </div>
+              <div class="messages" id="messages"></div>
+              
+              <form class="chat-input" onsubmit="sendQuestion(event)">
+                <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                </button>
+                
+                <!-- 🔥 FIX 1: SERVER NAME (KX NEURAL CORE) IN PLACEHOLDER 🔥 -->
+                <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
+                
+                <button type="submit" title="Send message">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                </button>
+              </form>
 
-    function updateProgressUI() {
-        ['Physics', 'Chemistry', 'Mathematics'].forEach(sub => {
-            const bar = $('bar-' + sub);
-            const txt = $('txt-' + sub);
-            if(bar && subjectMastery[sub]) {
-                setTimeout(() => {
-                    bar.style.width = subjectMastery[sub] + "%";
-                    txt.textContent = subjectMastery[sub] + "%";
-                    txt.style.color = "white"; 
-                    setTimeout(() => txt.style.color = "#b8c1d0", 1500);
-                }, 500); 
-            }
-        });
-    }
+            </div>
+          </div>
+        </section>
 
-    updateProgressUI();
+        <section class="section reveal" id="progress">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">05 • ADAPTIVE PROGRESS</span>
+              <h2 class="gradient-title">See what's actually improving.</h2>
+            </div>
+            <!-- 🔥 FIX 3: SOPHISTICATED TEXT UPGRADE 🔥 -->
+            <p>The KX Neural Core analyzes your performance metrics in real-time to dynamically optimize your learning trajectory.</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat glass tilt-panel"><span>Weekly focus</span><strong>18.4h</strong><small>↑ 24% vs last week</small></div>
+            <div class="stat glass tilt-panel"><span>Topics mastered</span><strong>27</strong><small>↑ 6 this week</small></div>
+            <div class="stat glass tilt-panel"><span>Quiz accuracy</span><strong>86%</strong><small>↑ 9% this month</small></div>
+            <div class="stat glass tilt-panel"><span>Study streak</span><strong>12 days</strong><small>Personal best 🔥</small></div>
+          </div>
 
-    // 🔥 NEW: Fetch PYQ / Practice Function 🔥
-    function fetchPYQ() {
-        const cls = $("pyqClass").value;
-        const exam = $("pyqExam").value;
-        const sub = $("pyqSubject").value;
-        const year = $("pyqYear").value;
-        const mode = $("pyqMode").value;
+          <div class="progress-panel glass tilt-panel">
+            <div class="chart-head"><div><span class="mini-label">SUBJECT HEALTH</span><h3 class="gradient-title">Where your next hour should go</h3></div><span class="legend"><i></i> Mastery</span></div>
+            <div class="bars">
+              <div class="bar-row"><span>Physics</span><div class="bar"><i id="bar-Physics" style="width:0%"></i></div><b id="txt-Physics" style="color: #b8c1d0;">0%</b></div>
+              <div class="bar-row"><span>Chemistry</span><div class="bar"><i id="bar-Chemistry" style="width:0%"></i></div><b id="txt-Chemistry" style="color: #b8c1d0;">0%</b></div>
+              <div class="bar-row"><span>Mathematics</span><div class="bar"><i id="bar-Mathematics" style="width:0%"></i></div><b id="txt-Mathematics" style="color: #b8c1d0;">0%</b></div>
+            </div>
+            <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Keep taking Custom Quizzes to update your memory database and improve your progress!</p></div><button onclick="window.scrollTo(0,0)">Take Quiz</button></div>
+          </div>
+        </section>
 
-        if (mode === "pdf") {
-            showToast(`📚 Accessing DoE ${exam} Papers for ${sub} (${year})...`);
-            // Note: You will replace the link below with your actual Google Drive Folder link later
-            setTimeout(() => {
-                alert(`Yahan ${cls} ${sub} ke pichle ${year} ke ${exam} ki PDF Google Drive me khulegi! Abhi link add karni baaki hai.`);
-                // window.open("YOUR_GOOGLE_DRIVE_LINK_HERE", "_blank");
-            }, 1000);
-        } else {
-            showToast(`🤖 Initializing AI Practice for ${cls} ${sub} ${exam}...`);
-            setTimeout(() => {
-                const doubtSection = document.getElementById('doubt');
-                if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
-            }, 600);
-
-            setTimeout(() => {
-                let prompt = `Act as a strict CBSE ${cls} examiner. We are doing a PYQ practice session for ${sub} (${exam} syllabus, past ${year}). Ask me exactly ONE highly important Previous Year Question. Wait for my answer. After I answer, evaluate it, provide the correct solution, and THEN ask the NEXT question. Do NOT give all questions at once. Keep the format very clean.`;
-                askDemo(prompt);
-            }, 1500);
-        }
-    }
-
-    function startCustomQuiz() {
-        const sub = $("quizSubject").value;
-        const topic = $("quizTopic").value.trim();
-        const time = $("quizTime").value;
-        const numQs = $("quizQuestions").value;
-
-        if(!topic) {
-            showToast("❌ Please enter a Chapter or Topic name!");
-            return;
-        }
-
-        showToast(`Initiating ${time}-min Custom Quiz for ${sub}...`);
-        
-        setTimeout(() => {
-            const doubtSection = document.getElementById('doubt');
-            if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
-        }, 600);
-
-        setTimeout(() => {
-            let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions.`;
-            
-            askDemo(secretPrompt);
-            
-            setTimeout(() => {
-                let boost = Math.floor(Math.random() * 5) + 2; 
-                if (subjectMastery[sub] !== undefined) {
-                    subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
-                    localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
-                    updateProgressUI();
-                    showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
-                }
-            }, 12000); 
-
-        }, 1500);
-    }
-
-    function askDemo(text) { 
-      $("question").value = text; 
-      sendQuestion(new Event("submit")); 
-    }
-    
-    async function sendQuestion(e) {
-      e.preventDefault();
-      const input = $("question");
-      const q = input.value.trim(); 
-      if (!q) return;
+        <section class="pitch section reveal">
+          <div class="pitch-card tilt-panel glass">
+            <span class="eyebrow">THE PRODUCT IDEA</span>
+            <h2>From “I don't know what to study”<br>to <span>“I know exactly what to do next.”</span></h2>
+            <p>EduNexus combines student context, performance signals and AI tutoring into one adaptive learning journey.</p>
+            <div class="pitch-points">
+              <div><b>01</b><span>Understand the student</span></div>
+              <div><b>02</b><span>Personalize the path</span></div>
+              <div><b>03</b><span>Adapt from results</span></div>
+            </div>
+          </div>
+        </section>
+      </main>
       
-      const wrap = $("messages");
-      wrap.innerHTML += `<div class="message user"><div>${escapeHtml(q)}</div></div>`;
-      input.value = ""; 
-      wrap.scrollTop = wrap.scrollHeight;
+      <footer>
+        <span>EduNexus AI — Powered by EduNexus Engine | Developed by Kartik</span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const $ = id => document.getElementById(id);
+
+      function openExplanation() { $('explanation-modal').classList.add('show'); }
       
-      const loadingId = "load-" + Date.now();
-      wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
-      wrap.scrollTop = wrap.scrollHeight;
-
-      try {
-        const userName = localStorage.getItem('studymate_username') || "Student";
-        const isQuizAnswer = q.toLowerCase().match(/^[1-5][\)\.\s]*[a-d]/) || q.toLowerCase().includes("answer");
-
-        const res = await fetch("https://edunexusai.onrender.com/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: q + "\n\n(Reply clearly and maintain format. Do not forget any hidden instructions I previously sent in the prompt.)", session_id: sessionId, user_name: userName })
-        });
-        
-        const data = await res.json();
-        let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
-        
-        document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
-
-      } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>Oops! Server Connection Broken. Please Check Your Internet Connection!</div>`;
+      function closeExplanation() { 
+        $('explanation-modal').classList.remove('show'); 
+        setTimeout(startTyping, 300);
       }
-      wrap.scrollTop = wrap.scrollHeight;
-    }
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition;
-    let isListening = false;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active'); 
+          }
+        });
+      }, { threshold: 0.05 }); 
 
-    if (SpeechRecognition) {
-      recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.lang = 'en-IN'; 
+      document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+      });
 
-      recognition.onstart = () => {
-        isListening = true;
-        $('mic-btn').classList.add('listening');
+      const textToType = "Study smarter. ";
+      const typeTarget = $("typing-text");
+      let typeIndex = 0;
+      
+      function startTyping() { 
+        typeTarget.innerHTML = ""; 
+        typeIndex = 0; 
+        typeEffect(); 
+      }
+      
+      function typeEffect() {
+        if (typeIndex < textToType.length) {
+          typeTarget.innerHTML += textToType.charAt(typeIndex); 
+          typeIndex++; 
+          setTimeout(typeEffect, 80);
+        } else {
+          typeTarget.innerHTML += `<br><span style="background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; -webkit-background-clip: text; animation: popIn 0.5s ease-out;">Not harder.</span>`;
+        }
+      }
+
+      const overlay = $('login-overlay'); 
+      const mainContent = $('main-content');
+      const savedUser = localStorage.getItem('studymate_username');
+      
+      if (savedUser) { 
+        activateUser(savedUser, false); 
+      } else {
+        $('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const newName = $('usernameInput').value.trim();
+          if (newName) {
+            localStorage.setItem('studymate_username', newName);
+            activateUser(newName, true);
+          }
+        });
+      }
+
+      function activateUser(name, isFirstTime) {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.visibility = 'hidden';
+          mainContent.classList.remove('blurred');
+          
+          if (isFirstTime) { 
+            openExplanation(); 
+          } else {
+            startTyping();
+          }
+        }, 500);
+        
+        $('profileName').textContent = name;
+        $('profileAvatar').textContent = name.charAt(0).toUpperCase();
+        $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
+        
+        $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
+        
+        if(isFirstTime) {
+          const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
+          fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: `🚨 **BINGO!** New User Loged In!\n🧑‍🎓 **Name:** ${name}\n💻 **Action:** Launched EduNexus AI Dashboard 🚀` })
+          }).catch(err => console.log("Tracker silent fail"));
+        }
+      }
+
+      function logout() {
+        if (confirm("Do you want to log out?")) {
+          localStorage.removeItem('studymate_username');
+          localStorage.removeItem('edunexus_mastery');
+          location.reload();
+        }
+      }
+
+      if (window.innerWidth > 850) {
+        document.querySelectorAll('.tilt-panel').forEach(card => {
+          card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const rotateX = (((e.clientY - rect.top) - (rect.height / 2)) / (rect.height / 2)) * -10;
+            const rotateY = (((e.clientX - rect.left) - (rect.width / 2)) / (rect.width / 2)) * 10;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transition = "transform 0.1s ease-out";
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            card.style.transition = "transform 0.5s ease-out";
+          });
+        });
+      }
+
+      function showToast(text) {
+        const t = $("toast"); 
+        t.textContent = text; 
+        t.classList.add("show");
+        clearTimeout(window.toastTimer); 
+        window.toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+      }
+      
+      function escapeHtml(s) { 
+        return s.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m])); 
+      }
+
+      if ($("date")) {
+        $("date").value = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+      }
+
+      // 🔥 START NOW: SCROLL AND TRIGGER AI FUNCTION 🔥
+      function startSession(sub, taskType) {
+          showToast(`🚀 Initiating Study Session for ${sub}...`);
+          setTimeout(() => {
+              const doubtSection = document.getElementById('doubt');
+              if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+          }, 400);
+
+          setTimeout(() => {
+              let prompt = `Act as my personal strict AI Tutor. I am starting my study session right now for ${sub}. My goal for today is: ${taskType}. Welcome me, motivate me in ONE short sentence, and then ask me the very first diagnostic question to kickstart my session!`;
+              askDemo(prompt);
+          }, 1200);
+      }
+
+      $("plannerForm").addEventListener("submit", e => {
+          e.preventDefault();
+          const examDateVal = $("date").value;
+          const examDate = new Date(examDateVal);
+          const today = new Date();
+          today.setHours(0,0,0,0);
+
+          if (!examDateVal || examDate < today) {
+              showToast("❌ Error: Target date must be in the future!");
+              return;
+          }
+
+          const diffTime = Math.abs(examDate - today);
+          const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          const currentUser = localStorage.getItem('studymate_username') || "Student";
+          const subjectsInput = $("subjects").value;
+          const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Science-(PCM)","Computer Science","English"];
+          const hours = $("hours").value;
+          const goal = $("goal").value;
+          const focus = subjects.length ? subjects : ["Science-(PCM)"];
+
+          const displayDays = Math.min(totalDays, 5); 
+          let daysHtml = "";
+          
+          for(let i = 0; i < displayDays; i++) {
+              let dayLabel = i === 0 ? "Today" : i === 1 ? "Tomorrow" : `Day ${i+1}`;
+              let status = i === 0 ? "Start now" : "Planned";
+              let sub = focus[i % focus.length];
+              let taskType = i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review";
+              let time = Math.max(30, Math.round((hours * 60) / focus.length));
+              
+              let onclickAttr = i === 0 ? `onclick="startSession('${sub}', '${taskType}')" style="cursor: pointer; border-color: rgba(94, 231, 197, 0.4); background: rgba(94, 231, 197, 0.08); box-shadow: 0 0 15px rgba(94, 231, 197, 0.1);"` : '';
+              let btnSpan = i === 0 ? `<span class="start-btn" style="float: right; background: var(--accent2); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(94,231,197,0.3);">Start Session ✦</span>` : `<span style="float: right; color: #5ee7c5; font-size: 10px;">${status}</span>`;
+              
+              daysHtml += `
+                <div class="plan-day" ${onclickAttr}>
+                  <b>${dayLabel}</b>${btnSpan}
+                  <p>${sub} • ${taskType} • ${time} min</p>
+                </div>
+              `;
+          }
+
+          $("planResult").innerHTML = `
+            <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
+              <div>
+                  <span class="eyebrow" style="color: var(--accent2);">✦ ${totalDays}-DAY ROADMAP GENERATED FOR ${currentUser.toUpperCase()}</span>
+                  <h3 style="margin-top:10px; font-size: 26px; color: #fff;">Your ${goal} Roadmap</h3>
+                  <div class="plan-meta">
+                    <span class="chip">${totalDays} Days Left</span>
+                    <span class="chip">${hours} hrs/day</span>
+                    <span class="chip">${focus.length} subjects</span>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                      
+                      <div class="days-list">
+                         ${daysHtml}
+                      </div>
+
+                      <div class="ai-analytics-box" style="padding: 24px; background: #ffffff03; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                          <div>
+                              <h4 style="color: #fff; font-size: 15px; margin-top: 0; margin-bottom: 18px; font-family: 'Space Grotesk';">✦ KX Core Execution Strategy</h4>
+                              <ul style="list-style: none; padding: 0; margin: 0; font-size: 12px; color: #a9b1c1; line-height: 1.8;">
+                                  <li style="margin-bottom: 12px;"><b style="color:#8b7cff;">Phase 1:</b> Active Recall testing on ${focus[0]}. Deep focus on weak points.</li>
+                                  <li style="margin-bottom: 12px;"><b style="color:#5ee7c5;">Phase 2:</b> Concept decoding via Live AI Tutor.</li>
+                                  <li style="margin-bottom: 12px;"><b style="color:#ffb86c;">Phase 3:</b> Solve PYQ Vault papers to build exam muscle memory.</li>
+                              </ul>
+                          </div>
+                          <div style="margin-top: 20px; padding: 15px; background: rgba(139, 124, 255, 0.1); border-left: 3px solid #8b7cff; border-radius: 0 8px 8px 0;">
+                              <p style="margin: 0; font-size: 11px; color: #d6d2ff; line-height: 1.5;">"Your schedule is scientifically optimized. Click <b style="color:#fff;">Start Session</b> on Today's task to launch the AI Tutor instantly."</p>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+            </div>`;
+          showToast("✅ AI study plan generated!");
+      });
+
+      let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
+          "Physics": 45,
+          "Chemistry": 30,
+          "Mathematics": 60,
+          "Computer Science": 75
+      };
+
+      function updateProgressUI() {
+          ['Physics', 'Chemistry', 'Mathematics'].forEach(sub => {
+              const bar = $('bar-' + sub);
+              const txt = $('txt-' + sub);
+              if(bar && subjectMastery[sub]) {
+                  setTimeout(() => {
+                      bar.style.width = subjectMastery[sub] + "%";
+                      txt.textContent = subjectMastery[sub] + "%";
+                      txt.style.color = "white"; 
+                      setTimeout(() => txt.style.color = "#b8c1d0", 1500);
+                  }, 500); 
+              }
+          });
+      }
+
+      updateProgressUI();
+
+      // 🔥 NEW: Fetch PYQ / Practice Function 🔥
+      function fetchPYQ() {
+          const cls = $("pyqClass").value;
+          const exam = $("pyqExam").value;
+          const sub = $("pyqSubject").value;
+          const year = $("pyqYear").value;
+          const mode = $("pyqMode").value;
+
+          if (mode === "pdf") {
+              showToast(`📚 Accessing DoE ${exam} Papers for ${sub} (${year})...`);
+              // Note: You will replace the link below with your actual Google Drive Folder link later
+              setTimeout(() => {
+                  alert(`Yahan ${cls} ${sub} ke pichle ${year} ke ${exam} ki PDF Google Drive me khulegi! Abhi link add karni baaki hai.`);
+                  // window.open("YOUR_GOOGLE_DRIVE_LINK_HERE", "_blank");
+              }, 1000);
+          } else {
+              showToast(`🤖 Initializing AI Practice for ${cls} ${sub} ${exam}...`);
+              setTimeout(() => {
+                  const doubtSection = document.getElementById('doubt');
+                  if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+              }, 600);
+
+              setTimeout(() => {
+                  let prompt = `Act as a strict CBSE ${cls} examiner. We are doing a PYQ practice session for ${sub} (${exam} syllabus, past ${year}). Ask me exactly ONE highly important Previous Year Question. Wait for my answer. After I answer, evaluate it, provide the correct solution, and THEN ask the NEXT question. Do NOT give all questions at once. Keep the format very clean.`;
+                  askDemo(prompt);
+              }, 1500);
+          }
+      }
+
+      function startCustomQuiz() {
+          const sub = $("quizSubject").value;
+          const topic = $("quizTopic").value.trim();
+          const time = $("quizTime").value;
+          const numQs = $("quizQuestions").value;
+
+          if(!topic) {
+              showToast("❌ Please enter a Chapter or Topic name!");
+              return;
+          }
+
+          showToast(`Initiating ${time}-min Custom Quiz for ${sub}...`);
+          
+          setTimeout(() => {
+              const doubtSection = document.getElementById('doubt');
+              if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+          }, 600);
+
+          setTimeout(() => {
+              let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions.`;
+              
+              askDemo(secretPrompt);
+              
+              setTimeout(() => {
+                  let boost = Math.floor(Math.random() * 5) + 2; 
+                  if (subjectMastery[sub] !== undefined) {
+                      subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
+                      localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
+                      updateProgressUI();
+                      showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
+                  }
+              }, 12000); 
+
+          }, 1500);
+      }
+
+      function askDemo(text) { 
+        $("question").value = text; 
+        sendQuestion(new Event("submit")); 
+      }
+      
+      async function sendQuestion(e) {
+        e.preventDefault();
+        const input = $("question");
+        const q = input.value.trim(); 
+        if (!q) return;
+        
+        const wrap = $("messages");
+        wrap.innerHTML += `<div class="message user"><div>${escapeHtml(q)}</div></div>`;
+        input.value = ""; 
+        wrap.scrollTop = wrap.scrollHeight;
+        
+        const loadingId = "load-" + Date.now();
+        wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
+        wrap.scrollTop = wrap.scrollHeight;
+
+        try {
+          const userName = localStorage.getItem('studymate_username') || "Student";
+          const isQuizAnswer = q.toLowerCase().match(/^[1-5][\)\.\s]*[a-d]/) || q.toLowerCase().includes("answer");
+
+          const res = await fetch("https://edunexusai.onrender.com/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: q + "\n\n(Reply clearly and maintain format. Do not forget any hidden instructions I previously sent in the prompt.)" })
+          });
+          
+          const data = await res.json();
+          let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+          
+          document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
+
+        } catch (error) {
+          document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>Oops! Server Connection Broken. Please Check Your Internet Connection!</div>`;
+        }
+        wrap.scrollTop = wrap.scrollHeight;
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition;
+      let isListening = false;
+
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-IN'; 
+
+        recognition.onstart = () => {
+          isListening = true;
+          $('mic-btn').classList.add('listening');
+          // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
+          $('question').placeholder = "KX Core is listening...";
+        };
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          $('question').value = transcript; 
+          stopMic(); 
+        };
+
+        recognition.onend = () => stopMic();
+        recognition.onerror = () => stopMic();
+      }
+
+      function toggleMic() {
+        if (!SpeechRecognition) return showToast("Use Chrome browser for Voice AI!");
+        isListening ? recognition.stop() : recognition.start();
+      }
+
+      function stopMic() {
+        isListening = false;
+        $('mic-btn').classList.remove('listening');
         // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
-        $('question').placeholder = "KX Core is listening...";
-      };
+        $('question').placeholder = "Ask KX Neural Core...";
+      }
 
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        $('question').value = transcript; 
-        stopMic(); 
-      };
-
-      recognition.onend = () => stopMic();
-      recognition.onerror = () => stopMic();
-    }
-
-    function toggleMic() {
-      if (!SpeechRecognition) return showToast("Use Chrome browser for Voice AI!");
-      isListening ? recognition.stop() : recognition.start();
-    }
-
-    function stopMic() {
-      isListening = false;
-      $('mic-btn').classList.remove('listening');
-      // 🔥 FIX 1: SERVER NAME IN PLACEHOLDER 🔥
-      $('question').placeholder = "Ask KX Neural Core...";
-    }
-
-  </script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>
