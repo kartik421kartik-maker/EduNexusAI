@@ -421,7 +421,7 @@
         </nav>
         <button class="profile-btn" onclick="logout()" title="Click to Logout">
           <span class="avatar" id="profileAvatar">P</span>
-          <span id="profileName">Prince</span>
+          <span id="profileName">Kartik</span>
         </button>
       </header>
     </div>
@@ -452,7 +452,7 @@
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice with the PYQ Vault?</h2>
             <p style="font-size: 17px; color: var(--muted); margin: 0; line-height: 1.6;">
-              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>, and the KX Neural Core will test you strictly on actual past questions, grading you like a real examiner.
+              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last years of official Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>, and the KX Neural Core will test you strictly on actual past questions, grading you like a real examiner.
             </p>
             <div style="display: flex; gap: 20px; margin-top: 25px; font-size: 12px; color: #8b7cff; font-weight: 700;">
               <span>✓ Real DO.E Papers</span>
@@ -476,6 +476,7 @@
                     <option value="Chemistry">Chemistry</option>
                     <option value="Mathematics">Mathematics</option>
                     <option value="Computer Science">Computer Science</option>
+                    <option value="English">English</option>
                   </select>
                 </div>
               </div>
@@ -509,14 +510,14 @@
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
             <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
-              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last 5 years of official DO.E Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
+              Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last years of official  Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
             </p>
           </div>
 
           <!-- 🔥 PYQ VAULT BOX 🔥 -->
           <div class="hero-card glass tilt-panel reveal" id="pyq-vault-section">
             <div class="card-top">
-              <div><span class="mini-label" style="font-size: 11px;">02 • DO.E OFFICIAL BOARD BANK</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">PYQ Vault</h3></div>
+              <div><span class="mini-label" style="font-size: 11px;">02 • OFFICIAL BOARD BANK</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">PYQ Vault</h3></div>
             </div>
             <div class="quiz-box">
               <div style="display: flex; gap: 8px;">
@@ -552,9 +553,9 @@
                   <select id="pyqYear" style="margin-bottom: 0;">
                     <option value="1 Year">Last 1 Year</option>
                     <option value="2 Years">Last 2 Years</option>
-                    <option value="3 Years">Last 3 Years</option>
-                    <option value="4 Years">Last 4 Years</option>
-                    <option value="5 Years" selected>Last 5 Years</option>
+                    
+                    
+                    
                   </select>
                 </div>
               </div>
@@ -631,7 +632,6 @@
             <h3 class="gradient-title">EduNexus Tutor</h3>
             <p>From Physics derivations to Python logic—decode complex concepts instantly, then test your mastery.</p>
             <div class="suggestions">
-              <!-- 🔥 UPDATED SUGGESTIONS FOR VISION FEATURE 🔥 -->
               <button onclick="askDemo('Analyze my handwriting step by step')">Analyze my handwriting step</button>
               <button onclick="askDemo('Analyze this Physics circuit diagram')">Analyze this Physics circuit</button>
               <button onclick="askDemo('Summarize key points from this PDF')">Summarize key points from this PDF</button>
@@ -643,7 +643,6 @@
             </div>
             <div class="messages" id="messages"></div>
             
-            <!-- 🔥 NEW ATTACHMENT PREVIEW PANE 🔥 -->
             <div id="attachment-preview" class="preview-pane" style="display: none;">
                 <img id="preview-img" class="preview-thumb" src="" style="display:none;">
                 <div id="preview-doc" class="preview-thumb" style="display:none;">📄</div>
@@ -655,11 +654,9 @@
             </div>
 
             <form class="chat-input" onsubmit="sendQuestion(event)">
-              <!-- 🔥 HIDDEN FILE INPUTS 🔥 -->
               <input type="file" id="image-upload" accept="image/*" capture="environment" style="display:none;" onchange="handleAttachment(event, 'image')">
               <input type="file" id="file-upload" accept=".pdf,.txt,.doc,.docx" style="display:none;" onchange="handleAttachment(event, 'file')">
                             
-              <!-- 🔥 NEW ATTACH BUTTONS 🔥 -->
               <button type="button" class="attach-btn" onclick="document.getElementById('file-upload').click()" title="Attach File">
                 <svg viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.31 2.69 6 6 6s6-2.69 6-6V6h-1.5z"/></svg>
               </button>
@@ -668,9 +665,8 @@
                 <svg viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
               </button>
 
-              <!-- 🔥 NEW INPUT WRAPPER WITH INLINE MIC 🔥 -->
               <div class="input-wrapper">
-                <input id="question" placeholder="Ask KX Core..." autocomplete="off">
+                <input id="question" placeholder="Ask KX Neural Core..." autocomplete="off">
                 <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
                 </button>
@@ -930,7 +926,7 @@
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
                     <div class="days-list">
-                       ${daysHtml}
+                      ${daysHtml}
                     </div>
 
                     <div class="ai-analytics-box" style="padding: 24px; background: #ffffff03; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
@@ -1040,7 +1036,9 @@
 
     const sessionId = Date.now().toString();
 
-    // 🔥 NEW JS FOR ATTACHMENTS 🔥
+    // 🔥 MEMORY CHIP: Yeh array chat ko yaad rakhega 🔥
+    let chatMemory = [];
+    
     let currentAttachmentBase64 = null;
     let currentAttachmentName = null;
 
@@ -1090,7 +1088,6 @@
       
       const wrap = $("messages");
       
-      // Show user message with attachment notice if it exists
       if (currentAttachmentBase64) {
           wrap.innerHTML += `<div class="message user"><div><div style="font-size:10px; color:#5ee7c5; margin-bottom:6px; font-weight:700;">📎 Attached: ${currentAttachmentName}</div>${escapeHtml(q)}</div></div>`;
       } else {
@@ -1103,15 +1100,20 @@
       const payload = { 
         message: q + " [Do NOT use LaTeX math formatting. Use standard plain text.]", 
         session_id: sessionId, 
-        user_name: localStorage.getItem('studymate_username') || "Student" 
+        user_name: localStorage.getItem('studymate_username') || "Student",
+        history: chatMemory // 🔥 Memory sending to backend
       };
 
-      // If image is attached, append it to payload so the future backend can read it
       if (currentAttachmentBase64) {
           payload.image_data = currentAttachmentBase64;
           payload.file_name = currentAttachmentName;
-          clearAttachment(); // Auto-clear after sending
       }
+
+      // Memory Update ke liye temp variables
+      let memImage = currentAttachmentBase64;
+      let memName = currentAttachmentName;
+      
+      clearAttachment();
 
       const loadingId = "load-" + Date.now();
       wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
@@ -1131,6 +1133,19 @@
         }
 
         const data = await res.json();
+        
+        // 🔥 SAVING TO MEMORY 🔥
+        let userContent = { text: q };
+        if (memImage) {
+            userContent.image_data = memImage;
+            userContent.mime_type = memImage.split(';')[0].split(':')[1];
+        }
+        chatMemory.push({ role: "user", content: userContent });
+        chatMemory.push({ role: "model", content: { text: data.reply } });
+
+        // Memory limit: Server crash se bachane ke liye sirf last 12 turns (6 tumhare, 6 AI ke)
+        if (chatMemory.length > 12) chatMemory = chatMemory.slice(chatMemory.length - 12);
+
         let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
         document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
 
