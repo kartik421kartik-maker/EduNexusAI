@@ -823,15 +823,23 @@
         typeTarget.innerHTML += `<br><span style="background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; -webkit-background-clip: text; animation: popIn 0.5s ease-out;">Not harder.</span>`;
       }
     }
-
     const overlay = $('login-overlay'); 
-    const mainContent = $('main-content');
-    const savedUser = localStorage.getItem('studymate_username');
-    
-    if (savedUser) { 
-      activateUser(savedUser, false); 
-    }
+const mainContent = $('main-content');
 
+// 🔥 FIREBASE AUTH GUARD: Purane bina email wale users ko yahan se bhagayenge 🔥
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        // Agar user ne Firebase se asli login kar rakha hai, tabhi andar jane do
+        const name = user.displayName || user.email.split('@')[0];
+        activateUser(name, false);
+    } else {
+        // Agar Firebase par login nahi hai, toh purana sab kachra saaf karke login screen dikha do!
+        localStorage.removeItem('studymate_username');
+        overlay.style.opacity = '1';
+        overlay.style.visibility = 'visible';
+        mainContent.classList.add('blurred');
+    }
+});
     function activateUser(name, isFirstTime) {
       overlay.style.opacity = '0';
       setTimeout(() => {
