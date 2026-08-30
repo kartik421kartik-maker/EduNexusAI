@@ -3,20 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#050505">
-  <title>EduNexus AI</title>
+  <meta name="theme-color" content="#070a12">
+  <title>EduNexus AI — Ultimate 3D Live Edition</title>
   
-  <!-- Tera purana icon wala link -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
 
-  <!-- 🔥 YAHAN PASTE KARNA HAI (PWA Links) 🔥 -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="https://i.ibb.co/Kz0LvSg9/logo.png">
-
-  <!-- Iske niche tere baaki ke font wale links rahenge -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg: #070a12; --panel: #0e1421; --text: #f4f7ff; --muted: #9ba6bb;
@@ -24,9 +19,17 @@
       --shadow: 0 24px 80px rgba(0,0,0,.5);
     }
     * { box-sizing: border-box; }
-    html, body { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    html, body {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    /* Lenis smooth-scroll takes over once it loads; this stops it colliding with the native rule above */
     .lenis.lenis-smooth { scroll-behavior: auto !important; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; line-height: 1.5; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, system-ui, sans-serif; line-height: 1.5;
+    }
     
     body::before {
       content: ""; position: fixed; inset: -50%; top: 0;
@@ -53,80 +56,50 @@
     .modal-content li { padding: 12px; background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
     .modal-content li b { color: #fff; font-size: 14px; }
 
-    /* 🔥 NAYA PREMIUM LOGIN OVERLAY START 🔥 */
     #login-overlay {
-      position: fixed; inset: 0; background: #04060a; z-index: 7000; 
-      display: flex; flex-direction: column; justify-content: center; align-items: center; 
-      transition: opacity 0.5s ease, visibility 0.5s; perspective: 1000px; overflow: hidden;
+      position: fixed; inset: 0; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(25px); z-index: 7000; 
+      display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s;
+      perspective: 1000px;
     }
-    
-    /* Particles Background Container */
-    #particles-js {
-      position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;
-    }
-
-    /* Floating & Glowing Logo Animation */
-    .floating-logo {
-      width: 75px; margin-bottom: 20px; z-index: 2; border-radius: 16px; position: relative;
-      animation: floatGlow 4s ease-in-out infinite;
-    }
-    @keyframes floatGlow {
-      0% { transform: translateY(0px); filter: drop-shadow(0 0 15px rgba(139, 124, 255, 0.4)); }
-      50% { transform: translateY(-12px); filter: drop-shadow(0 0 25px rgba(94, 231, 197, 0.8)); }
-      100% { transform: translateY(0px); filter: drop-shadow(0 0 15px rgba(139, 124, 255, 0.4)); }
-    }
-
     .login-box {
-      background: rgba(14, 18, 26, 0.7); backdrop-filter: blur(25px);
-      border: 1px solid rgba(139, 124, 255, 0.25); 
-      padding: 35px; border-radius: 24px; text-align: center; 
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255,255,255,0.1), 0 0 40px rgba(94, 231, 197, 0.1); 
-      transform-style: preserve-3d; animation: floatIn 1s ease-out;
-      width: 90%; max-width: 380px; position: relative; z-index: 2;
+      background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent); padding: 50px; border-radius: 24px; 
+      text-align: center; box-shadow: 0 0 50px rgba(139, 124, 255, 0.2); transform-style: preserve-3d; animation: floatIn 1s ease-out;
+      width: 90%; max-width: 450px;
     }
-    @keyframes floatIn { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes floatIn { from { opacity: 0; transform: translateY(50px) scale(0.9) rotateX(-20deg); } to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); } }
     
-    .form-input-container {
-        background: #0a0d14; border: 1px solid rgba(255,255,255,0.08); 
-        border-radius: 12px; padding: 10px 16px; margin-bottom: 12px; 
-        transition: 0.3s; display: flex; align-items: center; gap: 12px;
-    }
-    .form-input-container:focus-within { border-color: var(--accent2); box-shadow: 0 0 15px rgba(94, 231, 197, 0.15); }
-    .form-input-container input { background: transparent; border: none; padding: 0; margin: 0; width: 100%; color: #ffffff; font-size: 14px; outline: none; font-weight: 500;}
-    .form-input-container input::placeholder { color: #5a6478; font-weight: 400;}
-    
-    /* Dedicated Password Style for visibility */
-    #authPassword { letter-spacing: 2px; }
-    #authPassword::placeholder { letter-spacing: normal; }
+    .cube-container { width: 60px; height: 60px; perspective: 600px; margin: 0 auto 30px; }
+    .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spinCube 4s infinite linear; }
+    .face { position: absolute; width: 60px; height: 60px; border: 2px solid var(--accent2); background: rgba(139, 124, 255, 0.2); box-shadow: inset 0 0 20px rgba(94, 231, 197, 0.5); }
+    .front { transform: translateZ(30px); } .back { transform: rotateY(180deg) translateZ(30px); }
+    .right { transform: rotateY(90deg) translateZ(30px); } .left { transform: rotateY(-90deg) translateZ(30px); }
+    .top { transform: rotateX(90deg) translateZ(30px); } .bottom { transform: rotateX(-90deg) translateZ(30px); }
+    @keyframes spinCube { 0% { transform: rotateX(0deg) rotateY(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg); } }
 
-    .social-btn {
-        background: #0a0d14; border: 1px solid rgba(255,255,255,0.08); 
-        border-radius: 12px; width: 50px; height: 50px; display: grid; 
-        place-items: center; cursor: pointer; transition: 0.3s;
-    }
-    .social-btn:hover { background: rgba(139, 124, 255, 0.15); transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 5px 15px rgba(139, 124, 255, 0.2); }
-    
-    .submit-btn {
-        width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; 
-        padding: 14px; border-radius: 12px; color: #000; font-weight: 800; font-size: 15px; 
-        cursor: pointer; display: flex; justify-content: space-between; align-items: center; 
-        transition: 0.3s; box-shadow: 0 5px 20px rgba(94, 231, 197, 0.3); margin-top: 5px;
-    }
-    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(94, 231, 197, 0.5); }
-    /* 🔥 NAYA PREMIUM LOGIN OVERLAY END 🔥 */
+    .login-box h2 { font-size: 28px; margin-bottom: 10px; }
+    .login-box p { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+    .login-box input { width: 100%; padding: 15px; border-radius: 12px; background: #070a12; border: 1px solid var(--line); color: white; font-size: 16px; margin-bottom: 20px; outline: none; }
+    .login-box input:focus { border-color: var(--accent2); box-shadow: 0 0 15px rgba(94, 231, 197, 0.3); }
 
     .blurred { filter: blur(10px) brightness(0.5); pointer-events: none; }
     .ambient { position: fixed; width: 500px; height: 500px; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; pointer-events: none; }
     .ambient-1 { background: #7665ff; top: -180px; right: -100px; }
     .ambient-2 { background: #2bd9b1; left: -200px; top: 45%; }
-    .gradient-title { background: linear-gradient(90deg, #ffffff, #a59dff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
 
-    /* Other Styles (Topbar, Dashboard, etc. remaining exactly the same) */
-    .topbar-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; background: rgba(7, 10, 18, 0.35); backdrop-filter: blur(21px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.02); }
+    .gradient-title {
+      background: linear-gradient(90deg, #ffffff, #a59dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .topbar-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
     .topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+    
     .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-family: "Space Grotesk"; font-weight: 700; font-size: 20px; text-decoration: none; }
     .brand-logo { width: 34px; height: 34px; border-radius: 8px; object-fit: contain; box-shadow: 0 4px 15px rgba(94,231,197,0.2); }
     .tutor-logo { width: 48px; height: 48px; border-radius: 12px; object-fit: contain; margin-bottom: 12px; box-shadow: 0 4px 20px rgba(139,124,255,0.3); }
+
     .brand-ai { color: var(--accent2); }
     nav { display: flex; gap: 26px; }
     nav a { color: var(--muted); text-decoration: none; font-size: 13px; transition: 0.3s; cursor: pointer; }
@@ -135,15 +108,29 @@
     .profile-btn:hover { background: #ffffff15; box-shadow: 0 0 15px rgba(94,231,197,0.3); }
     .avatar { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #262d42; font-size: 12px; color: var(--accent2); font-weight: bold; }
     
-    main { max-width: 1240px; margin: 0 auto; transition: filter 0.5s; padding-bottom: 40px; padding-top: 90px; }
-    .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: center; position: relative; top: -10px}
+    main { 
+      max-width: 1240px; 
+      margin: 0 auto; 
+      transition: filter 0.5s; 
+      padding-bottom: 40px; 
+      padding-top: 90px; 
+    }
+    
+    .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: center; }
+    
     .eyebrow { font-size: 11px; letter-spacing: 1.5px; color: #aaa3ff; font-weight: 800; }
     .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 14px var(--accent2); margin-right: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(94, 231, 197, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(94, 231, 197, 0); } 100% { box-shadow: 0 0 0 0 rgba(94, 231, 197, 0); } }
+    
     h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.05; margin: 0; }
     .hero h1 { font-size: clamp(48px, 6vw, 82px); letter-spacing: -3px; margin: 18px 0 22px; min-height: 160px; }
     .hero h1 span { background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
-    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 26px; transform: translateY(-30px); } 
+    
+    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 26px; } 
     .hero-copy > div > p { max-width: 600px; color: var(--muted); font-size: 17px; margin-bottom: 25px; }
+    .hero { min-height: 600px; padding: 40px 28px 80px; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 70px; align-items: center; position: relative; top: -10px}
+    .hero-copy { transform: translateY(-30px); }
+    
     .btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 14px; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; transform-style: preserve-3d; }
     .btn:hover { transform: translateY(-3px) scale(1.02); }
     .primary { background: linear-gradient(135deg, #8c7cff, #665cff); color: white; box-shadow: 0 12px 35px #685cff55; }
@@ -152,28 +139,60 @@
     .trust-row { display: flex; gap: 20px; color: #727d91; font-size: 11px; margin-top: 25px; flex-wrap: wrap; }
 
     .mobile-only { display: none !important; }
-    @media(max-width: 850px) { .desktop-only { display: none !important; } .mobile-only { display: block !important; } .hero-feature-text.mobile-only::before { display: none; } }
-    .hero-feature-text { margin-top: 150px; padding-top: 30px; padding-right: 20px; border-top: 1px solid rgba(255,255,255,0.05); position: relative; animation: popIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; opacity: 0; animation-delay: 0.2s; }
-    .hero-feature-text::before { content: ''; position: absolute; top: -1px; left: 0; width: 60px; height: 1px; background: #5ee7c5; box-shadow: 0 0 15px #5ee7c5; }
+    @media(max-width: 850px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block !important; }
+      .hero-feature-text.mobile-only::before { display: none; }
+    }
+
+    .hero-feature-text {
+      margin-top: 150px; 
+      padding-top: 30px;
+      padding-right: 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      animation: popIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      opacity: 0;
+      animation-delay: 0.2s;
+    }
+    .hero-feature-text::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: #5ee7c5;
+      box-shadow: 0 0 15px #5ee7c5;
+    }
+
     .hero-right-panels { display: flex; flex-direction: column; gap: 30px; margin-top: 0; }
+
     .glass { background: linear-gradient(145deg, #121a29cc, #0b101bdd); border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow); backdrop-filter: blur(18px); transition: transform 0.1s ease-out; transform-style: preserve-3d; }
     .hero-card { border-radius: 22px; padding: 26px; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); }
     .hero-card > * { transform: translateZ(30px); } 
+
     .card-top { display: flex; justify-content: space-between; align-items: start; }
     .mini-label { font-size: 10px; letter-spacing: 1.3px; color: #727e96; font-weight: 800; display: block; margin-bottom: 6px; }
-    .quiz-box label, .panel label { color: #aeb7c8; letter-spacing: 1.5px; text-transform: uppercase; font-size: 10px; font-weight: 800; margin-bottom: 6px; display: block; }
-    select, input:not(#login-overlay input) { color: #f4f7ff !important; background: #0d1421 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; font: inherit; display: block; width: 100%; margin-top: 8px; border-radius: 10px; padding: 11px; outline: none; transition: 0.3s; }
-    select:focus, input:not(#login-overlay input):focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(139,124,255,0.3); }
     
+    .quiz-box label, .panel label { color: #aeb7c8; letter-spacing: 1.5px; text-transform: uppercase; font-size: 10px; font-weight: 800; margin-bottom: 6px; display: block; }
+    select, input { color: #f4f7ff !important; background: #0d1421 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; font: inherit; display: block; width: 100%; margin-top: 8px; border-radius: 10px; padding: 11px; outline: none; transition: 0.3s; }
+    select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(139,124,255,0.3); }
     .panel h3 { color: #ffffff; font-weight: 700; }
+    
     .score-badge { font-size: 11px; padding: 7px 9px; border-radius: 8px; background: #5ee7c51a; color: #5ee7c5; box-shadow: 0 0 15px rgba(94,231,197,0.2); height: max-content; }
+    
     input[type=range] { width: 100%; accent-color: var(--accent); margin-top: 13px; }
     .range-value { float: right; color: #8f86ff; font-size: 10px; margin-top: -22px; }
     .full { width: 100%; margin-top: 8px; }
+
     .quiz-box { margin-top: 20px; padding: 18px; background: #ffffff04; border: 1px solid #ffffff08; border-radius: 16px; }
     .quiz-box select, .quiz-box input { margin-bottom: 12px; font-size: 12px; }
+    .quiz-box select:focus, .quiz-box input:focus { border-color: var(--accent2); box-shadow: 0 0 15px rgba(94, 231, 197, 0.2); }
+    
     .focus-progress { height: 6px; background: #ffffff09; border-radius: 10px; margin: 22px 0; }
     .focus-progress span { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #8d7cff, #5ee7c5); box-shadow: 0 0 10px #5ee7c5; }
+    
     .task-list { display: grid; gap: 10px; }
     .task { display: flex; align-items: center; gap: 12px; padding: 13px; background: #ffffff04; border: 1px solid #ffffff08; border-radius: 13px; transition: 0.3s; cursor: pointer; }
     .task:hover { transform: translateZ(40px) scale(1.02); background: #ffffff0a; border-color: rgba(255,255,255,0.2); }
@@ -184,24 +203,30 @@
     .task small { color: #747f93; font-size: 10px; }
     .task button { border: 0; background: #fff; color: #111; border-radius: 7px; padding: 6px 9px; font-size: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
     .task button:hover { background: var(--accent2); }
+    
     .ai-note { display: flex; gap: 10px; margin-top: 18px; padding: 12px; border-radius: 12px; background: #8c7cff0d; border: 1px solid #8c7cff22; }
     .ai-note > span { color: #a89fff; text-shadow: 0 0 10px #a89fff; }
     .ai-note p { margin: 0; font-size: 10px; color: #929caf; }
     .ai-note b { color: #d6d2ff; }
+
     .section { padding: 80px 28px; }
     .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 30px; }
     .section-heading h2 { font-size: 40px; letter-spacing: -1.8px; margin-top: 10px; }
     .section-heading > p { max-width: 420px; color: var(--muted); font-size: 13px; }
+
     .planner-grid { display: grid; grid-template-columns: 390px 1fr; gap: 18px; }
     .panel { border-radius: 20px; padding: 24px; }
     .panel > * { transform: translateZ(20px); }
+    
     .panel-title { display: flex; gap: 12px; margin-bottom: 24px; align-items: center; }
     .panel-title h3 { font-size: 18px; line-height: 1.1; margin: 0; }
     .panel-title p { margin: 4px 0 0; color: #707b91; font-size: 11px; }
+    
     .result-panel { min-height: 460px; background: radial-gradient(circle at 70% 20%, #7e70ff12, transparent 45%), linear-gradient(145deg, #111928, #0b101a); }
     .result-empty { height: 100%; min-height: 410px; display: grid; place-items: center; align-content: center; text-align: center; padding: 30px; }
     .result-empty h3 { font-size: 19px; }
     .result-empty p { max-width: 400px; color: #727d91; font-size: 12px; margin-top: 10px; }
+    
     .generated-plan h3 { font-size: 21px; margin-top: 10px; margin-bottom: 5px; }
     .plan-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
     .chip { font-size: 10px; padding: 6px 8px; border-radius: 999px; background: #ffffff08; color: #aeb7c8; border: 1px solid rgba(255,255,255,0.1); }
@@ -210,6 +235,7 @@
     .plan-day b { font-size: 11px; }
     .plan-day span { float: right; color: #5ee7c5; font-size: 10px; }
     .plan-day p { margin: 5px 0 0; color: #7f8a9e; font-size: 10px; }
+
     .tutor { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; height: 680px; } 
     .tutor-side { padding: 28px; border-right: 1px solid var(--line); overflow-y: auto; }
     .tutor-side h3 { font-size: 22px; margin: 16px 0 8px; }
@@ -217,6 +243,7 @@
     .suggestions { display: grid; gap: 8px; margin-top: 22px; }
     .suggestions button { background: #ffffff05; border: 1px solid var(--line); color: #aeb7c8; text-align: left; border-radius: 9px; padding: 10px; font-size: 10px; cursor: pointer; transition: 0.3s; }
     .suggestions button:hover { background: rgba(139,124,255,0.2); border-color: rgba(139,124,255,0.5); color: white; transform: translateX(5px); }
+    
     .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; position: relative; } 
     .chat-head { padding: 17px 20px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; }
     .tiny { float: right; color: #616c80; font-weight: 500; }
@@ -227,6 +254,8 @@
     .message.user { align-self: flex-end; flex-direction: row-reverse; }
     .message.user > div { background: #8b7cff17; border-color: #8b7cff28; color: #fff; }
     .msg-avatar { min-width: 25px; height: 25px; border-radius: 8px; display: grid; place-items: center; background: #8b7cff18; color: #aaa2ff; }
+    
+    /* 🔥 ATTACHMENT PREVIEW STYLES 🔥 */
     .preview-pane { display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: rgba(7, 10, 18, 0.95); border-top: 1px solid var(--line); border-bottom: 1px solid rgba(255,255,255,0.03); }
     .preview-thumb { width: 35px; height: 35px; border-radius: 6px; object-fit: cover; background: #262d42; border: 1px solid rgba(255,255,255,0.1); display: grid; place-items: center; font-size: 14px; color: var(--accent2);}
     .preview-info { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
@@ -234,37 +263,47 @@
     .preview-size { font-size: 9px; color: #7f8a9e; margin-top: 2px;}
     .preview-close { background: transparent; border: none; color: #ff4757; cursor: pointer; font-size: 16px; padding: 5px; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
     .preview-close:hover { transform: scale(1.2); }
+
+    /* 🔥 GEMINI-STYLE SLEEK CHAT INPUT 🔥 */
     .chat-input { display: flex; gap: 8px; padding: 12px 18px; border-top: 1px solid var(--line); align-items: center; background: rgba(7, 10, 18, 0.8); backdrop-filter: blur(10px); }
+    
     .attach-btn { background: transparent; border: none; color: #a9b1c1; cursor: pointer; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; transition: 0.3s; flex-shrink: 0; }
     .attach-btn:hover { background: rgba(255,255,255,0.05); color: var(--accent2); }
     .attach-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    
     .input-wrapper { flex: 1; position: relative; display: flex; align-items: center; min-width: 0; }
     .chat-input input { width: 100%; font-size: 14px; padding: 14px 45px 14px 18px; border-radius: 30px; background: #ffffff05; border: 1px solid rgba(255,255,255,0.08); color: white; outline: none; transition: 0.3s; margin: 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
     .chat-input input:focus { border-color: var(--accent); background: #ffffff0a; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 0 15px rgba(139,124,255,0.15); }
+    
     #mic-btn { position: absolute; right: 6px; background: transparent; color: #a9b1c1; border: none; border-radius: 50%; width: 34px; height: 34px; flex-shrink: 0; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; display: grid; place-items: center; }
     #mic-btn svg { width: 18px; height: 18px; fill: currentColor; }
     #mic-btn:hover { background: rgba(139,124,255,0.1); color: var(--accent); transform: scale(1.05); }
     #mic-btn.listening { color: #ff4757; animation: pulseMic 1.5s infinite; }
+    
     .chat-input button[type="submit"] { background: var(--accent2); border: 0; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; color: #000; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); display: grid; place-items: center; box-shadow: 0 4px 10px rgba(94,231,197,0.2); flex-shrink: 0; }
     .chat-input button[type="submit"]:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 15px rgba(94,231,197,0.4); }
     .chat-input button[type="submit"] svg { width: 20px; height: 20px; stroke-width: 2.5px; }
+
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .stat { border-radius: 16px; padding: 20px; transition: 0.3s; }
     .stat:hover { transform: translateY(-5px) translateZ(20px); border-color: rgba(94,231,197,0.4); box-shadow: 0 10px 30px rgba(94,231,197,0.15); }
     .stat span { font-size: 10px; color: #737e92; }
     .stat strong { display: block; font-family: "Space Grotesk"; font-size: 31px; margin: 8px 0 2px; }
     .stat small { font-size: 10px; color: #5ee7c5; }
+    
     .progress-panel { margin-top: 12px; border-radius: 20px; padding: 25px; }
     .chart-head { display: flex; justify-content: space-between; align-items: end; }
     .chart-head h3 { font-size: 18px; margin-top: 7px; }
     .legend { font-size: 10px; color: #707b90; }
     .legend i { display: inline-block; width: 6px; height: 6px; background: #8b7cff; border-radius: 50%; margin-right: 5px; box-shadow: 0 0 8px #8b7cff; }
+    
     .bars { margin: 30px 0; }
     .bar-row { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 14px; margin: 18px 0; font-size: 11px; }
     .bar-row > b { text-align: right; color: #b8c1d0; transition: color 0.3s; }
     .bar { height: 10px; background: #ffffff07; border-radius: 20px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
     .bar i { display: block; height: 100%; background: linear-gradient(90deg, #8b7cff, #5ee7c5); border-radius: 20px; position: relative; overflow: hidden; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1); }
     .bar i::after { content:""; position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shimmer 2s infinite; }
+    
     .recommendation { display: flex; gap: 12px; align-items: center; padding: 13px; border: 1px solid #5ee7c51b; background: #5ee7c507; border-radius: 12px; }
     .recommendation > span { color: #5ee7c5; text-shadow: 0 0 10px #5ee7c5; }
     .recommendation div { flex: 1; }
@@ -272,6 +311,7 @@
     .recommendation p { margin: 4px 0 0; font-size: 10px; color: #7c879b; }
     .recommendation button { background: #ffffff08; border: 1px solid var(--line); color: #dce2ee; border-radius: 8px; padding: 8px; font-size: 9px; font-weight: 700; cursor: pointer; transition: 0.3s; }
     .recommendation button:hover { background: #5ee7c5; color: #000; }
+    
     .pitch-card { padding: 65px 50px; border: 1px solid var(--line); border-radius: 25px; text-align: center; background: radial-gradient(circle at 50% 0, #7668ff1c, transparent 45%), #0d1320; }
     .pitch-card h2 { font-size: clamp(30px, 4vw, 50px); letter-spacing: -2px; margin: 15px 0; }
     .pitch-card h2 span { color: #8f86ff; text-shadow: 0 0 20px rgba(143,134,255,0.4); }
@@ -281,200 +321,74 @@
     .pitch-points div:hover { transform: translateY(-5px) scale(1.05); border-color: var(--accent); background: rgba(143,134,255,0.1); }
     .pitch-points b { color: #8f86ff; margin-right: 8px; font-size: 10px; }
     .pitch-points span { font-size: 10px; color: #b8c1d0; }
+    
     footer { max-width: 1184px; margin: auto; padding: 30px 28px 50px; border-top: 1px solid var(--line); display: flex; justify-content: center; color: #566175; font-size: 11px; letter-spacing: 0.5px; }
     footer span { opacity: 0.7; transition: 0.3s ease; }
     footer span:hover { opacity: 1; color: var(--accent2); }
+    
+    /* 🔥 MOBILE FIXES - PROPER STACKING FOR MOBILE 🔥 */
     .toast { position: fixed; bottom: 40px; right: 20px; left: 20px; text-align: center; background: #f4f7ff; color: #0a0d14; padding: 12px 15px; border-radius: 12px; font-size: 12px; font-weight: 700; transform: translateY(100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 8000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); margin: 0 auto; max-width: 400px; }
     .toast.show { transform: none; opacity: 1; }
-    @media(max-width: 850px) { nav { display: none; } .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 55px; } .planner-grid { grid-template-columns: 1fr; } .tutor { grid-template-columns: 1fr; height: 85vh; min-height: 700px; display: flex; flex-direction: column; } .tutor-side { padding: 15px 20px; border-right: 0; border-bottom: 1px solid var(--line); flex: none; display: flex; overflow-x: auto; gap: 10px; white-space: nowrap; } .tutor-side h3, .tutor-side p, .tutor-logo { display: none; } .suggestions { margin-top: 0; display: flex; flex-direction: row; gap: 8px; width: max-content; } .suggestions button { padding: 8px 12px; font-size: 11px; margin: 0; } .chat { flex: 1; height: auto; } .stats-grid { grid-template-columns: 1fr 1fr; } .section-heading { display: block; } .section-heading > p { margin-top: 15px; } .pitch-points { flex-direction: column; } .bar-row { grid-template-columns: 80px 1fr 35px; } }
-    @media(max-width: 520px) { .hero h1 { font-size: 42px; min-height: 120px; } .stats-grid { grid-template-columns: 1fr; } .hero-actions { flex-direction: column; } .topbar { padding: 0 16px; } .profile-btn > span:last-child { display: none; } .section, .hero { padding-left: 18px; padding-right: 18px; padding-top: 50px; } .login-box { padding: 30px 20px; } .modal-content { padding: 25px; } .chat-input { padding: 10px 12px; gap: 5px; } .attach-btn { width: 32px; height: 32px; } .attach-btn svg { width: 18px; height: 18px; } .chat-input input { font-size: 13px; padding: 12px 40px 12px 15px; } .chat-input button[type="submit"] { width: 40px; height: 40px; } #mic-btn { width: 32px; height: 32px; right: 4px; } }
-/* 🔥 NEON GLOW TARGET HIGHLIGHT (OUTLINE FOCUSED & SMOOTH) 🔥 */
-    @keyframes smoothNeon {
-      0% { box-shadow: 0 0 0 rgba(94, 231, 197, 0); border-color: rgba(255,255,255,0.15); }
-      15% { box-shadow: 0 0 15px rgba(94, 231, 197, 0.9), inset 0 0 8px rgba(94, 231, 197, 0.2); border-color: var(--accent2); }
-      75% { box-shadow: 0 0 15px rgba(94, 231, 197, 0.9), inset 0 0 8px rgba(94, 231, 197, 0.2); border-color: var(--accent2); }
-      100% { box-shadow: 0 0 0 rgba(94, 231, 197, 0); border-color: rgba(255,255,255,0.15); }
-    }
-    .neon-highlight {
-      animation: smoothNeon 2.5s ease-in-out forwards !important;
-    }
 
-
-    /* 🔥 ZEN MODE STYLES 🔥 */
-    #zen-mode-overlay {
-        position: fixed; inset: 0; background: rgba(4, 6, 10, 0.98);
-        backdrop-filter: blur(25px); z-index: 9999;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        opacity: 0; visibility: hidden; transition: 0.5s ease;
-    }
-    #zen-mode-overlay.active { opacity: 1; visibility: visible; }
-    .zen-circle {
-        width: 300px; height: 300px; border-radius: 50%;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        background: radial-gradient(circle, rgba(139,124,255,0.1) 0%, transparent 70%);
-        border: 2px solid rgba(139, 124, 255, 0.3);
-        box-shadow: 0 0 50px rgba(139, 124, 255, 0.2), inset 0 0 30px rgba(139,124,255,0.1);
-        position: relative; animation: pulseGlow 4s infinite alternate;
-    }
-    @keyframes pulseGlow {
-        0% { box-shadow: 0 0 40px rgba(94, 231, 197, 0.1), inset 0 0 20px rgba(94, 231, 197, 0.1); border-color: rgba(94, 231, 197, 0.2); }
-        100% { box-shadow: 0 0 80px rgba(139, 124, 255, 0.3), inset 0 0 40px rgba(139, 124, 255, 0.2); border-color: rgba(139, 124, 255, 0.5); }
-    }
-    #zen-timer-display { font-size: 75px; font-family: 'Space Grotesk', sans-serif; font-weight: 800; color: white; letter-spacing: 2px; line-height: 1;}
-    #zen-status { color: var(--accent2); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
-    .zen-controls { display: flex; gap: 15px; margin-top: 40px; }
-    .zen-btn { background: #ffffff10; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .zen-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 20px rgba(139,124,255,0.4);}
-    .zen-btn.danger:hover { background: #ff4757; color: white; border-color: #ff4757; box-shadow: 0 0 20px rgba(255,71,87,0.4);}
-    /* 🔥 ULTRA-PREMIUM MOBILE MENU 🔥 */
-    .hamburger-btn {
-        display: none; background: transparent; border: none; color: white; cursor: pointer; padding: 5px;
-    }
-    .hamburger-btn svg { width: 30px; height: 30px; fill: currentColor; }
-
-    #mobile-menu-overlay {
-        position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-        background: rgba(7, 10, 18, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-        z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    #mobile-menu-overlay.active { right: 0; }
-    
-    #mobile-menu-overlay .close-menu {
-        position: absolute; top: 25px; right: 28px; background: transparent; border: none;
-        color: #ff4757; font-size: 40px; cursor: pointer; transition: 0.3s;
-    }
-    #mobile-menu-overlay .close-menu:hover { transform: scale(1.1); }
-    
-    #mobile-menu-overlay nav {
-        display: flex; flex-direction: column; gap: 35px; text-align: center;
-    }
-    #mobile-menu-overlay nav a {
-        font-size: 24px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #f4f7ff;
-        text-decoration: none; transition: 0.3s; letter-spacing: 1px;
-    }
-    #mobile-menu-overlay nav a:hover { color: var(--accent2); transform: translateY(-3px); }
-
-    /* Mobile par Hamburger Menu dikhane ka logic */
     @media(max-width: 850px) {
-        .hamburger-btn { display: block; }
-        .topbar { gap: 15px; }
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 55px; }
+      .hero-top-text { margin-bottom: 0; }
+      .hero-feature-text { margin-top: 0; }
+      .planner-grid { grid-template-columns: 1fr; }
+      .tutor { grid-template-columns: 1fr; height: 85vh; min-height: 700px; display: flex; flex-direction: column; } 
+      .tutor-side { padding: 15px 20px; border-right: 0; border-bottom: 1px solid var(--line); flex: none; display: flex; overflow-x: auto; gap: 10px; white-space: nowrap; }
+      .tutor-side h3, .tutor-side p, .tutor-logo { display: none; } 
+      .suggestions { margin-top: 0; display: flex; flex-direction: row; gap: 8px; width: max-content; }
+      .suggestions button { padding: 8px 12px; font-size: 11px; margin: 0; }
+      .chat { flex: 1; height: auto; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .section-heading { display: block; }
+      .section-heading > p { margin-top: 15px; }
+      .pitch-points { flex-direction: column; }
+      .bar-row { grid-template-columns: 80px 1fr 35px; }
     }
-    /* 🔥 MOBILE HEADER FIX 🔥 */
-    @media(max-width: 850px) {
-        #profileName { display: none !important; }
-        .profile-btn { padding: 4px !important; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.1) !important; background: transparent !important; }
-        .hamburger-btn { margin-left: 10px; }
+    
+    @media(max-width: 520px) {
+      .hero h1 { font-size: 42px; min-height: 120px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .topbar { padding: 0 16px; }
+      .profile-btn > span:last-child { display: none; }
+      .section, .hero { padding-left: 18px; padding-right: 18px; padding-top: 50px; }
+      .login-box { padding: 30px 20px; }
+      .modal-content { padding: 25px; }
+      
+      /* 🔥 MOBILE CHAT INPUT FIXES 🔥 */
+      .chat-input { padding: 10px 12px; gap: 5px; }
+      .attach-btn { width: 32px; height: 32px; }
+      .attach-btn svg { width: 18px; height: 18px; }
+      .chat-input input { font-size: 13px; padding: 12px 40px 12px 15px; }
+      .chat-input button[type="submit"] { width: 40px; height: 40px; }
+      #mic-btn { width: 32px; height: 32px; right: 4px; }
     }
   </style>
-
 </head>
 <body>
 
-  <!-- 🔥 YAHAN TERA NAYA PREMIUM UI AAYA HAI 🔥 -->
   <div id="login-overlay">
-    
-    <!-- CONSTELLATION PARTICLES BACKGROUND -->
-    <div id="particles-js"></div>
-    
-    <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="floating-logo" alt="EduNexus Logo">
-    
     <div class="login-box">
-      <h2 id="authTitle" style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; margin: 0 0 5px; color: #fff; letter-spacing: -1px;">Initialize Your <span style="color: var(--accent2);">EduNexus ID</span></h2>
-      <p id="authSubtitle" style="color: #8c9bba; font-size: 13px; margin: 0 0 25px;">Access your personalized learning engine.</p>
-      
-      <!-- User Data & Email Login Form -->
-      <form id="emailLoginForm" style="text-align: left;">
-        
-        <!-- NEW: Username Box (Hidden by default for standard Sign In) -->
-        <div class="form-input-container" id="nameFieldContainer" style="display: none;">
-          <svg style="width: 16px; fill: #5a6478;" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 9px; color: #5a6478; margin-bottom: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Username</label>
-            <input type="text" id="authName" placeholder="Enter your name" autocomplete="off">
-          </div>
+      <div class="cube-container">
+        <div class="cube">
+          <div class="face front"></div><div class="face back"></div>
+          <div class="face right"></div><div class="face left"></div>
+          <div class="face top"></div><div class="face bottom"></div>
         </div>
-
-        <div class="form-input-container">
-          <svg style="width: 16px; fill: #5a6478;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 9px; color: #5a6478; margin-bottom: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
-            <input type="email" id="authEmail" placeholder="Enter your email" required autocomplete="off">
-          </div>
-        </div>
-        
-        <div class="form-input-container">
-          <svg style="width: 16px; fill: #5a6478;" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 9px; color: #5a6478; margin-bottom: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Password</label>
-            <input type="password" id="authPassword" placeholder="Enter your password" required autocomplete="current-password">
-          </div>
-          <!-- Eye Icon With JS Logic -->
-          <svg id="eyeIcon" onclick="togglePassword()" style="width: 16px; fill: #5a6478; cursor: pointer; transition: 0.3s;" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        </div>
-        
-        <div id="forgotPassContainer" style="text-align: right; margin-bottom: 20px;">
-          <a href="#" onclick="resetPassword(event)" style="color: var(--accent2); font-size: 10px; text-decoration: none; transition: 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Forgot Password?</a>
-        </div>
-        
-        <button type="submit" style="width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; padding: 14px; border-radius: 12px; color: #000; font-weight: 800; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; box-shadow: 0 5px 20px rgba(94, 231, 197, 0.3);">
-          <span></span><span id="submitBtnText">Launch Dashboard </span><span style="color: #000; font-weight: bold; font-size: 18px;">→</span>
-        </button>
+      </div>
+      <h2 class="gradient-title">Welcome to EduNexus AI</h2>
+      <p>Enter your name to initialize your personal learning engine.</p>
+      <form id="loginForm">
+        <input type="text" id="usernameInput" placeholder="Your Name (e.g., Kartik)" required autocomplete="off">
+        <button type="submit" class="btn primary full">Launch Dashboard ✦</button>
       </form>
-
-      <div style="display: flex; align-items: center; margin: 25px 0; color: #4a5568; font-size: 10px; text-transform: lowercase;">
-        <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.05);"></div>
-        <span style="padding: 0 12px;">or continue with</span>
-        <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.05);"></div>
-      </div>
-
-      <!-- Asli Firebase Buttons -->
-      <div style="display: flex; justify-content: center; gap: 15px;">
-        <button id="googleBtn" class="social-btn" title="Login with Google">
-          <svg style="width: 20px;" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </button>
-        <button id="githubBtn" class="social-btn" title="Login with GitHub">
-          <svg style="width: 20px; fill: white;" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </button>
-        <button id="phoneBtn" class="social-btn" title="Login with Phone">
-          <svg style="width: 18px; fill: var(--accent2);" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        </button>
-      </div>
-
-      <div id="authToggleText" style="margin-top: 25px; font-size: 10px; color: #5a6478;">
-        Don't have an account? <a href="#" onclick="toggleAuthMode(event)" style="color: var(--accent2); text-decoration: none; font-weight: 600;">Sign Up</a>
-      </div>
     </div>
   </div>
 
-  <!-- 👇 BAHAAR KA 3D DASHBOARD BINA KISI CHANGE KE 👇 -->
-   <!-- 🔥 USER PROFILE MODAL 🔥 -->
-  <div id="profile-modal" class="modal-overlay" style="z-index: 8000;">
-    <div class="modal-content glass tilt-panel" style="max-width: 400px; text-align: center; padding: 30px; position: relative;">
-      <button onclick="closeProfileModal()" style="position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: #ff4757; font-size: 24px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">×</button>
-      
-      <div class="avatar" id="modalAvatar" style="width: 65px; height: 65px; font-size: 26px; margin: 0 auto 15px; box-shadow: 0 0 20px rgba(94, 231, 197, 0.2);">K</div>
-      <h2 id="modalName" style="font-family: 'Space Grotesk'; color: white; margin: 0 0 5px; justify-content: center;">Kartik</h2>
-      <p id="modalEmail" style="color: var(--muted); font-size: 12px; margin: 0 0 25px;">kartik@student.com</p>
-
-      <div style="text-align: left; margin-bottom: 15px;">
-        <label style="font-size: 10px; color: var(--accent2); font-weight: 700; letter-spacing: 0.5px;">CLASS / GRADE</label>
-        <select id="profileClass" style="color: #f4f7ff; background: #0d1421; border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; border-radius: 10px; padding: 12px; outline: none; margin-top: 5px;">
-          <option value="Class 12">Class 12</option>
-          <option value="Class 11">Class 11</option>
-        </select>
-      </div>
-
-      <div style="text-align: left; margin-bottom: 25px;">
-        <label style="font-size: 10px; color: var(--accent2); font-weight: 700; letter-spacing: 0.5px;">SCHOOL NAME</label>
-        <input type="text" id="profileSchool" placeholder="Enter your school name" style="color: #f4f7ff; background: #0d1421; border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; border-radius: 10px; padding: 12px; outline: none; margin-top: 5px; font-family: 'Inter', sans-serif;">
-      </div>
-
-      <button onclick="saveProfile()" class="btn primary full" style="margin-bottom: 12px; font-size: 13px;">Save Details ✦</button>
-      <button onclick="logout()" class="btn ghost full" style="color: #ff4757; border-color: rgba(255, 71, 87, 0.2); font-size: 13px;">Logout from KX Core</button>
-    </div>
-  </div>
-  
   <div id="explanation-modal" class="modal-overlay">
     <div class="modal-content glass tilt-panel">
       <h2 style="font-family: 'Space Grotesk'; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px;"><img src="https://i.ibb.co/Kz0LvSg9/logo.png" alt="Logo" style="width: 28px; border-radius: 6px; box-shadow: 0 4px 10px rgba(94,231,197,0.3);"> <span class="gradient-title" style="display: block;">Welcome to EduNexus AI</span></h2>
@@ -490,66 +404,6 @@
     </div>
   </div>
 
-  <!-- 🔥 NEXT-GEN INTERACTIVE QUIZ MODAL 🔥 -->
-
-  <!-- 🔥 PYQ VAULT RESULTS MODAL 🔥 -->
-  <div id="pyq-results-modal" class="modal-overlay">
-    <div class="modal-content glass tilt-panel" style="max-width: 600px; padding: 30px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px;">
-        <h2 style="font-family: 'Space Grotesk'; color: white; margin: 0; font-size: 20px;">
-          <span style="color: var(--accent2);">📚</span> <span id="pyq-modal-title">PYQ Vault</span>
-        </h2>
-        <button onclick="closePYQModal()" style="background: transparent; border: none; color: #ff4757; font-size: 28px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">×</button>
-      </div>
-      
-      <!-- Yahan saari PDF links list ban ke aayengi -->
-      <div id="pyq-links-container" style="display: flex; flex-direction: column; gap: 12px; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
-         
-      </div>
-    </div>
-  </div>
-  <div id="quiz-modal" class="modal-overlay">
-    <div class="modal-content glass tilt-panel" style="max-width: 600px; padding: 30px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px;">
-        <h2 style="font-family: 'Space Grotesk'; color: white; margin: 0; font-size: 20px;">
-          <span style="color: var(--accent2);">✦</span> <span id="quiz-title-text">AI Quiz Session</span>
-        </h2>
-        <div style="display: flex; gap: 15px; align-items: center;">
-          <span id="quiz-timer" style="color: #ff4757; font-family: monospace; font-size: 18px; font-weight: bold;">00:00</span>
-          <button onclick="abortQuiz()" style="background: rgba(255, 71, 87, 0.1); border: 1px solid #ff4757; color: #ff4757; padding: 5px 10px; border-radius: 8px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='rgba(255, 71, 87, 0.2)'" onmouseout="this.style.background='rgba(255, 71, 87, 0.1)'">Abort</button>
-        </div>
-      </div>
-
-      <!-- Loading State -->
-      <div id="quiz-loading" style="text-align: center; padding: 40px 0;">
-        <div class="pulse" style="width: 15px; height: 15px; display: inline-block;"></div>
-        <p style="color: var(--accent2); margin-top: 15px; font-weight: bold;">KX Core is generating your custom test...</p>
-      </div>
-
-      <!-- Active Quiz State -->
-      <div id="quiz-active" style="display: none;">
-        <div style="margin-bottom: 20px;">
-          <span id="quiz-progress-text" style="color: var(--muted); font-size: 12px; font-weight: bold; letter-spacing: 1px;">QUESTION 1 OF 5</span>
-        </div>
-        <h3 id="quiz-question-text" style="color: white; font-size: 18px; line-height: 1.4; margin-bottom: 25px;">Loading question...</h3>
-        
-        <div id="quiz-options-container" style="display: flex; flex-direction: column; gap: 12px;">
-          <!-- Options will be injected here by JS -->
-        </div>
-      </div>
-
-      <!-- Result State -->
-      <div id="quiz-result" style="display: none; text-align: center; padding: 20px 0;">
-        <h2 style="font-size: 36px; margin: 0 0 10px; color: white;">Quiz Complete!</h2>
-        <div style="font-size: 60px; font-family: 'Space Grotesk'; font-weight: 800; color: var(--accent2); margin: 20px 0; text-shadow: 0 0 20px rgba(94, 231, 197, 0.4);">
-          <span id="quiz-final-score">0</span><span style="font-size: 30px; color: var(--muted);">/10</span>
-        </div>
-        <p id="quiz-feedback-text" style="color: var(--muted); margin-bottom: 30px;">Analyzing performance...</p>
-        <button onclick="closeQuizModal()" class="btn primary full">Return to Dashboard</button>
-      </div>
-    </div>
-  </div>
-
   <div class="ambient ambient-1"></div>
   <div class="ambient ambient-2"></div>
 
@@ -562,25 +416,16 @@
         </a>
         <nav>
           <a onclick="openExplanation()" style="color: var(--accent2); cursor:pointer;">How it Works</a>
-          <a onclick="enterZenMode()" style="color: var(--accent2); cursor: pointer;">🎧 Zen Mode</a>
-          
           <a href="#quiz-engine">Quiz Engine</a>
           <a href="#pyq-vault-section">PYQ Vault</a>
           <a href="#planner">AI Planner</a>
           <a href="#doubt">Doubt Solver</a>
           <a href="#progress">Progress</a>
         </nav>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <button class="profile-btn" onclick="openProfileModal()" title="View Profile">
-              <span class="avatar" id="profileAvatar">P</span>
-              <span id="profileName">Profile</span>
-            </button>
-            
-            <button class="hamburger-btn" onclick="openMobileMenu()">
-                <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-            </button>
-        </div>
-  
+        <button class="profile-btn" onclick="logout()" title="Click to Logout">
+          <span class="avatar" id="profileAvatar">P</span>
+          <span id="profileName">Kartik</span>
+        </button>
       </header>
     </div>
 
@@ -605,6 +450,7 @@
             </div>
           </div>
 
+          <!-- 🔥 BARE TEXT ALIGNED EXACTLY WITH PYQ VAULT 🔥 -->
           <div class="hero-feature-text desktop-only">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice with the PYQ Vault?</h2>
@@ -662,6 +508,7 @@
             <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
 
+          <!-- 🔥 MOBILE ONLY: FEATURE TEXT BEFORE PYQ VAULT 🔥 -->
           <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
@@ -670,6 +517,7 @@
             </p>
           </div>
 
+          <!-- 🔥 PYQ VAULT BOX 🔥 -->
           <div class="hero-card glass tilt-panel reveal" id="pyq-vault-section">
             <div class="card-top">
               <div><span class="mini-label" style="font-size: 11px;">02 • OFFICIAL BOARD BANK</span><h3 class="gradient-title" style="margin: 0; line-height: 1; font-size: 24px;">PYQ Vault</h3></div>
@@ -708,6 +556,9 @@
                   <select id="pyqYear" style="margin-bottom: 0;">
                     <option value="1 Year">Last 1 Year</option>
                     <option value="2 Years">Last 2 Years</option>
+                    
+                    
+                    
                   </select>
                 </div>
               </div>
@@ -840,30 +691,22 @@
           </div>
           <p>The KX Neural Core analyzes your performance metrics in real-time to dynamically optimize your learning trajectory.</p>
         </div>
-
-
-
         <div class="stats-grid">
-  <div class="stat glass tilt-panel"><span>Quizzes Taken</span><strong id="stat-quizzes">0</strong><small style="color:var(--accent2);">Total sessions</small></div>
-  <div class="stat glass tilt-panel"><span>Topics Mastered</span><strong id="stat-topics">0</strong><small style="color:var(--accent2);">Score > 80%</small></div>
-  <div class="stat glass tilt-panel"><span>Quiz Accuracy</span><strong id="stat-accuracy">0%</strong><small style="color:var(--accent2);">Average score</small></div>
-  <div class="stat glass tilt-panel"><span>Study Streak</span><strong id="stat-streak">1 days</strong><small style="color:var(--accent2);">Keep going 🔥</small></div>
-</div>
-       
+          <div class="stat glass tilt-panel"><span>Weekly focus</span><strong>18.4h</strong><small>↑ 24% vs last week</small></div>
+          <div class="stat glass tilt-panel"><span>Topics mastered</span><strong>27</strong><small>↑ 6 this week</small></div>
+          <div class="stat glass tilt-panel"><span>Quiz accuracy</span><strong>86%</strong><small>↑ 9% this month</small></div>
+          <div class="stat glass tilt-panel"><span>Study streak</span><strong>12 days</strong><small>Personal best 🔥</small></div>
+        </div>
 
         <div class="progress-panel glass tilt-panel">
           <div class="chart-head"><div><span class="mini-label">SUBJECT HEALTH</span><h3 class="gradient-title">Where your next hour should go</h3></div><span class="legend"><i></i> Mastery</span></div>
           <div class="bars">
-  <div class="bar-row"><span>Physics</span><div class="bar"><i id="bar-Physics" style="width:0%"></i></div><b id="txt-Physics" style="color: #b8c1d0;">0%</b></div>
-  <div class="bar-row"><span>Chemistry</span><div class="bar"><i id="bar-Chemistry" style="width:0%"></i></div><b id="txt-Chemistry" style="color: #b8c1d0;">0%</b></div>
-  <div class="bar-row"><span>Mathematics</span><div class="bar"><i id="bar-Mathematics" style="width:0%"></i></div><b id="txt-Mathematics" style="color: #b8c1d0;">0%</b></div>
-  <div class="bar-row"><span>Comp. Sci.</span><div class="bar"><i id="bar-Computer Science" style="width:0%"></i></div><b id="txt-Computer Science" style="color: #b8c1d0;">0%</b></div>
-  <div class="bar-row"><span>English</span><div class="bar"><i id="bar-English" style="width:0%"></i></div><b id="txt-English" style="color: #b8c1d0;">0%</b></div>
-</div>
-          
-
-
-            
+            <div class="bar-row"><span>Physics</span><div class="bar"><i id="bar-Physics" style="width:0%"></i></div><b id="txt-Physics" style="color: #b8c1d0;">0%</b></div>
+            <div class="bar-row"><span>Chemistry</span><div class="bar"><i id="bar-Chemistry" style="width:0%"></i></div><b id="txt-Chemistry" style="color: #b8c1d0;">0%</b></div>
+            <div class="bar-row"><span>Mathematics</span><div class="bar"><i id="bar-Mathematics" style="width:0%"></i></div><b id="txt-Mathematics" style="color: #b8c1d0;">0%</b></div>
+          </div>
+          <div class="recommendation"><span>✦</span><div><b>AI recommendation</b><p>Keep taking Custom Quizzes to update your memory database and improve your progress!</p></div><button onclick="window.scrollTo(0,0)">Take Quiz</button></div>
+        </div>
       </section>
 
       <section class="pitch section reveal">
@@ -884,45 +727,16 @@
       <span>EduNexus AI — Powered by EduNexus Engine | Developed by Kartik</span>
     </footer>
   </div>
-  <div id="mobile-menu-overlay">
-      <button class="close-menu" onclick="closeMobileMenu()">×</button>
-      <img src="https://i.ibb.co/Kz0LvSg9/logo.png" style="width: 60px; margin-bottom: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(94,231,197,0.2);">
-      <nav>
-          <a onclick="closeMobileMenu(); enterZenMode();" style="color: var(--accent2); cursor: pointer;">🎧 Zen Mode</a>
-          <a onclick="closeMobileMenu(); openExplanation();" style="cursor: pointer;">How it Works</a>
-          <a href="#quiz-engine" onclick="closeMobileMenu()">Quiz Engine</a>
-          <a href="#pyq-vault-section" onclick="closeMobileMenu()">PYQ Vault</a>
-          <a href="#planner" onclick="closeMobileMenu()">AI Planner</a>
-          <a href="#doubt" onclick="closeMobileMenu()">Doubt Solver</a>
-          <a href="#progress" onclick="closeMobileMenu()">Progress</a>
-      </nav>
-  </div>
-  <div id="zen-mode-overlay">
-      <h2 style="color: white; font-family: 'Space Grotesk'; font-size: 32px; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">Deep Work Zone</h2>
-      <div class="zen-circle">
-          <div id="zen-status">FOCUS MODE</div>
-          <div id="zen-timer-display">25:00</div>
-      </div>
-      <div class="zen-controls">
-          <button class="zen-btn" id="zen-start-btn" onclick="toggleZenTimer()">Start Focus ✦</button>
-          <button class="zen-btn danger" onclick="exitZenMode()">End Session</button>
-      </div>
-      <p style="color: #727d91; margin-top: 35px; font-size: 13px; max-width: 400px; text-align: center;">Put your phone away. KX Core will notify you with a gentle chime when it's time to take a break.</p>
-  </div>
 
   <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
-  
-  <!-- 🔥 JS FOR PARTICLES BACKGROUND (LIVE CONSTELLATION) 🔥 -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
   <script>
     // Consistent premium smooth-scroll feel across phone, tablet and desktop
     const lenis = new Lenis({ autoRaf: true });
   </script>
   <script>
-    // Elastic edge-bounce: same rubber-band feel at top AND bottom, on every device
+    // Elastic edge-bounce: same rubber-band feel at top AND bottom, on every device (Lenis above only smooths mid-scroll, it doesn't add this)
     (function () {
       const el = document.querySelector('main');
       if (!el) return;
@@ -967,170 +781,8 @@
       window.addEventListener('touchend', () => { if (pulling) release(); });
     })();
   </script>
-
-  <!-- 🔥 STEP 1: FIREBASE ENGINE MUST LOAD FIRST 🔥 -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
-
-  <!-- 🔥 STEP 2: FIREBASE CONFIGURATION & INITIALIZATION 🔥 -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCNitBlQJg-m9sz0efnQ5k52Am5xIH-phk",
-      authDomain: "edunexusai-82f4e.firebaseapp.com",
-      projectId: "edunexusai-82f4e",
-      storageBucket: "edunexusai-82f4e.firebasestorage.app",
-      messagingSenderId: "12213943222",
-      appId: "1:12213943222:web:5fa5eafcc152f997749f17",
-      measurementId: "G-7ZYMJJD1XS"  
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const analytics = firebase.analytics(); 
-
-    let isSignUp = false;
-
-    function toggleAuthMode(e) {
-        if(e) e.preventDefault();
-        isSignUp = !isSignUp;
-        
-        const nameField = document.getElementById('nameFieldContainer');
-        const authTitle = document.getElementById('authTitle');
-        const authSubtitle = document.getElementById('authSubtitle');
-        const submitBtnText = document.getElementById('submitBtnText');
-        const toggleText = document.getElementById('authToggleText');
-        const forgotPassText = document.getElementById('forgotPassContainer');
-
-        if (isSignUp) {
-            nameField.style.display = 'flex'; 
-            forgotPassText.style.display = 'none'; 
-            authTitle.innerHTML = `Create <span style="color: var(--accent2);">Account</span>`;
-            authSubtitle.innerText = "Join the next-gen learning platform.";
-            submitBtnText.innerText = "Sign Up ";
-            toggleText.innerHTML = `Already have an account? <a href="#" onclick="toggleAuthMode(event)" style="color: var(--accent2); text-decoration: none; font-weight: 600;">Sign In</a>`;
-        } else {
-            nameField.style.display = 'none'; 
-            forgotPassText.style.display = 'block'; 
-            authTitle.innerHTML = `Initialize Your <span style="color: var(--accent2);">EduNexus ID</span>`;
-            authSubtitle.innerText = "Access your personalized learning engine.";
-            submitBtnText.innerText = "Launch Dashboard ";
-            toggleText.innerHTML = `Don't have an account? <a href="#" onclick="toggleAuthMode(event)" style="color: var(--accent2); text-decoration: none; font-weight: 600;">Sign Up</a>`;
-        }
-    }
-
-    function resetPassword(e) {
-        if(e) e.preventDefault();
-        const email = document.getElementById('authEmail').value.trim();
-        if(!email) { 
-            showToast("⚠️ Type your email first to reset password!"); 
-            return; 
-        }
-        firebase.auth().sendPasswordResetEmail(email).then(() => {
-            showToast("✅ Password reset link sent to your email!");
-        }).catch(err => showToast("❌ Error: " + err.message));
-    }
-
-    document.getElementById('emailLoginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('authEmail').value.trim();
-        const pass = document.getElementById('authPassword').value.trim();
-        const btnText = document.getElementById('submitBtnText');
-        
-        const originalText = btnText.innerText;
-        btnText.innerText = "Processing... ";
-
-        if (isSignUp) {
-            const name = document.getElementById('authName').value.trim();
-            if(!name) { showToast("⚠️ Name is required for Sign Up!"); btnText.innerText = originalText; return; }
-            
-            firebase.auth().createUserWithEmailAndPassword(email, pass)
-                .then((cred) => {
-                    return cred.user.updateProfile({ displayName: name }).then(() => {
-                        localStorage.setItem('studymate_username', name);
-                        activateUser(name, true);
-                    });
-                })
-                .catch(err => { showToast("❌ " + err.message); btnText.innerText = originalText; });
-        } else {
-            firebase.auth().signInWithEmailAndPassword(email, pass)
-                .then((cred) => {
-                    const name = cred.user.displayName || email.split('@')[0];
-                    localStorage.setItem('studymate_username', name);
-                    activateUser(name, false);
-                })
-                .catch(err => { showToast("❌ " + err.message); btnText.innerText = originalText; });
-        }
-    });
-
-    document.getElementById('googleBtn').addEventListener('click', () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        
-        // Smart Check: Phone hai ya Laptop?
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        if (isMobile) {
-            // Mobile ke liye safe tarika
-            firebase.auth().signInWithRedirect(provider);
-        } else {
-            // Laptop/Desktop ke liye safe tarika (Popup)
-            firebase.auth().signInWithPopup(provider).then((result) => {
-                const name = result.user.displayName ? result.user.displayName.split(" ")[0] : "Student";
-                localStorage.setItem('studymate_username', name);
-                showToast("✅ Login Successful! Welcome " + name);
-                activateUser(name, true); // Seedha dashboard ke andar fekega!
-            }).catch(err => {
-                console.error("Popup Error: ", err);
-                showToast("❌ Login Failed: " + err.message);
-            });
-        }
-    });
-
-    document.getElementById('githubBtn').addEventListener('click', () => {
-        const provider = new firebase.auth.GithubAuthProvider();
-        firebase.auth().signInWithPopup(provider).then((result) => {
-            const name = result.user.displayName || "Pro Developer";
-            localStorage.setItem('studymate_username', name);
-            activateUser(name, true);
-        }).catch(err => showToast("GitHub Login Failed: " + err.message));
-    });
-
-    document.getElementById('phoneBtn').addEventListener('click', () => {
-        showToast("Phone OTP setup readying up! We will setup it very soon!!");
-    });
-  </script>
-
-  <!-- 🔥 STEP 3: MAIN APP LOGIC (Now it can safely use firebase variables) 🔥 -->
   <script>
     const $ = id => document.getElementById(id);
-
-    // 🔥 PROGRESS BARS DATA (MOVED TO TOP FOR SAFETY) 🔥
-
-
-
-    // 🔥 REAL PROGRESS START (Ab sab default 0% hoga) 🔥
-let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
-    "Physics": 0,
-    "Chemistry": 0,
-    "Mathematics": 0,
-    "Computer Science": 0,
-    "English": 0
-};
-
-function updateProgressUI() {
-    ['Physics', 'Chemistry', 'Mathematics', 'Computer Science', 'English'].forEach(sub => {
-        const bar = document.getElementById('bar-' + sub);
-        const txt = document.getElementById('txt-' + sub);
-        if(bar && txt && subjectMastery[sub] !== undefined) {
-            setTimeout(() => {
-                bar.style.width = subjectMastery[sub] + "%";
-                txt.textContent = subjectMastery[sub] + "%";
-                txt.style.color = "white"; 
-                setTimeout(() => txt.style.color = "#b8c1d0", 1500);
-            }, 500); 
-        }
-    });
-}
 
     function openExplanation() { $('explanation-modal').classList.add('show'); }
     
@@ -1172,142 +824,28 @@ function updateProgressUI() {
         typeTarget.innerHTML += `<br><span style="background: linear-gradient(90deg, #fff, #8f82ff); color: transparent; -webkit-background-clip: text; animation: popIn 0.5s ease-out;">Not harder.</span>`;
       }
     }
+
     const overlay = $('login-overlay'); 
     const mainContent = $('main-content');
+    const savedUser = localStorage.getItem('studymate_username');
     
-    // 🔥 ZERO-FLICKER CACHE CHECK 🔥
-    if (localStorage.getItem('studymate_username')) {
-        overlay.style.display = 'none';
-        overlay.style.opacity = '0';
-        overlay.style.visibility = 'hidden';
-        mainContent.classList.remove('blurred');
-    }
-
-    // Catch Redirect Results for Mobile Logins
-    firebase.auth().getRedirectResult().then((result) => {
-        if (result && result.user) {
-            console.log("Redirect login successful!");
-        }
-    }).catch((error) => {
-        if(error.code !== 'auth/redirect-cancelled-by-user') {
-            console.error("Redirect login failed:", error);
-        }
-    });
-
-    firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        // Agar user logged in hai, toh dashboard kholo aur data sync karo
-        const name = user.displayName || user.email.split('@')[0];
-        localStorage.setItem('studymate_username', name);
-
-
-        // 🔥 REAL GOOGLE PROFILE PIC MAGIC 🔥
-        if (user.photoURL) {
-            localStorage.setItem('edunexus_pic', user.photoURL);
-        } else {
-            localStorage.removeItem('edunexus_pic');
-        }
-        
-        setInterval(() => {
-            const pic = localStorage.getItem('edunexus_pic');
-            const avatars = [document.getElementById('profileAvatar'), document.getElementById('modalAvatar')];
-            avatars.forEach(av => {
-                if (av && pic && !av.innerHTML.includes('img')) {
-                    av.innerHTML = `<img src="${pic}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
-                    av.style.padding = "0";
-                    av.style.background = "transparent";
-                }
-            });
-        }, 500);
-        
-        const overlay = document.getElementById('login-overlay');
-        const mainContent = document.getElementById('main-content');
-        if (overlay) {
-            overlay.style.display = 'none';
-            overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
-        }
-        if (mainContent) {
-            mainContent.classList.remove('blurred');
-        }
-
-        const db = firebase.firestore();
-        db.collection('users').doc(user.uid).get().then((doc) => {
-            if (doc.exists) {
-                const data = doc.data();
-                if(data.masteryScores) {
-                    subjectMastery = data.masteryScores;
-                    localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
-                    updateProgressUI();
-                }
-                if(data.stats) {
-                    userStats = data.stats;
-                    localStorage.setItem('edunexus_stats', JSON.stringify(userStats));
-                    updateStatsUI();
-                }
-                if(data.classGrade) {
-                    localStorage.setItem('edunexus_class', data.classGrade);
-                    if ($('profileClass')) $('profileClass').value = data.classGrade;
-                }
-                if(data.school) {
-                    localStorage.setItem('edunexus_school', data.school);
-                    if ($('profileSchool')) $('profileSchool').value = data.school;
-                }
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-
-        if (typeof activateUser === 'function') {
-            activateUser(name, false);
-        }
+    if (savedUser) { 
+      activateUser(savedUser, false); 
     } else {
-        // 🔥 SABSE ZAROORI FIX: Agar localStorage mein pehle se username hai, 
-        // toh Firebase ke initial 'null' state ki wajah se login mat dikhao!
-        if (localStorage.getItem('studymate_username')) {
-            console.log("Waiting for Firebase session restore...");
-            return; 
+      $('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const newName = $('usernameInput').value.trim();
+        if (newName) {
+          localStorage.setItem('studymate_username', newName);
+          activateUser(newName, true);
         }
-        
-        // Agar sach mein user logged out hai, tabhi login overlay dikhao
-        const overlay = document.getElementById('login-overlay');
-        const mainContent = document.getElementById('main-content');
-        if (overlay) {
-            overlay.style.display = 'flex';
-            overlay.style.opacity = '1';
-            overlay.style.visibility = 'visible';
-        }
-        if (mainContent) {
-            mainContent.classList.add('blurred');
-        }
+      });
     }
-});
 
-function activateUser(name, isFirstTime) {
-  overlay.style.opacity = '0';
-  setTimeout(() => {
-    overlay.style.visibility = 'hidden';
-    overlay.style.display = 'none';
-    mainContent.classList.remove('blurred');
-    if (isFirstTime) { 
-      openExplanation(); 
-    } else {
-      startTyping();
-    }
-  }, 500);
-  
-  $('profileName').textContent = name;
-  $('profileAvatar').textContent = name.charAt(0).toUpperCase();
-  $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
-  
-  $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
-}
-        
     function activateUser(name, isFirstTime) {
       overlay.style.opacity = '0';
       setTimeout(() => {
         overlay.style.visibility = 'hidden';
-        overlay.style.display = 'none';
         mainContent.classList.remove('blurred');
         
         if (isFirstTime) { 
@@ -1333,75 +871,13 @@ function activateUser(name, isFirstTime) {
       }
     }
 
-    // 🔥 FIXED LOGOUT LOGIC (Firebase + Local Memory dono clear karega) 🔥
     function logout() {
       if (confirm("Do you want to log out?")) {
-        // 1. Browser ki memory saaf karo
         localStorage.removeItem('studymate_username');
         localStorage.removeItem('edunexus_mastery');
-        localStorage.removeItem('edunexus_class');
-        localStorage.removeItem('edunexus_school');
-        
-        // 2. FIREBASE ka connection cut karo (ASLI LOGOUT)
-        firebase.auth().signOut().then(() => {
-            // 3. Page reload karo
-            location.reload();
-        }).catch((error) => {
-            console.error("Logout Error:", error);
-            location.reload(); // Error aaye tab bhi bahar nikal do
-        });
+        location.reload();
       }
     }
-
-// 🔥 UPDATED PROFILE & PROGRESS SYNC LOGIC 🔥
-function openProfileModal() {
-    const name = localStorage.getItem('studymate_username') || "Student";
-    const email = firebase.auth().currentUser ? firebase.auth().currentUser.email : "Not Connected";
-
-    document.getElementById('modalAvatar').textContent = name.charAt(0).toUpperCase();
-    document.getElementById('modalName').textContent = name;
-    document.getElementById('modalEmail').textContent = email;
-
-    // Load old data if exists
-    document.getElementById('profileClass').value = localStorage.getItem('edunexus_class') || "Class 12";
-    document.getElementById('profileSchool').value = localStorage.getItem('edunexus_school') || "";
-
-    document.getElementById('profile-modal').classList.add('show');
-}
-
-function closeProfileModal() {
-    document.getElementById('profile-modal').classList.remove('show');
-}
-
-function saveProfile() {
-    const cls = document.getElementById('profileClass').value;
-    const school = document.getElementById('profileSchool').value.trim();
-
-    // Save in browser memory
-    localStorage.setItem('edunexus_class', cls);
-    localStorage.setItem('edunexus_school', school);
-
-    // Save in Firebase Database
-    const user = firebase.auth().currentUser;
-    if (user) {
-        firebase.firestore().collection('users').doc(user.uid).set({
-            classGrade: cls,
-            school: school,
-            masteryScores: subjectMastery, // Jo progress bars ka data hai
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true }).then(() => {
-            showToast("✅ Profile & Progress Cloud mein Sync ho gayi!");
-        }).catch(err => {
-            console.error("Firestore Save Error: ", err);
-            showToast("❌ Cloud Sync fail ho gaya!");
-        });
-    } else {
-        showToast("✅ Profile Details Saved Locally!");
-    }
-
-    closeProfileModal();
-}
-    
 
     if (window.innerWidth > 850) {
       document.querySelectorAll('.tilt-panel').forEach(card => {
@@ -1526,21 +1002,29 @@ function saveProfile() {
         showToast("✅ AI study plan generated!");
     });
 
-    updateProgressUI();
-
-   // 🗄️ PYQ DATABASE (Yahan tu future me aur bhi links add kar sakta hai asani se)
-    const pyqDatabase = {
-        "Class 12": {
-            "Mid-Term": {
-                "Computer Science": [
-                    { year: "2023-24 & 2024-25", name: "CS Mid-Term Papers with MS", link: "https://drive.google.com/file/d/1ydMIha-U9IY9CsOPd-qNo2wM74hrglYX/view?usp=drive_link" }
-                ],
-                "Physics": [
-                    { year: "2024-2025", name: "Physics DoE Mid-Term Papers", link: "https://drive.google.com/file/d/1b_UX6M9pH3umfzl1upkOgkiR9PXM9I1o/view?usp=sharing" }
-                ]
-            }
-        }
+    let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
+        "Physics": 45,
+        "Chemistry": 30,
+        "Mathematics": 60,
+        "Computer Science": 75
     };
+
+    function updateProgressUI() {
+        ['Physics', 'Chemistry', 'Mathematics'].forEach(sub => {
+            const bar = $('bar-' + sub);
+            const txt = $('txt-' + sub);
+            if(bar && subjectMastery[sub]) {
+                setTimeout(() => {
+                    bar.style.width = subjectMastery[sub] + "%";
+                    txt.textContent = subjectMastery[sub] + "%";
+                    txt.style.color = "white"; 
+                    setTimeout(() => txt.style.color = "#b8c1d0", 1500);
+                }, 500); 
+            }
+        });
+    }
+
+    updateProgressUI();
 
     function fetchPYQ() {
         const cls = $("pyqClass").value;
@@ -1550,52 +1034,11 @@ function saveProfile() {
         const mode = $("pyqMode").value;
 
         if (mode === "pdf") {
-            showToast(`📚 Searching Vault for ${cls} ${sub} ${exam}...`);
-            
-            const container = $("pyq-links-container");
-            container.innerHTML = ""; // Purana data saaf karna
-            
-            // Database se sahi papers nikalna
-            let foundLinks = [];
-            try {
-                foundLinks = pyqDatabase[cls][exam][sub] || [];
-            } catch(e) {
-                foundLinks = []; // Agar data nahi mila
-            }
-
-            // Modal ki heading update karna
-            $("pyq-modal-title").textContent = `${cls} | ${sub} | ${exam}`;
-
-            // Agar papers mil gaye toh UI me daalna
-            if (foundLinks.length > 0) {
-                foundLinks.forEach(item => {
-                    container.innerHTML += `
-                        <div style="background: #ffffff05; border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;" onmouseover="this.style.borderColor='var(--accent2)'; this.style.background='rgba(94, 231, 197, 0.05)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='#ffffff05';">
-                            <div>
-                                <div style="font-size: 10px; color: var(--accent2); font-weight: bold; letter-spacing: 1px; margin-bottom: 4px;">🎯 YEAR: ${item.year}</div>
-                                <div style="color: white; font-size: 14px; font-weight: 600;">${item.name}</div>
-                            </div>
-                            <a href="${item.link}" target="_blank" style="background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #000; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 11px; box-shadow: 0 4px 15px rgba(94,231,197,0.3); transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Open PDF ↗</a>
-                        </div>
-                    `;
-                });
-            } else {
-                // Agar paper abhi upload nahi hua hai
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 30px; background: #ffffff03; border-radius: 12px; border: 1px dashed rgba(255,255,255,0.05);">
-                        <div style="font-size: 30px; margin-bottom: 10px;">🚧</div>
-                        <h4 style="color: white; margin: 0 0 5px; font-size: 15px;">Vault is Empty</h4>
-                        <p style="color: #7f8a9e; font-size: 12px; margin: 0;">We are currently scanning and uploading the ${exam} papers for ${sub}. Check back soon!</p>
-                    </div>`;
-            }
-
-            // Modal ko screen par dikhana
+            showToast(`📚 Accessing DoE ${exam} Papers for ${sub} (${year})...`);
             setTimeout(() => {
-                $("pyq-results-modal").classList.add("show");
-            }, 400);
-
+                alert(`Yahan ${cls} ${sub} ke pichle ${year} ke ${exam} ki PDF Google Drive me khulegi! Abhi link add karni baaki hai.`);
+            }, 1000);
         } else {
-            // AI PRACTICE MODE WALA PURANA CODE
             showToast(`🤖 Initializing AI Practice for ${cls} ${sub} ${exam}...`);
             setTimeout(() => {
                 const doubtSection = document.getElementById('doubt');
@@ -1609,171 +1052,45 @@ function saveProfile() {
         }
     }
 
-    function closePYQModal() {
-        $("pyq-results-modal").classList.remove("show");
-    }
+    function startCustomQuiz() {
+        const sub = $("quizSubject").value;
+        const topic = $("quizTopic").value.trim();
+        const time = $("quizTime").value;
+        const numQs = $("quizQuestions").value;
 
- // 🔥 NEXT-GEN QUIZ ENGINE LOGIC & REAL STATS 🔥
-    let userStats = JSON.parse(localStorage.getItem('edunexus_stats')) || { totalQuizzes: 0, topicsMastered: 0, totalScorePerc: 0, streak: 1 };
-
-    function updateStatsUI() {
-        if(document.getElementById('stat-quizzes')) {
-            document.getElementById('stat-quizzes').innerText = userStats.totalQuizzes;
-            document.getElementById('stat-topics').innerText = userStats.topicsMastered;
-            let accuracy = userStats.totalQuizzes > 0 ? Math.round(userStats.totalScorePerc / userStats.totalQuizzes) : 0;
-            document.getElementById('stat-accuracy').innerText = accuracy + "%";
-            document.getElementById('stat-streak').innerText = userStats.streak + " days";
+        if(!topic) {
+            showToast("❌ Please enter a Chapter or Topic name!");
+            return;
         }
-    }
 
-    let currentQuizData = [];
-    let currentQuestionIndex = 0;
-    let userScore = 0;
-    let quizTimerInterval;
-    let timeRemaining = 0;
-   
-
-    
-
-    
-
-    async function fetchQuizFromAI(prompt) {
-        const payload = { 
-            message: prompt, session_id: sessionId, 
-            user_name: localStorage.getItem('studymate_username') || "Student", history: [] 
-        };
-        try {
-            const res = await fetch("https://edunexusai.onrender.com/chat", {
-                method: "POST", headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-            if (!res.ok) throw new Error("Server sleeping");
-            const data = await res.json();
-            let cleanJsonStr = data.reply.replace(/```json/gi, '').replace(/```/g, '').trim();
-            try {
-                currentQuizData = JSON.parse(cleanJsonStr);
-                if (!Array.isArray(currentQuizData) || currentQuizData.length === 0) throw new Error("Invalid JSON");
-                startQuizTimer();
-                loadQuestion();
-            } catch (e) {
-                abortQuiz("AI failed to generate a proper quiz format. Please try again.");
-            }
-        } catch (error) {
-            abortQuiz("Connection failed. Server might be waking up (takes ~50s).");
-        }
-    }
-
-    function loadQuestion() {
-        document.getElementById("quiz-loading").style.display = "none";
-        document.getElementById("quiz-active").style.display = "block";
-        const qData = currentQuizData[currentQuestionIndex];
+        showToast(`Initiating ${time}-min Custom Quiz for ${sub}...`);
         
-        document.getElementById("quiz-progress-text").textContent = `QUESTION ${currentQuestionIndex + 1} OF ${currentQuizData.length}`;
-        document.getElementById("quiz-question-text").innerHTML = escapeHtml(qData.q);
-        const optionsContainer = document.getElementById("quiz-options-container");
-        optionsContainer.innerHTML = "";
-
-        qData.options.forEach((opt, index) => {
-            const btn = document.createElement("button");
-            btn.innerHTML = `<span style="background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; margin-right: 10px; font-weight: bold;">${String.fromCharCode(65 + index)}</span> ${escapeHtml(opt)}`;
-            btn.style.cssText = `background: #ffffff05; border: 1px solid rgba(255,255,255,0.1); color: white; text-align: left; padding: 15px; border-radius: 12px; font-size: 14px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center;`;
-            btn.onclick = () => handleAnswer(index, btn);
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    function handleAnswer(selectedIndex, selectedBtn) {
-        const allBtns = document.getElementById("quiz-options-container").querySelectorAll("button");
-        allBtns.forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
-
-        const correctIndex = currentQuizData[currentQuestionIndex].ans;
-        if (selectedIndex === correctIndex) {
-            selectedBtn.style.background = 'rgba(94, 231, 197, 0.2)';
-            selectedBtn.style.borderColor = 'var(--accent2)';
-            userScore++;
-        } else {
-            selectedBtn.style.background = 'rgba(255, 71, 87, 0.2)';
-            selectedBtn.style.borderColor = '#ff4757';
-            if(allBtns[correctIndex]) {
-                allBtns[correctIndex].style.background = 'rgba(94, 231, 197, 0.2)';
-                allBtns[correctIndex].style.borderColor = 'var(--accent2)';
-            }
-        }
         setTimeout(() => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < currentQuizData.length) loadQuestion();
-            else finishQuiz();
-        }, 1500); 
-    }
+            const doubtSection = document.getElementById('doubt');
+            if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+        }, 600);
 
-    function startQuizTimer() {
-        clearInterval(quizTimerInterval);
-        quizTimerInterval = setInterval(() => {
-            timeRemaining--;
-            document.getElementById("quiz-timer").textContent = formatTime(timeRemaining);
-            if (timeRemaining <= 0) { clearInterval(quizTimerInterval); finishQuiz(); }
-        }, 1000);
-    }
-
-    function formatTime(seconds) {
-        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-        const s = (seconds % 60).toString().padStart(2, '0');
-        return `${m}:${s}`;
-    }
-
-    function finishQuiz() {
-        clearInterval(quizTimerInterval);
-        document.getElementById("quiz-active").style.display = "none";
-        document.getElementById("quiz-result").style.display = "block";
-        document.getElementById("quiz-final-score").textContent = userScore;
-        document.getElementById("quiz-result").querySelector("span:last-child").textContent = `/${currentQuizData.length}`;
-
-        const percentage = (userScore / currentQuizData.length) * 100;
-        let feedback = "";
-        if (percentage === 100) feedback = "Flawless victory! You have absolutely mastered this topic. 🏆";
-        else if (percentage >= 70) feedback = "Great job! You have a solid grasp of the core concepts. 🌟";
-        else if (percentage >= 40) feedback = "Good effort, but there's room for improvement. Let's review the weak spots. 📚";
-        else feedback = "Looks like this topic is tricky. Don't worry, hit the AI Tutor for a quick revision! 💡";
-        document.getElementById("quiz-feedback-text").textContent = feedback;
-
-        // 🔥 100% REAL PROGRESS & STATS SYNC 🔥
-        let boost = Math.floor(percentage / 10); 
-        userStats.totalQuizzes += 1;
-        userStats.totalScorePerc += percentage;
-        if(percentage >= 80) userStats.topicsMastered += 1;
-        
-        localStorage.setItem('edunexus_stats', JSON.stringify(userStats));
-        updateStatsUI(); 
-
-        if (subjectMastery[selectedSubjectForQuiz] !== undefined) {
-            subjectMastery[selectedSubjectForQuiz] = Math.min(100, subjectMastery[selectedSubjectForQuiz] + boost);
-            localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
-            updateProgressUI();
-            showToast(`📈 Live Tracking: Stats updated and ${selectedSubjectForQuiz} mastery increased!`);
+        setTimeout(() => {
+            let secretPrompt = `Act as a strict Class 12 examiner. Create a ${time}-minute short quiz with ${numQs} high-quality MCQ questions on the topic "${topic}" for ${sub}. Provide only the questions and options first. Wait for me to submit my answers before giving solutions or explanations. Do not skip any instructions.`;
             
-            if (firebase.auth().currentUser) {
-                firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set({
-                    masteryScores: subjectMastery, stats: userStats
-                }, { merge: true });
-            }
-        }
-    }
+            askDemo(secretPrompt);
+            
+            setTimeout(() => {
+                let boost = Math.floor(Math.random() * 5) + 2; 
+                if (subjectMastery[sub] !== undefined) {
+                    subjectMastery[sub] = Math.min(100, subjectMastery[sub] + boost);
+                    localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
+                    updateProgressUI();
+                    showToast(`📈 Live Tracking Updated: ${sub} mastery increased by ${boost}%!`);
+                }
+            }, 12000); 
 
-    function abortQuiz(msg = "Quiz aborted.") {
-        clearInterval(quizTimerInterval);
-        closeQuizModal();
-        showToast(`⚠️ ${msg}`);
+        }, 1500);
     }
-
-    function closeQuizModal() {
-        document.getElementById('quiz-modal').classList.remove('show');
-        clearInterval(quizTimerInterval);
-    }
-    
-    setTimeout(updateStatsUI, 1000); // Page load hote hi naye stats dikhane ke liye
 
     const sessionId = Date.now().toString();
 
+    // 🔥 MEMORY CHIP: Yeh array chat ko yaad rakhega 🔥
     let chatMemory = [];
     
     let currentAttachmentBase64 = null;
@@ -1817,202 +1134,80 @@ function saveProfile() {
       sendQuestion(new Event("submit")); 
     }
     
-    // 🔥 ULTRA-PREMIUM FEMALE AI VOICE ENGINE 🔥
-    function speakText(text, btnElement) {
-        if ('speechSynthesis' in window) {
-            if (window.speechSynthesis.speaking) {
-                window.speechSynthesis.cancel();
-                if(btnElement) btnElement.innerHTML = '🔊'; 
-                return; 
-            }
-
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 1.0; // Perfect reading speed
-            utterance.pitch = 1.2; // Thodi si sweet aur soft pitch (attractive feel ke liye)
-
-            // Sabse best Female voice automatic dhoondne ka logic
-            const voices = window.speechSynthesis.getVoices();
-            const femaleVoice = voices.find(v => 
-                (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha')) && 
-                v.lang.startsWith('en')
-            );
-
-            if (femaleVoice) {
-                utterance.voice = femaleVoice;
-            }
-
-            if(btnElement) btnElement.innerHTML = '🛑'; 
-
-            utterance.onend = () => {
-                if(btnElement) btnElement.innerHTML = '🔊'; 
-            };
-
-            window.speechSynthesis.speak(utterance);
-        } else {
-            showToast("⚠️ Your browser doesn't support AI Voice!");
-        }
-    }
-
-
-    // 🔥 NEW QUIZ LOGIC (Popup to Chatbot) 🔥
-    // ग्लोबल वेरिएबल ताकि पता रहे कि किस सब्जेक्ट का क्विज़ चल रहा है
-    let selectedSubjectForQuiz = ""; // इसे फंक्शन के ठीक ऊपर रखना
-
-function startCustomQuiz() {
-    const sub = document.getElementById("quizSubject").value;
-    const topic = document.getElementById("quizTopic").value.trim();
-    const numQs = document.getElementById("quizQuestions").value;
-
-    if(!topic) {
-        showToast("❌ Please enter a Chapter or Topic name!");
-        return;
-    }
-
-    selectedSubjectForQuiz = sub; // सब्जेक्ट याद कर लिया
-    showToast(`🚀 Initiating Interactive AI Quiz for ${sub}...`);
-
-    setTimeout(() => {
-        const doubtSection = document.getElementById('doubt');
-        if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
-    }, 600);
-
-    setTimeout(() => {
-        let secretPrompt = `Act as a strict Class 12 examiner. Create a short interactive MCQ quiz with ${numQs} questions on the topic "${topic}" for ${sub}. Ask me QUESTION 1 first. Wait for my answer. If I am wrong, explain why and clear my doubt. Then move to the next. Do NOT give all questions at once. \n\nCRITICAL RULE: When the quiz finishes, you MUST end your final response exactly with this hidden tag: [SCORE: {my_score}/${numQs}]`;
-        askDemo(secretPrompt);
-    }, 1200);
-}
-
-
-
-async function sendQuestion(e) {
-  e.preventDefault();
-  const input = document.getElementById("question");
-  const q = input.value.trim(); 
-  if (!q && !currentAttachmentBase64) return;
-  
-  const wrap = document.getElementById("messages");
-  
-  if (currentAttachmentBase64) {
-      wrap.insertAdjacentHTML('beforeend', `<div class="message user"><div><div style="font-size:10px; color:#5ee7c5; margin-bottom:6px; font-weight:700;">📎 Attached: ${currentAttachmentName}</div>${escapeHtml(q)}</div></div>`);
-  } else {
-      wrap.insertAdjacentHTML('beforeend', `<div class="message user"><div>${escapeHtml(q)}</div></div>`);
-  }
-  
-  input.value = ""; 
-  wrap.scrollTop = wrap.scrollHeight;
-  
-  // 🔥 SUPER MEMORY LOGIC 🔥
-  let memoryText = "";
-  if (typeof chatMemory !== 'undefined' && chatMemory.length > 0) {
-      let pastConversations = chatMemory.map(m => {
-          let speaker = m.role === 'user' ? "Student" : "AI Tutor";
-          return `${speaker}: ${m.content.text}`;
-      }).join('\n\n');
+    async function sendQuestion(e) {
+      e.preventDefault();
+      const input = $("question");
+      const q = input.value.trim(); 
+      if (!q && !currentAttachmentBase64) return;
       
-      memoryText = `[PREVIOUS CHAT HISTORY FOR CONTEXT:\n${pastConversations}]\n\n--- END OF HISTORY ---\n\nNow, reply to this new message considering the context above: `;
-  }
+      const wrap = $("messages");
+      
+      if (currentAttachmentBase64) {
+          wrap.innerHTML += `<div class="message user"><div><div style="font-size:10px; color:#5ee7c5; margin-bottom:6px; font-weight:700;">📎 Attached: ${currentAttachmentName}</div>${escapeHtml(q)}</div></div>`;
+      } else {
+          wrap.innerHTML += `<div class="message user"><div>${escapeHtml(q)}</div></div>`;
+      }
+      
+      input.value = ""; 
+      wrap.scrollTop = wrap.scrollHeight;
+      
+      const payload = { 
+        message: q + " [Do NOT use LaTeX math formatting. Use standard plain text.]", 
+        session_id: sessionId, 
+        user_name: localStorage.getItem('studymate_username') || "Student",
+        history: chatMemory // 🔥 Memory sending to backend
+      };
 
-  const payload = { 
-    message: memoryText + q + " [Do NOT use LaTeX math formatting. Use standard plain text.]", 
-    session_id: sessionId, 
-    user_name: localStorage.getItem('studymate_username') || "Student",
-    history: typeof chatMemory !== 'undefined' ? chatMemory : []
-  };
+      if (currentAttachmentBase64) {
+          payload.image_data = currentAttachmentBase64;
+          payload.file_name = currentAttachmentName;
+      }
 
-  if (currentAttachmentBase64) {
-      payload.image_data = currentAttachmentBase64;
-      payload.file_name = currentAttachmentName;
-  }
+      // Memory Update ke liye temp variables
+      let memImage = currentAttachmentBase64;
+      let memName = currentAttachmentName;
+      
+      clearAttachment();
 
-  let memImage = currentAttachmentBase64;
-  let memName = currentAttachmentName;
-  
-  clearAttachment();
+      const loadingId = "load-" + Date.now();
+      wrap.innerHTML += `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`;
+      wrap.scrollTop = wrap.scrollHeight;
 
-  const loadingId = "load-" + Date.now();
-  wrap.insertAdjacentHTML('beforeend', `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing concepts with EduNexus AI... ✦</div></div>`);
-  wrap.scrollTop = wrap.scrollHeight;
-
-  try {
-    const res = await fetch("https://edunexusai.onrender.com/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    
-    if (!res.ok) {
-       document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">🚨</span><div style="color:#ffb86c;"><b>System Alert (${res.status}):</b> Server is waking up or busy. Please wait 10 seconds and try sending again!</div>`;
-       wrap.scrollTop = wrap.scrollHeight;
-       return;
-    }
-
-    const data = await res.json();
-    let aiResponse = data.reply;
-
-    // 🕵️‍♂️ AI SCOUTER: Check if AI sent the secret [SCORE: X/Y] tag
-    const scoreMatch = aiResponse.match(/\[SCORE:\s*(\d+)\/(\d+)\]/i);
-    if (scoreMatch) {
-        const score = parseInt(scoreMatch[1]);
-        const total = parseInt(scoreMatch[2]);
-        const percentage = (score / total) * 100;
+      try {
+        const res = await fetch("https://edunexusai.onrender.com/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload)
+        });
         
-        // सीक्रेट टैग को चैट से हटा दो ताकि बच्चे को ना दिखे
-        aiResponse = aiResponse.replace(/\[SCORE:\s*\d+\/\d+\]/i, '').trim();
-
-        // 100% REAL PROGRESS UPDATE
-        if (typeof selectedSubjectForQuiz !== 'undefined' && selectedSubjectForQuiz && typeof subjectMastery !== 'undefined') {
-            let boost = Math.floor(percentage / 10); // 100% स्कोर पर 10% मास्टरी बढ़ेगी
-            subjectMastery[selectedSubjectForQuiz] = Math.min(100, subjectMastery[selectedSubjectForQuiz] + boost);
-            
-            // मेमोरी और क्लाउड में सेव करो
-            localStorage.setItem('edunexus_mastery', JSON.stringify(subjectMastery));
-            if(typeof updateProgressUI === 'function') updateProgressUI();
-            
-            showToast(`🎯 Quiz Complete! You scored ${score}/${total}. ${selectedSubjectForQuiz} mastery increased!`);
-            
-            if (typeof firebase !== 'undefined' && firebase.auth().currentUser) {
-                firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set({
-                    masteryScores: subjectMastery
-                }, { merge: true });
-            }
+        if (!res.ok) {
+           document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">🚨</span><div style="color:#ffb86c;"><b>System Alert (${res.status}):</b> Server is waking up or busy. Please wait 10 seconds and try sending again!</div>`;
+           wrap.scrollTop = wrap.scrollHeight;
+           return;
         }
-    }
-    
-    let userContent = { text: q };
-    if (memImage) {
-        userContent.image_data = memImage;
-        userContent.mime_type = memImage.split(';')[0].split(':')[1];
-    }
-    
-    if (typeof chatMemory !== 'undefined') {
+
+        const data = await res.json();
+        
+        // 🔥 SAVING TO MEMORY 🔥
+        let userContent = { text: q };
+        if (memImage) {
+            userContent.image_data = memImage;
+            userContent.mime_type = memImage.split(';')[0].split(':')[1];
+        }
         chatMemory.push({ role: "user", content: userContent });
-        chatMemory.push({ role: "model", content: { text: aiResponse } });
+        chatMemory.push({ role: "model", content: { text: data.reply } });
+
+        // Memory limit: Server crash se bachane ke liye sirf last 12 turns (6 tumhare, 6 AI ke)
         if (chatMemory.length > 12) chatMemory = chatMemory.slice(chatMemory.length - 12);
+
+        let answer = data.reply.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+        document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">✦</span><div>${answer}</div>`;
+
+      } catch (error) {
+        document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">🚨</span><div style="color:#ff4757; font-size:11px; line-height:1.5;"><b>Connection Blocked!</b><br>Browser blocked the request (CORS) because the server is offline or sleeping.<br><br><b>Fix it right now:</b><br>1. Open <a href="https://edunexusai.onrender.com" target="_blank" style="color:#5ee7c5; text-decoration:underline;">https://edunexusai.onrender.com</a> in a new tab.<br>2. It will say "Not Found" (which is normal).<br>3. Come back here and send "Hi" again!</div>`;
+      }
+      wrap.scrollTop = wrap.scrollHeight;
     }
-
-    let answer = aiResponse.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
-    
-    document.getElementById(loadingId).innerHTML = `
-      <span class="msg-avatar">✦</span>
-      <div style="flex:1;">${answer}</div>
-      <button onclick="speakText(this.previousElementSibling.innerText, this)" style="background:transparent; border:none; cursor:pointer; font-size:16px; padding:0; margin-left:8px; align-self:flex-start;" title="Listen to AI">🔊</button>
-    `;
-
-  } catch (error) {
-    document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">🚨</span><div style="color:#ff4757; font-size:11px; line-height:1.5;"><b>Connection Blocked!</b><br>Browser blocked the request (CORS) because the server is offline or sleeping.</div>`;
-  }
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-
-
-
-
-
-    
-
-
-
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     let recognition;
@@ -2025,13 +1220,13 @@ async function sendQuestion(e) {
 
       recognition.onstart = () => {
         isListening = true;
-        document.getElementById('mic-btn').classList.add('listening');
-        document.getElementById('question').placeholder = "KX Core is listening...";
+        $('mic-btn').classList.add('listening');
+        $('question').placeholder = "KX Core is listening...";
       };
 
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
-        document.getElementById('question').value = transcript; 
+        $('question').value = transcript; 
         stopMic(); 
       };
 
@@ -2039,205 +1234,14 @@ async function sendQuestion(e) {
       recognition.onerror = () => stopMic();
     }
 
-    function toggleMic() {
-      if (isListening) {
-        recognition.stop();
-      } else if (recognition) {
-        recognition.start();
-      }
-    }
+    function toggleMic() { j}
 
     function stopMic() {
       isListening = false;
-      document.getElementById('mic-btn').classList.remove('listening');
-      document.getElementById('question').placeholder = "Ask KX Core...";
-    }
-    
-    // 🔥 PASSWORD EYE TOGGLE LOGIC 🔥
-    function togglePassword() {
-        const passInput = document.getElementById('authPassword');
-        const eyeIcon = document.getElementById('eyeIcon');
-        if (passInput.type === 'password') {
-            passInput.type = 'text';
-            eyeIcon.style.fill = 'var(--accent2)'; 
-        } else {
-            passInput.type = 'password';
-            eyeIcon.style.fill = '#5a6478'; 
-        }
-    }
-    
-    // 🔥 NAV LINK NEON GLOW LOGIC (INSTANT SYNC & SMOOTH FADE) 🔥
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                let elementsToGlow = [];
-                
-                if (targetElement.tagName.toLowerCase() === 'section') {
-                    elementsToGlow = Array.from(targetElement.querySelectorAll('.glass'));
-                } else {
-                    elementsToGlow = [targetElement];
-                }
-
-                elementsToGlow.forEach(el => {
-                    // Animation ko reset karne ke liye class hatao aur reflow karo
-                    el.classList.remove('neon-highlight');
-                    void el.offsetWidth; 
-                    
-                    // Click karte hi instantly glow shuru
-                    setTimeout(() => {
-                        el.classList.add('neon-highlight');
-                    }, 100);
-
-                    // Animation puri 2.5s ki hai, uske poore khatam hone ke baad hi class hatao
-                    // Isse achanak se band hone wala jhatka (jerk) nahi aayega
-                    setTimeout(() => {
-                        el.classList.remove('neon-highlight');
-                    }, 2500); 
-                });
-            }
-        });
-    });
-
-  </script> <!-- <-- Dhyan rahe, poora JS is script tag ke ANDAR hona chahiye -->
-  
-  <!-- 🔥 PARTICLES JS INITIALIZATION (LIVE CONSTELLATION) 🔥 -->
-  <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": ["#8b7cff", "#5ee7c5", "#ffffff"] },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-        "size": { "value": 3, "random": true, "anim": { "enable": false } },
-        "line_linked": { "enable": true, "distance": 150, "color": "#8b7cff", "opacity": 0.3, "width": 1 },
-        "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false, "attract": false }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } }, "push": { "particles_nb": 4 } }
-      },
-      "retina_detect": true
-    });
-    // 🔥 PWA (SERVICE WORKER) REGISTRATION 🔥
-  if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-              .then(reg => console.log('EduNexus PWA is Ready! 🚀', reg.scope))
-              .catch(err => console.log('PWA Registration Failed!', err));
-      });
-  
-  
-  
-  
-  
-  
+      $('mic-btn').classList.remove('listening');
+      $('question').placeholder = "Ask KX Core...";
     }
 
-
-
-    // 🔥 ZEN MODE LOGIC & AI BELL 🔥
-    let zenInterval;
-    let zenTimeLeft = 25 * 60; // 25 mins
-    let isZenRunning = false;
-    let isZenBreak = false;
-
-    function enterZenMode() {
-        document.getElementById('zen-mode-overlay').classList.add('active');
-        resetZenTimer();
-    }
-
-    function exitZenMode() {
-        document.getElementById('zen-mode-overlay').classList.remove('active');
-        clearInterval(zenInterval);
-        isZenRunning = false;
-    }
-
-    function toggleZenTimer() {
-        const startBtn = document.getElementById('zen-start-btn');
-        if (isZenRunning) {
-            clearInterval(zenInterval);
-            startBtn.innerText = "Resume Focus ✦";
-            isZenRunning = false;
-        } else {
-            zenInterval = setInterval(updateZenTimer, 1000);
-            startBtn.innerText = "Pause";
-            isZenRunning = true;
-        }
-    }
-
-    function updateZenTimer() {
-        if (zenTimeLeft <= 0) {
-            clearInterval(zenInterval);
-            playZenBell(); // AI Bell बजेगी
-            isZenRunning = false;
-            
-            if (!isZenBreak) {
-                // Break Shuru
-                isZenBreak = true;
-                zenTimeLeft = 5 * 60; // 5 min break
-                document.getElementById('zen-status').innerText = "BREAK TIME";
-                document.getElementById('zen-status').style.color = "#8b7cff";
-                document.getElementById('zen-start-btn').innerText = "Start Break ✦";
-                showToast("🎉 25 Mins Focus Complete! Take a 5 min break.");
-            } else {
-                // Focus Wapas Shuru
-                isZenBreak = false;
-                zenTimeLeft = 25 * 60;
-                document.getElementById('zen-status').innerText = "FOCUS MODE";
-                document.getElementById('zen-status').style.color = "var(--accent2)";
-                document.getElementById('zen-start-btn').innerText = "Start Focus ✦";
-                showToast("⏰ Break Over! Ready for another session?");
-            }
-        } else {
-            zenTimeLeft--;
-        }
-        
-        const m = Math.floor(zenTimeLeft / 60).toString().padStart(2, '0');
-        const s = (zenTimeLeft % 60).toString().padStart(2, '0');
-        document.getElementById('zen-timer-display').innerText = `${m}:${s}`;
-    }
-
-    function resetZenTimer() {
-        clearInterval(zenInterval);
-        isZenRunning = false;
-        isZenBreak = false;
-        zenTimeLeft = 25 * 60;
-        document.getElementById('zen-status').innerText = "FOCUS MODE";
-        document.getElementById('zen-status').style.color = "var(--accent2)";
-        document.getElementById('zen-start-btn').innerText = "Start Focus ✦";
-        document.getElementById('zen-timer-display').innerText = "25:00";
-    }
-
-    // AI Generated Chime Sound (Bina kisi MP3 file ke, seedha code se aawaz!)
-    function playZenBell() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(800, ctx.currentTime); 
-            gain.gain.setValueAtTime(1, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2);
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + 2);
-        } catch(e) { console.log("Audio not supported"); }
-    }
-    // 🔥 MOBILE MENU LOGIC 🔥
-    function openMobileMenu() {
-        document.getElementById('mobile-menu-overlay').classList.add('active');
-    }
-    function closeMobileMenu() {
-        document.getElementById('mobile-menu-overlay').classList.remove('active');
-    }
   </script>
-
-
-  
 </body>
-</html>s
+</html>
