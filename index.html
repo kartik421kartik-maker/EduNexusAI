@@ -1388,27 +1388,27 @@ function updateProgressUI() {
             mainContent.classList.add('blurred');
         }
     }
-});
-        
-    function activateUser(name, isFirstTime) {
+});function activateUser(name, isFirstTime) {
+      const overlay = document.getElementById('login-overlay');
+      const mainContent = document.getElementById('main-content');
+
+      // ⚡ 0-SECOND INSTANT REMOVAL (Koi delay nahi, koi animation nahi) ⚡
       overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.visibility = 'hidden';
-        overlay.style.display = 'none';
-        mainContent.classList.remove('blurred');
-        
-        if (isFirstTime) { 
-          openExplanation(); 
-        } else {
-          startTyping();
-        }
-      }, 500);
+      overlay.style.visibility = 'hidden';
+      overlay.style.display = 'none';
+      mainContent.classList.remove('blurred');
       
-      $('profileName').textContent = name;
-      $('profileAvatar').textContent = name.charAt(0).toUpperCase();
-      $('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
+      if (isFirstTime) { 
+        openExplanation(); 
+      } else {
+        startTyping();
+      }
       
-      $('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
+      // Baaki tera normal code
+      document.getElementById('profileName').textContent = name;
+      document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
+      document.getElementById('planEmptyTitle').textContent = `${name}'s personalized plan will appear here`;
+      document.getElementById('messages').innerHTML = `<div class="message ai"><span class="msg-avatar">✦</span><div>Hey ${name} 👋 EduNexus AI initialized! Ready for a quiz or a concept decode today?</div></div>`;
       
       if(isFirstTime) {
         const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
@@ -2325,19 +2325,24 @@ async function sendQuestion(e) {
 
 
     // Tere purane saare JS functions yahan honge...
-
-    // 👇 PWA INSTALL LOGIC KO YAHAN SABSE NEECHE CHIPKA DE 👇
+// 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
     let deferredPrompt;
     const pwaCard = document.getElementById('pwa-install-card');
     const btnLater = document.getElementById('pwa-later');
     const btnInstall = document.getElementById('pwa-install');
 
+    // Ye event tabhi fire hota hai jab Chrome PWA ki saari conditions man leta hai
     window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('PWA is ready to be installed!');
         e.preventDefault();
         deferredPrompt = e;
+        
+        // Popup ko thodi der me ya jab user dashboard pe ho tab dikhao
         setTimeout(() => {
-            pwaCard.classList.add('show');
-        }, 2500);
+            if(!document.getElementById('main-content').classList.contains('blurred')) {
+                 pwaCard.classList.add('show');
+            }
+        }, 3000); 
     });
 
     btnLater.addEventListener('click', () => {
@@ -2346,10 +2351,11 @@ async function sendQuestion(e) {
 
     btnInstall.addEventListener('click', async () => {
         if (deferredPrompt) {
+            pwaCard.classList.remove('show');
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
             deferredPrompt = null;
-            pwaCard.classList.remove('show');
         }
     });
 
