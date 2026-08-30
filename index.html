@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#050505">
-  <title>EduNexus AI </title>
+  <title>EduNexus AI-Study Smarter Not Harder! </title>
+  
+  <meta name="description" content="Experience the future of education with EduNexus AI. Master your board exams with our Adaptive Planner, PYQ Vault, and Live AI Tutor. Engineered by Kartik and powered by the cutting-edge KX Neural Core.">
+  <meta name="keywords" content="EduNexus AI, KX Neural Core, Kartik, Adaptive AI Tutor, PYQ Vault, Smart Study Planner, Board Exam Tracker, Next-Gen EdTech">
+  <meta name="author" content="Kartik">
   
   <!-- Tera purana icon wala link -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
@@ -1016,7 +1020,7 @@
     </main>
     
     <footer>
-      <span>EduNexus AI — Powered by EduNexus Engine | Developed by Kartik</span>
+      <span>EduNexus AI — Powered by KX Neural Core! | Developed by Kartik</span>
     </footer>
   </div>
 
@@ -1672,19 +1676,22 @@ function saveProfile() {
     updateProgressUI();
 
    // 🗄️ PYQ DATABASE (Yahan tu future me aur bhi links add kar sakta hai asani se)
-    const pyqDatabase = {
-        "Class 12": {
-            "Mid-Term": {
-                "Computer Science": [
-                    { year: "2023-24 & 2024-25", name: "CS Mid-Term Papers with MS", link: "https://drive.google.com/file/d/1ydMIha-U9IY9CsOPd-qNo2wM74hrglYX/view?usp=drive_link" }
-                ],
-                "Physics": [
-                    { year: "2024-2025", name: "Physics DoE Mid-Term Papers", link: "https://drive.google.com/file/d/1b_UX6M9pH3umfzl1upkOgkiR9PXM9I1o/view?usp=sharing" }
-                ]
-            }
-        }
-    };
-
+    // 🗄️ PYQ DATABASE (Yahan tu future me aur bhi links add kar sakta hai asani se)
+   const pyqDatabase = {
+       "Class 12": {
+           "Mid-Term": {
+               "Computer Science": [
+                   { year: "2023-24 & 2024-25", name: "CS DoE Mid-Term Papers with MS", link: "https://drive.google.com/file/d/1ydMIha-U9IY9CsOPd-qNo2wM74hrglYX/view?usp=drive_link" }
+               ],
+               "Physics": [
+                   { year: "2024-2025", name: "Physics DoE Mid-Term Papers", link: "https://drive.google.com/file/d/1b_UX6M9pH3umfzl1upkOgkiR9PXM9I1o/view?usp=sharing" }
+               ],
+               "Chemistry": [
+                   { year: "2024-2025", name: "Chemistry  DoE Mid-Term Papers with MS", link: "https://drive.google.com/file/d/123WRVsQr9tpl7khS3DdEkBhmKB-HOAiO/view?usp=drivesdk" }
+               ]
+           }
+       }
+   };
     function fetchPYQ() {
         const cls = $("pyqClass").value;
         const exam = $("pyqExam").value;
@@ -2383,42 +2390,70 @@ async function sendQuestion(e) {
     // Tere purane saare JS functions yahan honge...
 // 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
 
-// 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
+// 🔥 SMART PWA INSTALL LOGIC (NO ANNOYING POPUPS) 🔥
     let deferredPrompt;
     const pwaCard = document.getElementById('pwa-install-card');
     const btnLater = document.getElementById('pwa-later');
     const btnInstall = document.getElementById('pwa-install');
 
+    // Check karo ki app pehle se install ho chuki hai ya PWA mode me chal rahi hai
+    const isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone || localStorage.getItem('pwa_installed') === 'true';
+
     window.addEventListener('beforeinstallprompt', (e) => {
+        // Agar already installed hai ya user ne 'Later' dabaya tha, toh prompt mat dikhao!
+        if (isAppInstalled || localStorage.getItem('pwa_dismissed') === 'true') {
+            return;
+        }
+        
         console.log('PWA is ready to be installed! 🚀');
         e.preventDefault();
         deferredPrompt = e;
         
-        // Agar user pehle se logged in hai (page reload par), toh 3 sec baad dikhao
+        // Agar user login screen par nahi hai, tabhi 3 sec baad card dikhao
         if(!document.getElementById('main-content').classList.contains('blurred')) {
             setTimeout(() => {
-                pwaCard.classList.add('show');
+                if(deferredPrompt) pwaCard.classList.add('show');
             }, 3000);
         }
     });
 
+    // Agar user 'Later' dabata hai
     btnLater.addEventListener('click', () => {
         pwaCard.classList.remove('show');
+        localStorage.setItem('pwa_dismissed', 'true'); // Memory me save kar lo
+        showToast("You can install it later from the browser menu!");
     });
 
+    // Agar user 'Install Now' dabata hai
     btnInstall.addEventListener('click', async () => {
         if (deferredPrompt) {
             pwaCard.classList.remove('show');
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response: ${outcome}`);
+            if (outcome === 'accepted') {
+                localStorage.setItem('pwa_installed', 'true'); // Hamesha ke liye hide
+            }
             deferredPrompt = null;
         }
     });
 
+   // Jab app successfully install ho jaye
     window.addEventListener('appinstalled', () => {
         pwaCard.classList.remove('show');
+        localStorage.setItem('pwa_installed', 'true'); // Hamesha ke liye hide
         showToast("✅ EduNexus AI successfully installed on your device!");
+
+        // 🔥 NAYA CODE: DISCORD TRACKER FOR APP INSTALL 🔥
+        const name = localStorage.getItem('studymate_username') || "A Student";
+        const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
+        
+        fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                content: `📲 **NEW APP INSTALL!** 🎉\n🧑‍🎓 **User:** ${name}\n🚀 **Action:** Downloaded EduNexus AI to their home screen!` 
+            })
+        }).catch(err => console.log("Install tracker silent fail"));
     });
   </script>
 
