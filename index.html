@@ -457,21 +457,49 @@
         left: 20px;
         width: auto;
     }
-}
-    /* 🔥 ULTRA-PREMIUM MOBILE SPACING FIX 🔥 */
+}/* 🔥 ULTRA-PREMIUM MOBILE SPACING FIX 🔥 */
     @media(max-width: 850px) {
-        /* 1. "Not harder" के नीचे का फालतू स्पेस खत्म */
-        .hero h1 { min-height: 90px !important; margin-bottom: 12px !important; }
-        .hero-copy > div > p { margin-bottom: 22px !important; font-size: 15px !important; line-height: 1.5 !important; }
+        /* 1. "Not harder" के नीचे का फालतू स्पेस खत्म (min-height ओवरराइड) */
+        .hero h1 { 
+            min-height: unset !important; 
+            height: auto !important; 
+            margin-bottom: 12px !important; 
+        }
+        .hero-copy > div > p { 
+            margin-bottom: 20px !important; 
+            font-size: 15px !important; 
+            line-height: 1.5 !important; 
+        }
         
         /* 2. Buttons को एकदम Sleek और Equal width का बनाना */
-        .hero-actions { display: flex !important; flex-direction: row !important; gap: 12px !important; width: 100%; }
-        .hero-actions .btn { flex: 1; padding: 12px !important; font-size: 13px !important; justify-content: center; }
+        .hero-actions { 
+            display: flex !important; 
+            flex-direction: row !important; 
+            gap: 12px !important; 
+            width: 100%; 
+        }
+        .hero-actions .btn { 
+            flex: 1; 
+            padding: 12px !important; 
+            font-size: 13px !important; 
+            justify-content: center; 
+        }
         
         /* 3. Checkmarks और Cards के बीच का Extra Gap हटाना */
-        .trust-row { margin-top: 15px !important; margin-bottom: 0 !important; justify-content: center; }
-        .hero-copy { transform: translateY(0) !important; padding-bottom: 5px !important; }
-        .hero { gap: 20px !important; padding-top: 35px !important; }
+        .trust-row { 
+            margin-top: 15px !important; 
+            margin-bottom: 20px !important; 
+            justify-content: center; 
+        }
+        .hero-copy { 
+            transform: translateY(0) !important; 
+            padding-bottom: 0px !important; 
+        }
+        .hero { 
+            gap: 25px !important; 
+            padding-top: 20px !important; 
+            min-height: unset !important;
+        }
     }
   </style>
 
@@ -714,7 +742,7 @@
 
           <div class="hero-feature-text desktop-only">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 15px; display: block; font-size: 9px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
-            <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice with the PYQ Vault?</h2>
+            <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice <span class="gradient-title"> with the</span><span class="gradient-title">PYQ Vault?</span></h2>
             <p style="font-size: 17px; color: var(--muted); margin: 0; line-height: 1.6;">
               Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last years of official Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>, and the KX Neural Core will test you strictly on actual past questions, grading you like a real examiner.
             </p>
@@ -771,7 +799,7 @@
 
           <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
-            <h2 style="font-size: 32px; color: #fff; margin: 0 0 16px; font-family: 'Space Grotesk'; letter-spacing: -1.5px; line-height: 1.1;">Why practice with the PYQ Vault?</h2>
+            <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice <span class="gradient-title"> with the</span><span class="gradient-title">PYQ Vault?</span></h2>
             <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
               Stop hunting for old PDFs. The <b>PYQ Vault</b> gives you instant access to the last years of official  Mid-Term and Board papers. Switch to <b>AI Practice Mode</b>.
             </p>
