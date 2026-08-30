@@ -1,29 +1,46 @@
-const CACHE_NAME = 'edunexus-v1';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'edunexus-live-v1';
+const ASSETS = [
   './',
   './index.html',
   './manifest.json'
 ];
 
+// 1. Force Install: Naya update aate hi wait mat karo, turant install karo
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
+// 2. Auto-Clean: Jaise hi naya update aaye, purane kachre (cache) ko delete maar do
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activated.');
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
+// 3. THE MAGIC (Network First): Hamesha pehle internet se naya code laao
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      // Agar cache mein hai toh wahi de do, warna internet se fetch karo
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((response) => {
+        // Agar internet chal raha hai, toh naya code dikhao aur cache ko bhi update kar lo
+        const resClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+        return response;
+      })
+      .catch(() => {
+        // Agar user offline hai (no internet), tabhi phone ki memory se purana app dikhao
+        return caches.match(event.request);
+      })
   );
 });
