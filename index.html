@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#050505">
-  <title>EduNexus AI — Premium Login</title>
+  <title>EduNexus AI </title>
   
   <!-- Tera purana icon wala link -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
@@ -1241,10 +1241,17 @@ function updateProgressUI() {
 
     function openExplanation() { $('explanation-modal').classList.add('show'); }
     
-    function closeExplanation() { 
-      $('explanation-modal').classList.remove('show'); 
-      setTimeout(startTyping, 300);
-    }
+  function closeExplanation() { 
+  $('explanation-modal').classList.remove('show'); 
+  setTimeout(startTyping, 300);
+
+  // 🔥 NAYA CODE: Welcome modal band hote hi PWA card dikhao 🔥
+  setTimeout(() => {
+      if (deferredPrompt) {
+          document.getElementById('pwa-install-card').classList.add('show');
+      }
+  }, 1500); 
+}
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1402,6 +1409,12 @@ function updateProgressUI() {
         openExplanation(); 
       } else {
         startTyping();
+        // 🔥 NAYA CODE: Returning user ke liye seedha dashboard aate hi card dikhao 🔥
+        setTimeout(() => {
+            if (deferredPrompt) {
+              document.getElementById('pwa-install-card').classList.add('show');
+            }
+        }, 2000);
       }
       
       // Baaki tera normal code
@@ -2326,23 +2339,24 @@ async function sendQuestion(e) {
 
     // Tere purane saare JS functions yahan honge...
 // 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
+
+// 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
     let deferredPrompt;
     const pwaCard = document.getElementById('pwa-install-card');
     const btnLater = document.getElementById('pwa-later');
     const btnInstall = document.getElementById('pwa-install');
 
-    // Ye event tabhi fire hota hai jab Chrome PWA ki saari conditions man leta hai
     window.addEventListener('beforeinstallprompt', (e) => {
-        console.log('PWA is ready to be installed!');
+        console.log('PWA is ready to be installed! 🚀');
         e.preventDefault();
         deferredPrompt = e;
         
-        // Popup ko thodi der me ya jab user dashboard pe ho tab dikhao
-        setTimeout(() => {
-            if(!document.getElementById('main-content').classList.contains('blurred')) {
-                 pwaCard.classList.add('show');
-            }
-        }, 3000); 
+        // Agar user pehle se logged in hai (page reload par), toh 3 sec baad dikhao
+        if(!document.getElementById('main-content').classList.contains('blurred')) {
+            setTimeout(() => {
+                pwaCard.classList.add('show');
+            }, 3000);
+        }
     });
 
     btnLater.addEventListener('click', () => {
@@ -2363,7 +2377,6 @@ async function sendQuestion(e) {
         pwaCard.classList.remove('show');
         showToast("✅ EduNexus AI successfully installed on your device!");
     });
-    
   </script>
 
 
