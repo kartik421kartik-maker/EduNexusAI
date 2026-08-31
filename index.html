@@ -4,11 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#050505">
-  <title>EduNexus AI-Study Smarter Not Harder! </title>
-  
-  <meta name="description" content="Experience the future of education with EduNexus AI. Master your board exams with our Adaptive Planner, PYQ Vault, and Live AI Tutor. Engineered by Kartik and powered by the cutting-edge KX Neural Core.">
-  <meta name="keywords" content="EduNexus AI, KX Neural Core, Kartik, Adaptive AI Tutor, PYQ Vault, Smart Study Planner, Board Exam Tracker, Next-Gen EdTech">
-  <meta name="author" content="Kartik">
+  <title>EduNexus AI — Study Smarter Not Harder.</title>
   
   <!-- Tera purana icon wala link -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/Kz0LvSg9/logo.png">
@@ -461,7 +457,8 @@
         left: 20px;
         width: auto;
     }
-}/* 🔥 ULTRA-PREMIUM MOBILE SPACING FIX 🔥 */
+}
+/* 🔥 ULTRA-PREMIUM MOBILE SPACING FIX 🔥 */
     @media(max-width: 850px) {
         /* 1. "Not harder" के नीचे का फालतू स्पेस खत्म (min-height ओवरराइड) */
         .hero h1 { 
@@ -505,10 +502,11 @@
             min-height: unset !important;
         }
     }
+
   </style>
 
 </head>
-<body>
+<body class="no-scroll">
 
   <!-- 🔥 YAHAN TERA NAYA PREMIUM UI AAYA HAI 🔥 -->
   <div id="login-overlay">
@@ -696,7 +694,7 @@
     <div class="topbar-wrapper">
       <header class="topbar">
         <a class="brand" href="#">
-          <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="brand-logo" alt="EduNexus">
+          <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="brand-logo" alt="EduNexus AI">
           <span class="gradient-title">EduNexus<span class="brand-ai"> AI</span></span>
         </a>
         <nav>
@@ -801,7 +799,7 @@
             <div class="ai-note"><span>✦</span><p><b>AI insight:</b> Taking a quiz will automatically test you and update your Subject Mastery in the Adaptive Progress section!</p></div>
           </div>
 
-          <div class="hero-feature-text mobile-only" style="margin-top: 20px; padding-top: 0; border: none;">
+          <div class="hero-feature-text mobile-only reveal" style="margin-top: 20px; padding-top: 0; border: none; animation: none;">
             <span class="eyebrow" style="color: var(--accent2); margin-bottom: 12px; display: block; font-size: 10px; letter-spacing: 2px;">✦ NEW: BOARD EXAM MASTERY</span>
             <h2 style="font-size: clamp(40px, 4vw, 56px); color: #fff; margin: 0 0 20px; font-family: 'Space Grotesk'; letter-spacing: -2.5px; line-height: 1.05;">Why practice <span class="gradient-title"> with the</span><span class="gradient-title">PYQ Vault?</span></h2>
             <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">
@@ -862,6 +860,7 @@
         </div>
       </section>
 
+      <!-- 🔥 PLANNER SECTION START 🔥 -->
       <section class="section reveal" id="planner">
         <div class="section-heading">
           <div>
@@ -871,13 +870,16 @@
           <p>Input your Class 12 goals. The KX Core will instantly architect your personalized study roadmap.</p>
         </div>
 
+        <!-- 🔥 YE GRID WALA DIV GAYAB THA JISSE LAYOUT TUTA 🔥 -->
         <div class="planner-grid">
+          
           <form class="panel glass tilt-panel" id="plannerForm">
             <div class="panel-title">
               <span class="icon">✦</span>
               <div><h3 class="gradient-title">Build your study plan</h3><p>3 quick inputs</p></div>
             </div>
-            <label>Goal
+            
+            <label>GOAL
               <select id="goal">
                 <option>Board Exams</option>
                 <option>JEE Preparation</option>
@@ -885,16 +887,27 @@
                 <option>Concept Mastery</option>
               </select>
             </label>
-            <label>Subjects
-              <input id="subjects" value="Science-(PCM), Computer Science, English" placeholder="e.g. Physics, Maths">
+            
+            <label>SUBJECT
+              <select id="planSubject">
+                <option value="Economics">Economics</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="English">English</option>
+              </select>
             </label>
-            <label>Daily study time
+            
+            <label>DAILY STUDY TIME
               <input id="hours" type="range" min="1" max="8" value="4" oninput="document.getElementById('hoursValue').textContent=this.value+' hours'">
               <span class="range-value" id="hoursValue">4 hours</span>
-            </label>
-            <label>Exam / target date
+            </label> 
+            
+            <label>EXAM / TARGET DATE
               <input id="date" type="date">
             </label>
+            
             <button class="btn primary full" type="submit">Generate AI Study Plan <span>✦</span></button>
           </form>
 
@@ -905,8 +918,10 @@
               <p style="margin-top: 10px;">EduNexus will prioritize weak areas, distribute revision and protect time for practice.</p>
             </div>
           </div>
+          
         </div>
       </section>
+      <!-- 🔥 PLANNER SECTION END 🔥 -->
 
       <section class="section reveal" id="doubt">
         <div class="section-heading">
@@ -919,7 +934,7 @@
         
         <div class="tutor panel glass">
           <div class="tutor-side">
-            <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="tutor-logo" alt="EduNexus">
+            <img src="https://i.ibb.co/Kz0LvSg9/logo.png" class="tutor-logo" alt="EduNexus AI">
             <h3 class="gradient-title">EduNexus Tutor</h3>
             <p>From Physics derivations to Python logic—decode complex concepts instantly, then test your mastery.</p>
             <div class="suggestions">
@@ -957,7 +972,7 @@
               </button>
 
               <div class="input-wrapper">
-                <input id="question" placeholder="Ask EduNexus..." autocomplete="off">
+                <input id="question" placeholder="Ask KX Core..." autocomplete="off">
                 <button type="button" id="mic-btn" onclick="toggleMic()" title="Click to speak">
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
                 </button>
@@ -1020,7 +1035,7 @@
     </main>
     
     <footer>
-      <span>EduNexus AI — Powered by KX Neural Core! | Developed by Kartik</span>
+      <span>EduNexus AI — Powered by KX Neural Core! | Developed by KX Dynamics</span>
     </footer>
   </div>
 
@@ -1070,50 +1085,57 @@
     const lenis = new Lenis({ autoRaf: true });
   </script>
   <script>
-    // Elastic edge-bounce: same rubber-band feel at top AND bottom, on every device
-    (function () {
-      const el = document.querySelector('main');
-      if (!el) return;
+// Elastic edge-bounce: same rubber-band feel at top AND bottom, on every device
+// Elastic edge-bounce: same rubber-band feel at top AND bottom, on every device
+  (function () {
+    const el = document.querySelector('main');
+    if (!el) return;
 
-      const MAX_BOUNCE = 70;
-      let current = 0;
-      let pulling = false;
-      let wheelTimer = null;
+    const MAX_BOUNCE = 70;
+    let current = 0;
+    let pulling = false;
+    let wheelTimer = null;
 
-      function atTop() { return window.scrollY <= 0; }
-      function atBottom() { return Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 1; }
+    function atTop() { return window.scrollY <= 0; }
+    function atBottom() { return Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 1; }
 
-      function push(amount) {
-        current = Math.max(-MAX_BOUNCE, Math.min(MAX_BOUNCE, amount));
-        el.style.transition = 'none';
-        el.style.transform = `translateY(${current}px)`;
-      }
+    function push(amount) {
+      current = Math.max(-MAX_BOUNCE, Math.min(MAX_BOUNCE, amount));
+      el.style.transition = 'none';
+      el.style.transform = `translateY(${current}px)`;
+    }
 
-      function release() {
-        current = 0;
-        el.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        el.style.transform = 'translateY(0)';
-        pulling = false;
-      }
+    function release() {
+      current = 0;
+      el.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.style.transform = 'translateY(0)';
+      pulling = false;
+    }
 
-      window.addEventListener('wheel', (e) => {
-        if (e.target && e.target.closest && e.target.closest('.messages')) return;
-        if (atTop() && e.deltaY < 0) { push(current + Math.abs(e.deltaY) * 0.3); pulling = true; }
-        else if (atBottom() && e.deltaY > 0) { push(current - e.deltaY * 0.3); pulling = true; }
-        clearTimeout(wheelTimer);
-        wheelTimer = setTimeout(() => { if (pulling) release(); }, 120);
-      }, { passive: true });
+    window.addEventListener('wheel', (e) => {
+      // 🔥 MAGIC LOCK: Ab Chat Box (.messages) aur Planner List (.days-list) dono me page nahi hilega!
+      if (e.target && e.target.closest && (e.target.closest('.messages') || e.target.closest('.days-list'))) return;
+      
+      if (atTop() && e.deltaY < 0) { push(current + Math.abs(e.deltaY) * 0.3); pulling = true; }
+      else if (atBottom() && e.deltaY > 0) { push(current - e.deltaY * 0.3); pulling = true; }
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(() => { if (pulling) release(); }, 120);
+    }, { passive: true });
 
-      let startY = 0;
-      window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
-      window.addEventListener('touchmove', (e) => {
-        if (e.target && e.target.closest && e.target.closest('.messages')) return;
-        const dy = e.touches[0].clientY - startY;
-        if (atTop() && dy > 0) { push(dy * 0.4); pulling = true; }
-        else if (atBottom() && dy < 0) { push(dy * 0.4); pulling = true; }
-      }, { passive: true });
-      window.addEventListener('touchend', () => { if (pulling) release(); });
-    })();
+    let startY = 0;
+    window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      // 🔥 MAGIC LOCK MOBILE KE LIYE BHI 🔥
+      if (e.target && e.target.closest && (e.target.closest('.messages') || e.target.closest('.days-list'))) return;
+      
+      const dy = e.touches[0].clientY - startY;
+      if (atTop() && dy > 0) { push(dy * 0.4); pulling = true; }
+      else if (atBottom() && dy < 0) { push(dy * 0.4); pulling = true; }
+    }, { passive: true });
+    window.addEventListener('touchend', () => { if (pulling) release(); });
+  })();
+
+  
   </script>
 
   <!-- 🔥 STEP 1: FIREBASE ENGINE MUST LOAD FIRST 🔥 -->
@@ -1256,20 +1278,30 @@
 
   <!-- 🔥 STEP 3: MAIN APP LOGIC (Now it can safely use firebase variables) 🔥 -->
   <script>
+
+
+
     const $ = id => document.getElementById(id);
+    // 🔥 THE HIDDEN SYLLABUS VAULT (KX Neural Core) 🔥
+const syllabusVault = {
+    "Physics": ["Electric Charges", "Electrostatic Potential", "Current Electricity", "Moving Charges", "Magnetism", "EMI & AC", "EM Waves", "Ray & Wave Optics", "Dual Nature", "Atoms & Nuclei", "Semiconductors"],
+    "Chemistry": ["Solutions", "Electrochemistry", "Chemical Kinetics", "d/f Block", "Coordination Compounds", "Haloalkanes", "Alcohols", "Aldehydes", "Amines", "Biomolecules"],
+    "Mathematics": ["Relations & Functions", "Inverse Trigo", "Matrices & Determinants", "Calculus (Diff & Int)", "Differential Equations", "Vector & 3D", "Linear Programming", "Probability"],
+    "Computer Science": ["Python Revision", "Functions", "File Handling", "Stack", "Computer Networks", "SQL Database", "Python-SQL Interface"],
+    "English": ["Reading Skills", "Creative Writing", "Flamingo Prose", "Flamingo Poetry", "Vistas Supplementary"],
+    "Economics": ["National Income", "Money & Banking", "Income & Employment", "Government Budget", "Balance of Payments", "Indian Economy (1947-90)", "Economic Reforms (1991)", "Human Capital", "Rural Dev.", "Employment", "Sustainable Dev."]
+};
 
-    // 🔥 PROGRESS BARS DATA (MOVED TO TOP FOR SAFETY) 🔥
-
-
-
-    // 🔥 REAL PROGRESS START (Ab sab default 0% hoga) 🔥
 let subjectMastery = JSON.parse(localStorage.getItem('edunexus_mastery')) || {
     "Physics": 0,
     "Chemistry": 0,
     "Mathematics": 0,
     "Computer Science": 0,
-    "English": 0
+    "English": 0,
+    "Economics": 0
 };
+
+  
 
 function updateProgressUI() {
     ['Physics', 'Chemistry', 'Mathematics', 'Computer Science', 'English'].forEach(sub => {
@@ -1286,19 +1318,26 @@ function updateProgressUI() {
     });
 }
 
-    function openExplanation() { $('explanation-modal').classList.add('show'); }
+function openExplanation() { 
+        $('explanation-modal').classList.add('show'); 
+        document.body.classList.add('no-scroll'); 
+        try { lenis.stop(); } catch(e) {} // 🔥 Lenis Scroll Engine को रोक दिया!
+    }
     
-  function closeExplanation() { 
-  $('explanation-modal').classList.remove('show'); 
-  setTimeout(startTyping, 300);
+    function closeExplanation() { 
+        $('explanation-modal').classList.remove('show'); 
+        document.body.classList.remove('no-scroll'); 
+        try { lenis.start(); } catch(e) {} // 🔥 Lenis Engine वापस चालू!
+        
+        setTimeout(startTyping, 300);
 
-  // 🔥 NAYA CODE: Welcome modal band hote hi PWA card dikhao 🔥
-  setTimeout(() => {
-      if (deferredPrompt) {
-          document.getElementById('pwa-install-card').classList.add('show');
-      }
-  }, 1500); 
-}
+        // 🔥 NAYA CODE: Welcome modal band hote hi PWA card dikhao 🔥
+        setTimeout(() => {
+            if (typeof deferredPrompt !== 'undefined' && deferredPrompt) {
+                document.getElementById('pwa-install-card').classList.add('show');
+            }
+        }, 1500); 
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1443,6 +1482,8 @@ function updateProgressUI() {
         }
     }
 });function activateUser(name, isFirstTime) {
+
+  document.body.classList.remove('no-scroll');
       const overlay = document.getElementById('login-overlay');
       const mainContent = document.getElementById('main-content');
 
@@ -1594,89 +1635,130 @@ function saveProfile() {
             askDemo(prompt);
         }, 1200);
     }
+// 🔥 KX NEURAL CORE: DYNAMIC PLANNER ENGINE 🔥
+// 🔥 KX NEURAL CORE: DYNAMIC PLANNER ENGINE (PREMIUM UI FIX) 🔥
+$("plannerForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const examDateVal = $("date").value;
+    const examDate = new Date(examDateVal);
+    const today = new Date();
+    today.setHours(0,0,0,0);
 
-    $("plannerForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const examDateVal = $("date").value;
-        const examDate = new Date(examDateVal);
-        const today = new Date();
-        today.setHours(0,0,0,0);
+    if (!examDateVal || examDate < today) {
+        showToast("❌ Error: Target date must be in the future!");
+        return;
+    }
 
-        if (!examDateVal || examDate < today) {
-            showToast("❌ Error: Target date must be in the future!");
-            return;
-        }
+    const diffTime = Math.abs(examDate - today);
+    const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    const currentUser = localStorage.getItem('studymate_username') || "Student";
+    const selectedSubject = $("planSubject").value;
+    const hours = $("hours").value;
+    const goal = $("goal").value;
 
-        const diffTime = Math.abs(examDate - today);
-        const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const subjectTopics = syllabusVault[selectedSubject] || ["General Revision", "Mock Tests"];
+    
+    let daysHtml = "";
+    
+    for(let i = 0; i < totalDays; i++) {
+        let dayLabel = i === 0 ? "Today" : i === 1 ? "Tomorrow" : `Day ${i+1}`;
+        let status = i === 0 ? "Start Session ✦" : "Planned";
         
-        const currentUser = localStorage.getItem('studymate_username') || "Student";
-        const subjectsInput = $("subjects").value;
-        const subjects = subjectsInput ? subjectsInput.split(",").map(s => s.trim()).filter(Boolean) : ["Science-(PCM)","Computer Science","English"];
-        const hours = $("hours").value;
-        const goal = $("goal").value;
-        const focus = subjects.length ? subjects : ["Science-(PCM)"];
-
-        const displayDays = Math.min(totalDays, 5); 
-        let daysHtml = "";
+        let currentTopic = subjectTopics[i % subjectTopics.length]; 
+        let taskType = i % 2 === 0 ? "Concept decoding & Active recall" : "PYQ Vault solving & Error analysis";
+        let time = Math.max(30, Math.round((hours * 60) / 2));
         
-        for(let i = 0; i < displayDays; i++) {
-            let dayLabel = i === 0 ? "Today" : i === 1 ? "Tomorrow" : `Day ${i+1}`;
-            let status = i === 0 ? "Start now" : "Planned";
-            let sub = focus[i % focus.length];
-            let taskType = i % 2 === 0 ? "Concept mastery + active recall" : "Practice questions + error review";
-            let time = Math.max(30, Math.round((hours * 60) / focus.length));
-            
-            let onclickAttr = i === 0 ? `onclick="startSession('${sub}', '${taskType}')" style="cursor: pointer; border-color: rgba(94, 231, 197, 0.4); background: rgba(94, 231, 197, 0.08); box-shadow: 0 0 15px rgba(94, 231, 197, 0.1);"` : '';
-            let btnSpan = i === 0 ? `<span class="start-btn" style="float: right; background: var(--accent2); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(94,231,197,0.3);">Start Session ✦</span>` : `<span style="float: right; color: #5ee7c5; font-size: 10px;">${status}</span>`;
-            
-            daysHtml += `
-              <div class="plan-day" ${onclickAttr}>
-                <b>${dayLabel}</b>${btnSpan}
-                <p>${sub} • ${taskType} • ${time} min</p>
-              </div>
-            `;
-        }
+        // 🔥 TEXT ALIGNMENT FIX: Flexbox used instead of float 🔥
+        let onclickAttr = i === 0 ? `onclick="startSession('${selectedSubject}', '${currentTopic}')" style="cursor: pointer; border: 1px solid rgba(94, 231, 197, 0.4); background: rgba(94, 231, 197, 0.08); box-shadow: 0 0 15px rgba(94, 231, 197, 0.1);"` : '';
+        
+        let btnSpan = i === 0 
+            ? `<span style="background: var(--accent2); color: #000; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 11px; box-shadow: 0 4px 10px rgba(94,231,197,0.3);">${status}</span>` 
+            : `<span style="color: #5ee7c5; font-size: 11px; font-weight: 600;">${status}</span>`;
+        
+        daysHtml += `
+          <div class="plan-day" ${onclickAttr}>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <b style="font-size: 15px; color: #fff;">${dayLabel}</b>
+                ${btnSpan}
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #7f8a9e;"><span style="color:#8f86ff; font-weight:bold;">${currentTopic}</span> • ${taskType} • ${time} min</p>
+          </div>
+        `;
+    }
 
-        $("planResult").innerHTML = `
-          <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
-            <div>
-                <span class="eyebrow" style="color: var(--accent2);">✦ ${totalDays}-DAY ROADMAP GENERATED FOR ${currentUser.toUpperCase()}</span>
-                <h3 style="margin-top:10px; font-size: 26px; color: #fff;">Your ${goal} Roadmap</h3>
-                <div class="plan-meta">
-                  <span class="chip">${totalDays} Days Left</span>
-                  <span class="chip">${hours} hrs/day</span>
-                  <span class="chip">${focus.length} subjects</span>
+    // 4. 🔥 STRICT 2-COLUMN LAYOUT & HIDDEN SCROLLBAR 🔥
+    $("planResult").innerHTML = `
+      <style>
+        /* Premium Invisible Scrollbar */
+        .days-list-premium::-webkit-scrollbar { width: 5px; }
+        .days-list-premium::-webkit-scrollbar-track { background: transparent; }
+        .days-list-premium::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+        .plan-container { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 25px; align-items: flex-start; }
+        .plan-col-left { flex: 1.4; min-width: 320px; }
+        .plan-col-right { flex: 1; min-width: 280px; position: sticky; top: 20px; }
+      </style>
+
+      <div class="generated-plan" style="animation: popIn 0.5s ease-out; text-align: left;">
+        <div>
+            <span class="eyebrow" style="color: var(--accent2);">✦ ${totalDays}-DAY ROADMAP GENERATED FOR ${currentUser.toUpperCase()}</span>
+            <h3 style="margin-top:10px; font-size: 26px; color: #fff;">Your ${goal} Roadmap</h3>
+            <div class="plan-meta">
+              <span class="chip">${totalDays} Days Left</span>
+              <span class="chip">${hours} hrs/day</span>
+              <span class="chip">${selectedSubject}</span>
+            </div>
+
+            <div class="plan-container">
+                <!-- Left Side: Cards -->
+                <div class="plan-col-left days-list-premium" data-lenis-prevent="true" style="max-height: 480px; overflow-y: auto; padding-right: 12px;">
+                  ${daysHtml}
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div class="days-list">
-                      ${daysHtml}
+                <!-- Right Side: AI Analytics Box -->
+                <div class="plan-col-right ai-analytics-box" style="padding: 24px; background: #ffffff03; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h4 style="color: #fff; font-size: 15px; margin-top: 0; margin-bottom: 18px; font-family: 'Space Grotesk';">✦ KX Core Execution Strategy</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 12px; color: #a9b1c1; line-height: 1.8;">
+                            <li style="margin-bottom: 12px;"><b style="color:#8b7cff;">Phase 1:</b> Master core concepts of <b style="color:#fff;">${selectedSubject}</b>.</li>
+                            <li style="margin-bottom: 12px;"><b style="color:#5ee7c5;">Phase 2:</b> Deep analysis via Live AI Tutor.</li>
+                            <li style="margin-bottom: 12px;"><b style="color:#ffb86c;">Phase 3:</b> PYQ Vault integration for exam muscle memory.</li>
+                        </ul>
                     </div>
-
-                    <div class="ai-analytics-box" style="padding: 24px; background: #ffffff03; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <h4 style="color: #fff; font-size: 15px; margin-top: 0; margin-bottom: 18px; font-family: 'Space Grotesk';">✦ KX Core Execution Strategy</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 12px; color: #a9b1c1; line-height: 1.8;">
-                                <li style="margin-bottom: 12px;"><b style="color:#8b7cff;">Phase 1:</b> Active Recall testing on ${focus[0]}. Deep focus on weak points.</li>
-                                <li style="margin-bottom: 12px;"><b style="color:#5ee7c5;">Phase 2:</b> Concept decoding via Live AI Tutor.</li>
-                                <li style="margin-bottom: 12px;"><b style="color:#ffb86c;">Phase 3:</b> Solve PYQ Vault papers to build exam muscle memory.</li>
-                            </ul>
-                        </div>
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(139, 124, 255, 0.1); border-left: 3px solid #8b7cff; border-radius: 0 8px 8px 0;">
-                            <p style="margin: 0; font-size: 11px; color: #d6d2ff; line-height: 1.5;">"Your schedule is scientifically optimized. Click <b style="color:#fff;">Start Session</b> on Today's task to launch the AI Tutor instantly."</p>
-                        </div>
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(139, 124, 255, 0.1); border-left: 3px solid #8b7cff; border-radius: 0 8px 8px 0;">
+                        <p style="margin: 0; font-size: 11px; color: #d6d2ff; line-height: 1.5;">"Plan strictly optimized based on remaining days. Click <b style="color:#fff;">Start Session</b> to initialize the AI engine."</p>
                     </div>
                 </div>
             </div>
-          </div>`;
-        showToast("✅ AI study plan generated!");
-    });
+        </div>
+      </div>`;
+    
+    setTimeout(() => { $("planResult").scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
+    showToast("✅ Dynamic AI Roadmap Generated!");
+});
+
+// 🔥 HIDDEN AI TRIGGER FUNCTION FOR START SESSION 🔥
+function startSession(subject, topic) {
+    showToast(`🚀 Initializing EduNexus Engine for ${topic}...`);
+    
+    setTimeout(() => {
+        const doubtSection = document.getElementById('doubt');
+        if(doubtSection) doubtSection.scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+
+    setTimeout(() => {
+        let uiMessage = `🚀 Start Session: ${topic} (${subject})`;
+        // Secret prompt goes to backend
+        let secretPrompt = `Act as my elite strict AI Tutor. I am starting my study session for ${subject}, specifically focusing on "${topic}". Greet me with high energy, explain why this topic is crucial for my exams, and instantly ask me ONE conceptual diagnostic question to test my baseline knowledge. Do NOT give me the answer yet.`;
+        
+        // Ye wohi triggerHiddenAI hai jo humne pehle discuss kiya tha!
+        triggerHiddenAI(uiMessage, secretPrompt);
+    }, 1200);
+}
 
     updateProgressUI();
 
    // 🗄️ PYQ DATABASE (Yahan tu future me aur bhi links add kar sakta hai asani se)
-    // 🗄️ PYQ DATABASE (Yahan tu future me aur bhi links add kar sakta hai asani se)
    const pyqDatabase = {
        "Class 12": {
            "Mid-Term": {
@@ -1687,11 +1769,12 @@ function saveProfile() {
                    { year: "2024-2025", name: "Physics DoE Mid-Term Papers", link: "https://drive.google.com/file/d/1b_UX6M9pH3umfzl1upkOgkiR9PXM9I1o/view?usp=sharing" }
                ],
                "Chemistry": [
-                   { year: "2024-2025", name: "Chemistry  DoE Mid-Term Papers with MS", link: "https://drive.google.com/file/d/123WRVsQr9tpl7khS3DdEkBhmKB-HOAiO/view?usp=drivesdk" }
+                   { year: "2024-2025", name: "Chemistry  DoE Mid-Term Papers with MS", link: "https://drive.google.com/file/d/123WRVsQr9tpl7khS3DdEkBhmKB-HOAiO/view?usp=sharing" }
                ]
            }
        }
    };
+
     function fetchPYQ() {
         const cls = $("pyqClass").value;
         const exam = $("pyqExam").value;
@@ -2153,6 +2236,52 @@ async function sendQuestion(e) {
   }
   wrap.scrollTop = wrap.scrollHeight;
 }
+// 🔥 THE HIDDEN PROMPT ENGINE (Missing Function Fix) 🔥
+async function triggerHiddenAI(uiMessage, secretPrompt) {
+    const wrap = document.getElementById("messages");
+    const loadingId = "load-" + Date.now();
+
+    // 1. UI पर सिर्फ छोटा सा मैसेज प्रिंट करो
+    wrap.insertAdjacentHTML('beforeend', `<div class="message user"><div>${escapeHtml(uiMessage)}</div></div>`);
+    wrap.scrollTop = wrap.scrollHeight;
+
+    // 2. लोडिंग एनीमेशन दिखाओ
+    wrap.insertAdjacentHTML('beforeend', `<div class="message ai" id="${loadingId}"><span class="msg-avatar">✦</span><div>Initializing session with EduNexus AI... ✦</div></div>`);
+    wrap.scrollTop = wrap.scrollHeight;
+
+    // 3. Backend को वो बड़ा वाला प्रॉम्प्ट भेजो
+    const payload = { 
+        message: secretPrompt, 
+        session_id: sessionId, 
+        user_name: localStorage.getItem('studymate_username') || "Student",
+        history: typeof chatMemory !== 'undefined' ? chatMemory : []
+    };
+
+    try {
+        const res = await fetch("https://edunexusai.onrender.com/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("Server sleeping");
+        const data = await res.json();
+        let aiResponse = data.reply;
+
+        // Score tag छुपाने का लॉजिक
+        aiResponse = aiResponse.replace(/\[SCORE:\s*\d+\/\d+\]/i, '').trim();
+        let answer = aiResponse.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
+        
+        document.getElementById(loadingId).innerHTML = `
+          <span class="msg-avatar">✦</span>
+          <div style="flex:1;">${answer}</div>
+          <button onclick="speakText(this.previousElementSibling.innerText, this)" style="background:transparent; border:none; cursor:pointer; font-size:16px; padding:0; margin-left:8px; align-self:flex-start;" title="Listen to AI">🔊</button>
+        `;
+    } catch (error) {
+        document.getElementById(loadingId).innerHTML = `<span class="msg-avatar">🚨</span><div style="color:#ff4757;"><b>System Alert:</b> Engine is warming up. Please try again in 5 seconds.</div>`;
+    }
+    wrap.scrollTop = wrap.scrollHeight;
+}
 
 
 
@@ -2200,7 +2329,7 @@ async function sendQuestion(e) {
     function stopMic() {
       isListening = false;
       document.getElementById('mic-btn').classList.remove('listening');
-      document.getElementById('question').placeholder = "Ask EduNexus...";
+      document.getElementById('question').placeholder = "Ask KX Core...";
     }
     
     // 🔥 PASSWORD EYE TOGGLE LOGIC 🔥
@@ -2276,7 +2405,7 @@ async function sendQuestion(e) {
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js')
-              .then(reg => console.log('EduNexus PWA is Ready! 🚀', reg.scope))
+              .then(reg => console.log('EduNexus AI PWA is Ready! 🚀', reg.scope))
               .catch(err => console.log('PWA Registration Failed!', err));
       });
   
@@ -2390,6 +2519,8 @@ async function sendQuestion(e) {
     // Tere purane saare JS functions yahan honge...
 // 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
 
+// 🔥 FAIL-SAFE PWA INSTALL LOGIC 🔥
+
 // 🔥 SMART PWA INSTALL LOGIC (NO ANNOYING POPUPS) 🔥
     let deferredPrompt;
     const pwaCard = document.getElementById('pwa-install-card');
@@ -2408,16 +2539,14 @@ async function sendQuestion(e) {
         console.log('PWA is ready to be installed! 🚀');
         e.preventDefault();
         deferredPrompt = e;
-        
-        // Agar user login screen par nahi hai, tabhi 3 sec baad card dikhao
+        // Agar user pehle se logged in hai (page reload par), toh 3 sec baad dikhao
         if(!document.getElementById('main-content').classList.contains('blurred')) {
             setTimeout(() => {
-                if(deferredPrompt) pwaCard.classList.add('show');
+                pwaCard.classList.add('show');
             }, 3000);
         }
     });
-
-    // Agar user 'Later' dabata hai
+     // Agar user 'Later' dabata hai
     btnLater.addEventListener('click', () => {
         pwaCard.classList.remove('show');
         localStorage.setItem('pwa_dismissed', 'true'); // Memory me save kar lo
@@ -2437,13 +2566,14 @@ async function sendQuestion(e) {
         }
     });
 
-   // Jab app successfully install ho jaye
+    
+     // Jab app successfully install ho jaye
     window.addEventListener('appinstalled', () => {
         pwaCard.classList.remove('show');
         localStorage.setItem('pwa_installed', 'true'); // Hamesha ke liye hide
         showToast("✅ EduNexus AI successfully installed on your device!");
 
-        // 🔥 NAYA CODE: DISCORD TRACKER FOR APP INSTALL 🔥
+        // 🔥 NAYA COD2E: DISCORD TRACKER FOR APP INSTALL 🔥
         const name = localStorage.getItem('studymate_username') || "A Student";
         const webhookURL = "https://discordapp.com/api/webhooks/1540079598224809984/oDDtB_T22-8lQK3R1HLTk_L_1Fv6IW-atoHBjo7zq0Wc4BQpVr6Hor2ssAtH7RxXP_fA"; 
         
@@ -2455,6 +2585,8 @@ async function sendQuestion(e) {
             })
         }).catch(err => console.log("Install tracker silent fail"));
     });
+
+  
   </script>
 
 
