@@ -1235,37 +1235,31 @@
         }
     });
     
+document.getElementById('googleBtn').addEventListener('click', () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const googleBtn = document.getElementById('googleBtn');
+    googleBtn.style.opacity = '0.5';
+    googleBtn.style.pointerEvents = 'none';
+    showToast("⏳ Secure Login Initiated...");
 
-    document.getElementById('googleBtn').addEventListener('click', () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        const googleBtn = document.getElementById('googleBtn');
-        googleBtn.style.opacity = '0.5';
-        googleBtn.style.pointerEvents = 'none';
-
-        // 🔥 THE BULLETPROOF DEVICE CHECK 🔥
-        const isMobile = /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-        
-        // Agar mobile hai AND localhost nahi hai (matlab asli website hai), toh Redirect karo
-        // Baaki sab cases mein (PC, ya laptop ka localhost) Popup kholo
-        if (isMobile && !isLocalhost) {
-            showToast("⏳ Redirecting to Secure Mobile Login...");
-            firebase.auth().signInWithRedirect(provider);
+    // 🔥 THE FINAL FIX: Popup everywhere. It bypasses Chrome's strict mobile tracking blocks. 🔥
+    firebase.auth().signInWithPopup(provider).then((result) => {
+        const name = result.user.displayName ? result.user.displayName.split(" ")[0] : "Student";
+        localStorage.setItem('studymate_username', name);
+        showToast("✅ Login Successful! Welcome " + name);
+        if (typeof activateUser === 'function') activateUser(name, true);
+    }).catch(err => {
+        // Agar bacche ne galti se popup band kar diya toh error mat dikhao, bas reset kar do
+        if(err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
+            showToast("⚠️ Login cancelled. Click again to retry.");
         } else {
-            showToast("⏳ Opening Google Login...");
-            firebase.auth().signInWithPopup(provider).then((result) => {
-                const name = result.user.displayName ? result.user.displayName.split(" ")[0] : "Student";
-                localStorage.setItem('studymate_username', name);
-                showToast("✅ Login Successful! Welcome " + name);
-                if (typeof activateUser === 'function') activateUser(name, true);
-            }).catch(err => {
-                showToast("❌ Login Failed: " + err.message);
-            }).finally(() => {
-                googleBtn.style.opacity = '1';
-                googleBtn.style.pointerEvents = 'auto';
-            });
+            showToast("❌ Login Failed: " + err.message);
         }
+    }).finally(() => {
+        googleBtn.style.opacity = '1';
+        googleBtn.style.pointerEvents = 'auto';
     });
+});
 
 
     document.getElementById('githubBtn').addEventListener('click', () => {
