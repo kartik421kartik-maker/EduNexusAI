@@ -46,7 +46,7 @@
 
     .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); z-index: 6000; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: 0.4s ease-out; }
     .modal-overlay.show { opacity: 1; visibility: visible; }
-    .modal-content { background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent2); border-radius: 24px; padding: 40px; max-width: 500px; width: 100%; text-align: left; box-shadow: 0 30px 60px rgba(94, 231, 197, 0.15); transform: scale(0.9) translateY(20px); transition: 0.4s ease-out; max-height: 85vh; overflow-y: auto; margin: auto; }
+    .modal-content { background: linear-gradient(145deg, #121a29, #0b101b); border: 1px solid var(--accent2); border-radius: 24px; padding: 30px; max-width: 500px; width: 100%; text-align: left; box-shadow: 0 30px 60px rgba(94, 231, 197, 0.15); transform: scale(0.9) translateY(20px); transition: 0.4s ease-out; max-height: 65vh; overflow-y: auto !important; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y !important; margin: auto; }
     .modal-overlay.show .modal-content { transform: scale(1) translateY(0); }
     .modal-content h2 { font-family: "Space Grotesk"; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
     .modal-content ul { list-style: none; padding: 0; margin-bottom: 30px; }
@@ -1129,7 +1129,8 @@
     window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchmove', (e) => {
       // 🔥 MAGIC LOCK MOBILE KE LIYE BHI 🔥
-      if (e.target && e.target.closest && (e.target.closest('.messages') || e.target.closest('.days-list'))) return;
+      // 🔥 MAGIC LOCK MOBILE KE LIYE BHI 🔥
+      if (e.target && e.target.closest && (e.target.closest('.messages') || e.target.closest('.days-list') || e.target.closest('.modal-content'))) return;
       
       const dy = e.touches[0].clientY - startY;
       if (atTop() && dy > 0) { push(dy * 0.4); pulling = true; }
