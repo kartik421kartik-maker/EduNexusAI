@@ -1,4 +1,4 @@
-const CACHE_NAME = 'edunexus-live-v2';
+const CACHE_NAME = 'edunexus-live-v3'; // Version change kiya taaki naya turant update ho
 const ASSETS = [
   './',
   './index.html',
@@ -30,6 +30,16 @@ self.addEventListener('activate', (event) => {
 
 // 3. THE MAGIC (Network First): Hamesha pehle internet se naya code laao
 self.addEventListener('fetch', (event) => {
+  // 🔥 THE LIFESAVER FIX: Sirf GET requests ko cache karo. POST (Firebase/AI) ko ignore karo warna crash hoga!
+  if (event.request.method !== 'GET') {
+      return; // Browser ko normal kaam karne do, service worker interfere nahi karega
+  }
+
+  // Chrome extensions wagaira ke errors se bachne ke liye
+  if (!event.request.url.startsWith('http')) {
+      return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
